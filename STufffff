@@ -2487,50 +2487,6 @@ end    end,
 })
 
 
-local MyButton3 = MyButton2:AddButton({
-    Text = 'Skybox (wtf)',
-    Func = function()
--- Asset ID replacements
-local skyTextures = {
-    Up = "rbxassetid://2668798561",
-    Front = "rbxassetid://2668798561",
-    Left = "rbxassetid://2668798561",
-    Down = "rbxassetid://2668798561",
-    Back = "rbxassetid://2668798561",
-    Right = "rbxassetid://2668798561"
-}
-
--- Get the Lighting service
-local lighting = game:GetService("Lighting")
-
--- Iterate through all children of Lighting and check if they are of class Sky
-for _, sky in pairs(lighting:GetChildren()) do
-    if sky:IsA("Sky") then
-        print("Found Sky at: " .. sky:GetFullName())  -- Print the path of the Sky object
-        
-        -- Set the Sky textures with the specified asset IDs
-        sky.SkyboxUp = skyTextures.Up
-        print("Updated SkyboxUp: " .. sky.SkyboxUp)
-        
-        sky.SkyboxFt = skyTextures.Front
-        print("Updated SkyboxFt: " .. sky.SkyboxFt)
-        
-        sky.SkyboxLf = skyTextures.Left
-        print("Updated SkyboxLf: " .. sky.SkyboxLf)
-        
-        sky.SkyboxDn = skyTextures.Down
-        print("Updated SkyboxDn: " .. sky.SkyboxDn)
-        
-        sky.SkyboxBk = skyTextures.Back
-        print("Updated SkyboxBk: " .. sky.SkyboxBk)
-        
-        sky.SkyboxRt = skyTextures.Right
-        print("Updated SkyboxRt: " .. sky.SkyboxRt)
-    end
-end    end,
-    DoubleClick = false, -- You will have to click this button twice to trigger the callback
-    Tooltip = 'Skybox changer'
-})
 
 
 
