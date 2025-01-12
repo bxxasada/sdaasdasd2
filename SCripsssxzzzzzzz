@@ -780,6 +780,207 @@ RightGroupbox:AddButton({
 LeftGroupBox:AddLabel('Troll')
 
 
+_G.Dropxxx22 = true
+function Dropxxx22()
+    while _G.Dropxxx22 do
+        local ohTable1 = {
+            ["MinDmg"] = 0,
+            ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets["Ban Hammer"].Configuration,
+            ["Bullets"] = 42342342,
+            ["Range"] = 8192,
+            ["FireRate"] = 0,
+            ["CanDrop"] = true,
+            ["DMG"] = 423424234,
+            ["Penetration"] = 423423423,
+            ["Secondary"] = false,
+            ["Gun"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets["Ban Hammer"].Gun,
+            ["Spread"] = {
+                ["Move"] = 10,
+                ["Crouch"] = 3.68,
+                ["Stand"] = 4.9,
+                ["MaxInaccuracy"] = 0,
+                ["Land"] = 19.1,
+                ["Value"] = 2.5,
+                ["Jump"] = 94.48,
+                ["Ladder"] = 138.32,
+                ["RecoveryTime"] = {
+                    ["Value"] = 0.349,
+                    ["Crouched"] = 0.291
+                }
+            },
+            ["BulletPerTrail"] = 31231,
+            ["ArmorPenetration"] = 321321312.5,
+            ["AccuracyDivisor"] = -1,
+            ["Tagging"] = 0.44,
+            ["KillAward"] = 150,
+            ["Ammo"] = 32112312,
+            ["PointsAward"] = 12,
+            ["RangeModifier"] = 91,
+            ["StoredAmmo"] = 24,
+            ["RemoveTime"] = 3.65,
+            ["ApplyTime"] = 0,
+            ["Name"] = "",
+            ["AccuracyOffset"] = 0,
+            ["ReloadTime"] = 2.17,
+            ["EquipTime"] = 1,
+            ["Auto"] = false,
+            ["Recoil"] = {
+                ["Value"] = 23,
+                ["X"] = 0,
+                ["Y"] = 0
+            }
+        }
+        
+        -- Function to generate a random string of characters
+        local function generateRandomName()
+            local length = math.random(1, 1000) -- Random length between 1 and 30
+            local characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            local randomName = ""
+            for i = 1, length do
+                local randomIndex = math.random(1, #characters)
+                randomName = randomName .. string.sub(characters, randomIndex, randomIndex)
+            end
+            return randomName
+        end
+        
+        -- Assign a random name
+        ohTable1.Name = generateRandomName()
+        
+        local players = game:GetService("Players")
+        
+        for _, player in ipairs(players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local playerPosition = player.Character.HumanoidRootPart.Position
+                local ohCFrame2 = CFrame.new(playerPosition)
+                local ohNumber3 = 12
+                local ohNumber4 = 24
+                local ohBoolean5 = false
+                local ohNil6 = nil
+                local ohBoolean7 = false
+                local ohBoolean8 = false
+        
+                game:GetService("ReplicatedStorage").Events.Drop:FireServer(ohTable1, ohCFrame2, ohNumber3, ohNumber4, ohBoolean5, ohNil6, ohBoolean7, ohBoolean8)
+            end
+        end
+        
+        wait(0.01)
+    end
+end
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Spawn inf Hammers',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'lol', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+_G.Dropxxx22 = Value
+Dropxxx22()
+    end
+})
+
+
+
+
+_G.Dropxxx221111 = true
+function Dropxxx221111()
+    while _G.Dropxxx221111 do
+        local ohTable1 = {
+            ["MinDmg"] = 0,
+            ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets["Saccharine Saboteur"].Configuration,
+            ["Bullets"] = 42342342,
+            ["Range"] = 8192,
+            ["FireRate"] = 0,
+            ["CanDrop"] = true,
+            ["DMG"] = 423424234,
+            ["Penetration"] = 423423423,
+            ["Secondary"] = false,
+            ["Gun"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets["Saccharine Saboteur"].Gun,
+            ["Spread"] = {
+                ["Move"] = 10,
+                ["Crouch"] = 3.68,
+                ["Stand"] = 4.9,
+                ["MaxInaccuracy"] = 0,
+                ["Land"] = 19.1,
+                ["Value"] = 2.5,
+                ["Jump"] = 94.48,
+                ["Ladder"] = 138.32,
+                ["RecoveryTime"] = {
+                    ["Value"] = 0.349,
+                    ["Crouched"] = 0.291
+                }
+            },
+            ["BulletPerTrail"] = 31231,
+            ["ArmorPenetration"] = 321321312.5,
+            ["AccuracyDivisor"] = -1,
+            ["Tagging"] = 0.44,
+            ["KillAward"] = 150,
+            ["Ammo"] = 32112312,
+            ["PointsAward"] = 12,
+            ["RangeModifier"] = 91,
+            ["StoredAmmo"] = 24,
+            ["RemoveTime"] = 3.65,
+            ["ApplyTime"] = 0,
+            ["Name"] = "",
+            ["AccuracyOffset"] = 0,
+            ["ReloadTime"] = 2.17,
+            ["EquipTime"] = 1,
+            ["Auto"] = false,
+            ["Recoil"] = {
+                ["Value"] = 23,
+                ["X"] = 0,
+                ["Y"] = 0
+            }
+        }
+        
+        -- Function to generate a random string of characters
+        local function generateRandomName()
+            local length = math.random(1, 1000) -- Random length between 1 and 30
+            local characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            local randomName = ""
+            for i = 1, length do
+                local randomIndex = math.random(1, #characters)
+                randomName = randomName .. string.sub(characters, randomIndex, randomIndex)
+            end
+            return randomName
+        end
+        
+        -- Assign a random name
+        ohTable1.Name = generateRandomName()
+        
+        local players = game:GetService("Players")
+        
+        for _, player in ipairs(players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local playerPosition = player.Character.HumanoidRootPart.Position
+                local ohCFrame2 = CFrame.new(playerPosition)
+                local ohNumber3 = 12
+                local ohNumber4 = 24
+                local ohBoolean5 = false
+                local ohNil6 = nil
+                local ohBoolean7 = false
+                local ohBoolean8 = false
+        
+                game:GetService("ReplicatedStorage").Events.Drop:FireServer(ohTable1, ohCFrame2, ohNumber3, ohNumber4, ohBoolean5, ohNil6, ohBoolean7, ohBoolean8)
+            end
+        end
+        
+        wait(0.01)
+    end
+end
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Crash game',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'lol', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+_G.Dropxxx221111 = Value
+Dropxxx221111()
+    end
+})
+
+
+
 
 _G.TpALl22222 = true
 function TpALl22222()
