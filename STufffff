@@ -1,0 +1,2720 @@
+
+
+-- New example script written by wally
+-- You can suggest changes with a pull request or something
+
+local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
+
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+
+local Window = Library:CreateWindow({
+    -- Set Center to true if you want the menu to appear in the center
+    -- Set AutoShow to true if you want the menu to appear when it is created
+    -- Position and Size are also valid options here
+    -- but you do not need to define them unless you are changing them :)
+
+    Title = 'Sync.wtf | Counter Blox Elvolved', -- The title of the window
+    Center = true,
+    AutoShow = true,
+    TabPadding = 8,
+    MenuFadeTime = 0.1
+})
+
+-- CALLBACK NOTE:
+-- Passing in callback functions via the initial element parameters (i.e. Callback = function(Value)...) works
+-- HOWEVER, using Toggles/Options.INDEX:OnChanged(function(Value) ... ) is the RECOMMENDED way to do this.
+-- I strongly recommend decoupling UI code from logic code. i.e. Create your UI elements FIRST, and THEN setup :OnChanged functions later.
+
+-- You do not have to set your tabs & groups up this way, just a prefrence.
+local Tabs = {
+    -- Creates a new tab titled Main
+    Main = Window:AddTab('Main'),
+    UpdateLogs = Window:AddTab('Update logs'),
+    ['UI Settings'] = Window:AddTab('Settings'),
+}
+
+-- Groupbox and Tabbox inherit the same functions
+-- except Tabboxes you have to call the functions on a tab (Tabbox:AddTab(name))
+local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Main stuff')
+local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updates (11-01-2025) (17:50 GMT+1)')
+
+
+-- We can also get our Main tab via the following code:
+-- local LeftGroupBox = Window.Tabs.Main:AddLeftGroupbox('Groupbox')
+
+-- Tabboxes are a tiny bit different, but here's a basic example:
+--[[
+
+local TabBox = Tabs.Main:AddLeftTabbox() -- Add Tabbox on left side
+
+local Tab1 = TabBox:AddTab('Tab 1')
+local Tab2 = TabBox:AddTab('Tab 2')
+
+
+-- You can now call AddToggle, etc on the tabs you added to the Tabbox
+]]
+
+
+
+
+
+LeftGroupBox2:AddLabel('- Added TeamCheck \n- Added 2 New AA (Anti Aims) \n- Added Speed n Bhop \n- Added Fov changer \n- Added Alot of new fucked shit including tp all, kick all, etc\n- Added Gun sound \n- Added ForceField + Hitmaker check to AutoShoot \n- Added ALOT of new shit', true)
+
+
+
+-- Test the showHitmarker function (call it manually or in a damage system)
+
+
+
+
+
+
+
+_G.AutoBhop = true
+function AutoBhop()
+while _G.AutoBhop == true do
+    
+            -- Reference to the connection that will be created
+            local player = game.Players.LocalPlayer
+    
+                -- LocalScript (Place this in StarterPlayer -> StarterPlayerScripts or in the appropriate location)
+                local character = player.Character
+                if character then
+                    local humanoid = character:FindFirstChild("Humanoid")
+                    if humanoid then
+                        humanoid.Jump = true
+                    end
+                end
+            
+            wait(0.01)
+        end
+    end
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local RightGroupbox = Tabs.Main:AddRightGroupbox('Visuals');
+
+
+_G.KillAllFast = true
+function KillAllFast()
+    while _G.KillAllFast do
+        -- Get the LocalPlayer to exclude them
+local localPlayer = game.Players.LocalPlayer
+
+-- Loop through all models in the workspace
+for _, instance in pairs(workspace:GetChildren()) do
+    -- Check if the instance is a model with a "HeadHB" part and is not the LocalPlayer's character
+    if instance:IsA("Model") and instance:FindFirstChild("HeadHB") and instance.Name ~= localPlayer.Name then
+-- Define the parameters
+local ohInstance1 = instance.HeadHB
+local ohVector32 = Vector3.new(0, 0, 0)
+local ohString3 = "Reaver Operator"
+local ohNumber4 = math.huge
+local ohInstance5 = workspace:FindFirstChild(localPlayer.Name) and workspace[localPlayer.Name]:FindFirstChild("Gun") or nil
+local ohNil6 = nil
+local ohNil7 = nil
+local ohNumber8 = 9999999999999999999999999999999999999999999999999999999999999999999999999999999999
+local ohBoolean9 = false
+local ohBoolean10 = true
+local ohVector311 = Vector3.new(0, 0, 0)
+local ohNumber12 = math.huge
+local ohVector313 = Vector3.new(0, 0, 0)
+local ohBoolean14 = true
+local ohNumber15 = 36
+local ohNumber16 = 86
+
+-- Find the event dynamically
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local eventsFolder = replicatedStorage:FindFirstChild("Events")
+local targetEvent = nil
+
+if eventsFolder then
+    local eventNamePattern = "^%w+%-%w+%-%w+$" -- Alphanumeric with dashes
+    for _, child in pairs(eventsFolder:GetChildren()) do
+        if child:IsA("RemoteEvent") and child.Name:match(eventNamePattern) then
+            targetEvent = child
+            break -- Stop after finding the first matching event
+        end
+    end
+end
+
+-- Ensure the event is found before firing
+if targetEvent then
+    targetEvent:FireServer(
+        ohInstance1, ohVector32, ohString3, ohNumber4, ohInstance5,
+        ohNil6, ohNil7, ohNumber8, ohBoolean9, ohBoolean10, ohVector311,
+        ohNumber12, ohVector313, ohBoolean14, ohNumber15, ohNumber16
+    )
+else
+    print("Target RemoteEvent not found!")
+end
+end
+end
+
+
+
+        wait(0.01)
+    end
+end
+
+
+
+
+
+_G.AnnoyingSound = true
+function AnnoyingSound()
+    while _G.AnnoyingSound do
+        -- Get the LocalPlayer to exclude them
+local localPlayer = game.Players.LocalPlayer
+
+-- Loop through all models in the workspace
+for _, instance in pairs(workspace:GetChildren()) do
+    -- Check if the instance is a model with a "HeadHB" part and is not the LocalPlayer's character
+    if instance:IsA("Model") and instance:FindFirstChild("HeadHB") and instance.Name ~= localPlayer.Name then
+-- Define the parameters
+local ohInstance1 = instance.HeadHB
+local ohVector32 = Vector3.new(0, 0, 0)
+local ohString3 = "AWP"
+local ohNumber4 = math.huge
+local ohInstance5 = workspace:FindFirstChild(localPlayer.Name) and workspace[localPlayer.Name]:FindFirstChild("Gun") or nil
+local ohNil6 = nil
+local ohNil7 = nil
+local ohNumber8 = math.huge
+local ohBoolean9 = false
+local ohBoolean10 = true
+local ohVector311 = Vector3.new(0, 0, 0)
+local ohNumber12 = math.huge
+local ohVector313 = Vector3.new(0, 0, 0)
+local ohBoolean14 = true
+local ohNumber15 = 36
+local ohNumber16 = 86
+
+-- Find the event dynamically
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local eventsFolder = replicatedStorage:FindFirstChild("Events")
+local targetEvent = nil
+
+if eventsFolder then
+    local eventNamePattern = "^%w+%-%w+%-%w+$" -- Alphanumeric with dashes
+    for _, child in pairs(eventsFolder:GetChildren()) do
+        if child:IsA("RemoteEvent") and child.Name:match(eventNamePattern) then
+            targetEvent = child
+            break -- Stop after finding the first matching event
+        end
+    end
+end
+
+-- Ensure the event is found before firing
+if targetEvent then
+    targetEvent:FireServer(
+        ohInstance1, ohVector32, ohString3, ohNumber4, ohInstance5,
+        ohNil6, ohNil7, ohNumber8, ohBoolean9, ohBoolean10, ohVector311,
+        ohNumber12, ohVector313, ohBoolean14, ohNumber15, ohNumber16
+    )
+else
+    print("Target RemoteEvent not found!")
+end
+end
+end
+
+
+        wait(0.01)
+    end
+end
+-- Groupbox:AddToggle
+-- Arguments: Index, Options
+
+
+
+
+
+
+
+function WeaponForceField()
+    -- Set the default color if none is selected
+    local SelectedColor1 = _G.selectedColor1 or Color3.fromRGB(255, 0, 0) -- Default magenta
+
+    -- Define the path to ReplicatedStorage.Viewmodels
+local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels")
+
+-- Function to set material and color of all BaseParts, excluding "Right Arm" and "Left Arm"
+    -- Specify the color you want to set (Bright red in this case)
+    
+    -- Iterate over each descendant of Viewmodels
+    for _, child in pairs(viewmodels:GetDescendants()) do
+        -- Check if the child is a BasePart (Part, MeshPart, etc.)
+        if child:IsA("BasePart") then
+            -- Exclude parts named "Right Arm" and "Left Arm"
+            if child.Name ~= "Right Arm" and child.Name ~= "Left Arm" then
+                -- Set the material to ForceField
+                child.Material = Enum.Material.ForceField
+                -- Set the color to newColor
+                child.Color = SelectedColor1
+        end
+    end
+end
+
+-- Run the function to set the material and color
+
+        wait(0.01)  -- Wait briefly before repeating
+    end
+
+
+RightGroupbox:AddLabel('Visual')
+-- Arguments: Index, Options
+-- Add the toggle for ForceField weapon
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'ForceField stuff',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Changes ur weapons material', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.WeaponForceField = Value
+        WeaponForceField()
+        if _G.WeaponForceField == false then
+            -- Define the path to ReplicatedStorage.Viewmodels
+local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels")
+
+-- Function to set material and color of all BaseParts, excluding "Right Arm" and "Left Arm"
+    -- Specify the color you want to set (Bright red in this case)
+    local newColor = Color3.fromRGB(105, 105, 105)  -- Bright red color
+    
+    -- Iterate over each descendant of Viewmodels
+    for _, child in pairs(viewmodels:GetDescendants()) do
+        -- Check if the child is a BasePart (Part, MeshPart, etc.)
+        if child:IsA("BasePart") then
+            -- Exclude parts named "Right Arm" and "Left Arm"
+            if child.Name ~= "Right Arm" and child.Name ~= "Left Arm" then
+                -- Set the material to ForceField
+                child.Material = Enum.Material.Plastic
+                -- Set the color to newColor
+                child.Color = newColor
+        end
+    end
+end
+        end
+    end
+})
+
+-- Add the color picker for changing the color of the ForceField
+RightGroupbox:AddLabel('Gun color'):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Default color is magenta (force field color)
+    Title = 'ForceField Color', -- Custom title for the color picker
+    Transparency = 0, -- Optional transparency
+
+    Callback = function(Value)
+        _G.selectedColor1 = Value -- Store the color chosen by the user
+    end
+})
+
+-- WeaponForceField function that runs when the toggle is enabled
+
+
+
+-- WeaponForceField function that runs when the toggle is enabled
+function ArmForceField()
+    -- Set the default color if none is selected
+    local SelectedColor2 = _G.selectedColor2 or Color3.fromRGB(255, 0, 0) -- Default magenta
+
+   -- Define the path to Camera.Arms
+local cameraArms = workspace:WaitForChild("Camera"):WaitForChild("Arms")
+
+
+-- Function to set transparency of parts named "Left Arm" or "Right Arm"
+    -- Iterate over each descendant of Camera.Arms
+    for _, child in pairs(cameraArms:GetDescendants()) do
+        -- Check if the child is a part and if its name is "Left Arm" or "Right Arm"
+        if child:IsA("Part") and (child.Name == "Left Arm" or child.Name == "Right Arm") then
+            -- Set the transparency to 1 (fully invisible)
+            child.Transparency = 1
+        end
+    end
+
+            wait(0.01)
+end
+-- Run the function to change material
+
+
+         -- Wait briefly before repeating
+    
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'Invis Skin (not arm)',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Changes ur arms material', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.ArmForceField = Value
+        ArmForceField()
+        if _G.ArmForceField == false then
+            -- Define the path to Camera.Arms
+local cameraArms = workspace:WaitForChild("Camera"):WaitForChild("Arms")
+
+            for _, child in pairs(cameraArms:GetDescendants()) do
+                -- Check if the child is a part and if its name is "Left Arm" or "Right Arm"
+                if child:IsA("Part") and (child.Name == "Left Arm" or child.Name == "Right Arm") then
+                    -- Set the transparency to 1 (fully invisible)
+                    child.Transparency = 0
+                end
+            end
+        end
+    end
+})
+
+
+
+function CharacterForceField()
+    -- Set the default color if none is selected
+    local SelectedColor3 = _G.selectedColor3 or Color3.fromRGB(255, 0, 0) -- Default magenta
+    
+    while _G.CharacterForceField == true do
+        -- Get the LocalPlayer's model (assuming it is under workspace)
+        local player = game.Players.LocalPlayer
+        local playerModel = workspace:WaitForChild(player.Name)
+
+        -- Iterate over all BaseParts in the player's model
+        for _, part in pairs(playerModel:GetDescendants()) do
+            if part:IsA("BasePart") then
+                -- Update the Material and Color of the part
+                part.Material = Enum.Material.ForceField
+                part.Color = SelectedColor3  -- Set the color to the one selected by the color picker
+            end
+        end
+
+        wait(0.01)  -- Wait briefly before repeating
+    end
+end
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'ForceField character',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Changes your entire character to ForceField material', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.CharacterForceField = Value
+        CharacterForceField()
+        if _G.CharacterForceField == false then
+            local player = game.Players.LocalPlayer
+            local playerModel = workspace:WaitForChild(player.Name)
+            
+            -- Reset all parts' material back to Fabric when toggle is off
+            for _, part in pairs(playerModel:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Material = Enum.Material.Fabric
+                end
+            end
+        end
+    end
+})
+
+RightGroupbox:AddLabel('Character color'):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Default color is red
+    Title = 'Forcefield Color', -- Custom title for the color picker
+    Transparency = 0, -- Optional transparency
+
+    Callback = function(Value)
+        _G.selectedColor3 = Value -- Store the color chosen by the user
+    end
+})
+
+
+function UpdateLightingColor()
+    -- Set the default color if none is selected
+    local SelectedColor4 = _G.selectedColor4 or Color3.fromRGB(33, 33, 33) -- Default color for TintColor
+    
+    while _G.LightingColorLoop == true do
+        -- Get the Lighting service
+        local lighting = game:GetService("Lighting")
+        
+        -- Check and update the TintColor of the specific ColorCorrectionEffect objects
+        if lighting:FindFirstChild("dust2ColorCorrection") then
+            lighting.dust2ColorCorrection.TintColor = SelectedColor4
+            -- Debug: Print path of the changed object
+            print("Updated TintColor for: Lighting.dust2ColorCorrection")
+        end
+        
+        if lighting:FindFirstChild("mirageColorCorrection") then
+            lighting.mirageColorCorrection.TintColor = SelectedColor4
+            -- Debug: Print path of the changed object
+            print("Updated TintColor for: Lighting.mirageColorCorrection")
+        end
+        
+        if lighting:FindFirstChild("crossfireColorCorrection") then
+            lighting.crossfireColorCorrection.TintColor = SelectedColor4
+            -- Debug: Print path of the changed object
+            print("Updated TintColor for: Lighting.crossfireColorCorrection")
+        end
+        
+        if lighting:FindFirstChild("spookfaceColorCorrection") then
+            lighting.spookfaceColorCorrection.TintColor = SelectedColor4
+            -- Debug: Print path of the changed object
+            print("Updated TintColor for: Lighting.spookfaceColorCorrection")
+        end
+        
+        if lighting:FindFirstChild("ColorCorrection") then
+            lighting.ColorCorrection.TintColor = SelectedColor4
+            -- Debug: Print path of the changed object
+            print("Updated TintColor for: Lighting.ColorCorrection")
+        end
+        
+        wait(0.01)  -- Wait briefly before repeating
+    end
+end
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'Ambience Changer',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Changes the lighting TintColor to a selected color', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.LightingColorLoop = Value
+        UpdateLightingColor()
+    end
+})
+
+RightGroupbox:AddLabel('Ambience Color'):AddColorPicker('ColorPicker', {
+    Default = Color3.new(33/255, 33/255, 33/255), -- Default color for TintColor
+    Title = 'Ambience Color', -- Custom title for the color picker
+    Transparency = 0, -- Optional transparency
+
+    Callback = function(Value)
+        _G.selectedColor4 = Value -- Store the color chosen by the user
+    end
+})
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'Rainbow Crosshair',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Ranbow crosshair color', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.RainbowCrosshair  = Value
+        RainbowCrosshair()
+    end
+})
+
+
+RightGroupbox:AddSlider('MySlider', {
+    Text = 'Stretch',
+    Default = 1,
+    Min = 0.1,
+    Max = 1,
+    Rounding = 10,
+    Compact = false,
+
+    Callback = function(Value)
+        getgenv().Resolution = {
+            [".gg/scripters"] = Value
+        }
+         
+        local Camera = workspace.CurrentCamera
+        if getgenv().gg_scripters == nil then
+            game:GetService("RunService").RenderStepped:Connect(
+                function()
+                    Camera.CFrame = Camera.CFrame * CFrame.new(0, 0, 0, 1, 0, 0, 0, getgenv().Resolution[".gg/scripters"], 0, 0, 0, 1)
+                end
+            )
+        end
+        getgenv().gg_scripters = "Aori0001"    end
+})
+
+
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'ESP',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'ESP', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        -- Load the Sense library
+        local Sense = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua'))()
+
+        _G.ESP2 = Value
+
+        if _G.ESP2 == true then
+            -- When the toggle is ON, load the ESP
+            Sense.Load()
+        else
+            -- When the toggle is OFF, unload the ESP
+            Sense.Unload()
+        end
+
+        -- Customize ESP settings for enemy team
+        Sense.teamSettings.enemy.enabled = true
+        Sense.teamSettings.enemy.box = true
+        Sense.teamSettings.enemy.boxColor[1] = Color3.new(.25, .25, .25)
+        Sense.teamSettings.enemy.distanceColor = { Color3.new(.6,0,0), 2 }
+        Sense.teamSettings.enemy.chams = true
+        Sense.teamSettings.enemy.distance = true
+        Sense.teamSettings.enemy.chamsVisibleOnly = false
+        Sense.teamSettings.enemy.name = true
+        Sense.teamSettings.enemy.nameColor = { Color3.new(.6,0,0), 2 }
+        Sense.teamSettings.enemy.healthBar = true
+        Sense.teamSettings.enemy.healthyColor = Color3.new(1,0,0)
+        Sense.teamSettings.enemy.chamsFillColor = { Color3.new(1, 0, 0), 0.83 }
+        Sense.teamSettings.enemy.chamsOutlineColor = { Color3.new(0,0,0), .4 }
+        Sense.teamSettings.enemy.healthText = true
+        Sense.teamSettings.enemy.healthTextColor = { Color3.new(.6,0,0), 2 }     
+        Sense.teamSettings.enemy.healthTextOutline = true
+        Sense.teamSettings.enemy.healthTextOutlineColor = Color3.new(0, 0, 0)
+
+        Sense.teamSettings.enemy.distanceOutline = true
+        Sense.teamSettings.enemy.distanceOutlineColor = Color3.new(0, 0, 0)
+        Sense.teamSettings.enemy.nameOutline = true
+        Sense.teamSettings.enemy.nameOutlineColor = Color3.new(0, 0, 0)
+    end
+})
+
+
+
+-- Define the offset and camera reference
+-- Define the offset and camera reference
+
+
+-- Define the offset and camera reference
+local offset3 = Vector3.new(-0, -2.3, -8) -- Change the offset as needed
+local camera3 = workspace.CurrentCamera
+
+-- Store the original metatable and functions
+local mt = getrawmetatable(game)
+local oldIndex = mt.__index
+local oldNewIndex = mt.__newindex
+local hooked = false -- To track if the hook is active
+
+-- Store the original position when third-person mode is enabled
+local originalPosition = camera3.CFrame.Position
+
+-- Function to enable third-person mode
+local function enableThirdPerson()
+    setreadonly(mt, false)
+
+    -- Store the original position of the camera when we enable third-person mode
+    originalPosition = camera3.CFrame.Position
+
+    mt.__index = function(t, k)
+        if t == camera3 and k == "CFrame" then
+            return oldIndex(t, k) * CFrame.new(offset3)
+        end
+        return oldIndex(t, k)
+    end
+
+    mt.__newindex = function(t, k, v)
+        if t == camera3 and k == "CFrame" then
+            return oldNewIndex(t, k, v * CFrame.new(-offset3))
+        end
+        return oldNewIndex(t, k, v)
+    end
+
+    setreadonly(mt, true)
+    hooked = true
+end
+
+-- Function to disable third-person mode
+local function disableThirdPerson()
+    if hooked then
+        setreadonly(mt, false)
+
+        mt.__index = oldIndex
+        mt.__newindex = oldNewIndex
+
+        setreadonly(mt, true)
+        hooked = false
+
+        -- Reset the camera's position only (keeping the current orientation)
+        local currentOrientation = camera3.CFrame - camera3.CFrame.Position -- Get the current orientation
+        camera3.CFrame = CFrame.new(originalPosition) * currentOrientation -- Reset position, keep the orientation
+    end
+end
+
+-- Add a toggle to control third-person mode
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'Third person',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Thirdperson', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        if Value then
+            enableThirdPerson() -- Enable third-person mode
+        else
+            disableThirdPerson() -- Disable third-person mode
+        end
+    end
+})
+
+
+_G.InvisArms = true
+function InvisArms()
+    while _G.InvisArms == true do
+local cameraArms = workspace:WaitForChild("Camera"):WaitForChild("Arms")
+
+local function deleteAllModelsUnderCameraArms()
+    if cameraArms then
+    for _, child in pairs(cameraArms:GetDescendants()) do
+        if child:IsA("Model") then
+            child:Destroy()
+        end
+    end
+end
+end
+
+-- Run the function to delete models
+deleteAllModelsUnderCameraArms()
+
+        wait(0.01)
+    end
+end
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'Invis arms',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Makes ur arms invisible', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.InvisArms = Value
+        InvisArms()
+    end
+})
+
+
+-- FOV settings
+_G.EnableFOV = false  -- Default to off
+local fovValue = 70   -- Default FOV value
+
+local player = game.Players.LocalPlayer
+local runService = game:GetService("RunService")
+local camera = game.Workspace.CurrentCamera
+
+-- Function to update FOV based on the toggle
+local function UpdateFOV()
+    if _G.EnableFOV then  -- Only modify FOV if the toggle is on
+        camera.FieldOfView = fovValue
+    end
+end
+
+-- Hook the metamethod to intercept FieldOfView changes
+local oldNamecall
+oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+    local method = getnamecallmethod()
+
+    -- Intercept FieldOfView changes if FOV toggle is enabled
+    if _G.EnableFOV and method == "SetFieldOfView" then
+        local args = { ... }
+        args[1] = fovValue  -- Force the FOV to match the current slider value
+        return oldNamecall(self, unpack(args))
+    end
+
+    return oldNamecall(self, ...)
+end)
+
+-- Add the Toggle for FOV
+RightGroupbox:AddToggle('FOVToggle', {
+    Text = 'Enable FOV Change',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Enable or disable Field of View adjustment', -- Tooltip for FOV toggle
+
+    Callback = function(Value)
+        -- Enable or disable FOV adjustment based on the toggle
+        _G.EnableFOV = Value
+
+        -- If FOV toggle is enabled, apply the FOV update
+        UpdateFOV()
+    end
+})
+
+-- Add the FOV Slider
+RightGroupbox:AddSlider('FOVSlider', {
+    Text = 'Field of View Slider',
+    Default = 70,  -- Default FOV value
+    Min = 30,      -- Minimum FOV value
+    Max = 120,     -- Maximum FOV value
+    Rounding = 1,
+    Compact = false,
+
+    Callback = function(Value)
+        -- Update the FOV value
+        fovValue = Value
+
+        -- Apply the FOV update if the toggle is enabled
+        if _G.EnableFOV then
+            UpdateFOV()
+            print("FOV updated to: " .. fovValue)  -- Optional: Print for debugging
+        end
+    end
+})
+
+
+RightGroupbox:AddButton({
+    Text = 'Remove animations',
+    Func = function()
+        local localplayer = game.Players.LocalPlayer        
+        local Character = localplayer.Character
+        local Humanoid = Character.Humanoid
+        local Animator = Humanoid.Animator
+        Animator:Destroy()
+        
+            end,
+    DoubleClick = false,
+    Tooltip = 'Removes ur character animations'
+})
+
+
+
+LeftGroupBox:AddLabel('Troll')
+
+
+
+_G.TpALl22222 = true
+function TpALl22222()
+    while _G.TpALl22222 do
+        local Theplayer = game.Players.LocalPlayer
+    Theplayer.Character.HumanoidRootPart.Anchored = true
+
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+for _, player in pairs(players:GetPlayers()) do
+    -- Ensure the player has a character and the Gun exists
+    if player.Character and player.Character:FindFirstChild("Gun") then
+        -- Create a copy of the original table for each player
+        local ohTable1 = {
+            ["MinDmg"] = 0,
+            ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+            ["Bullets"] = 1,
+            ["Range"] = 8192,
+            ["FireRate"] = 0.14,
+            ["CanDrop"] = true,
+            ["DMG"] = 35,
+            ["Penetration"] = 100,
+            ["Secondary"] = true,
+            ["Gun"] = player.Character.Gun, -- Use the Gun for the current player
+            ["Spread"] = {
+                ["Move"] = 10,
+                ["Crouch"] = 3.68,
+                ["Stand"] = 4.9,
+                ["MaxInaccuracy"] = 0,
+                ["Land"] = 19.1,
+                ["Value"] = 2.5,
+                ["Jump"] = 94.48,
+                ["Ladder"] = 138.32,
+                ["RecoveryTime"] = {
+                    ["Value"] = 0.349,
+                    ["Crouched"] = 0.291
+                }
+            },
+            ["BulletPerTrail"] = 0,
+            ["ArmorPenetration"] = 50.5,
+            ["AccuracyDivisor"] = -1,
+            ["Tagging"] = 0.44,
+            ["KillAward"] = 150,
+            ["Ammo"] = 2222,
+            ["PointsAward"] = 12,
+            ["RangeModifier"] = 91,
+            ["StoredAmmo"] = 24,
+            ["RemoveTime"] = 3.65,
+            ["ApplyTime"] = 3,
+            ["Name"] = "P2000",
+            ["AccuracyOffset"] = 0,
+            ["ReloadTime"] = 2.17,
+            ["EquipTime"] = 1,
+            ["Auto"] = false,
+            ["Recoil"] = {
+                ["Value"] = 23,
+                ["X"] = 0,
+                ["Y"] = 2222
+            }
+        }
+
+        local ohInstance2 = players.LocalPlayer
+
+        -- Fire the remote event for this player's gun
+        replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+    
+    end
+end
+
+
+        wait(0.01)
+    end
+end
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Attach all to ur gun',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'lol', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+_G.TpALl22222 = Value
+TpALl22222()
+
+if Value == false then
+    local player = game.Players.LocalPlayer
+    player.Character.HumanoidRootPart.Anchored = false
+end
+    end
+})
+
+
+
+
+
+
+
+
+RightGroupbox:AddButton({
+    Text = 'Sync.wtf pfp',
+    Func = function()
+        local ohString1 = "save"
+local ohString2 = "rbxassetid://88623550306743"
+
+game:GetService("ReplicatedStorage").ProfileUpdateEvent:FireServer(ohString1, ohString2)
+
+  end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
+
+RightGroupbox:AddLabel('Skins')
+
+
+
+RightGroupbox:AddButton({
+    Text = 'Ban Hammer melee',
+    Func = function()
+        local players = game:GetService("Players")
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+        
+        for _, player in pairs(players:GetPlayers()) do
+            -- Ensure the player has a character and the Gun exists
+            if player.Character and player.Character:FindFirstChild("Gun") then
+                -- Create a copy of the original table for each player
+                local ohTable1 = {
+                    ["MinDmg"] = 0,
+                    ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+                    ["Bullets"] = 1,
+                    ["Range"] = 8192,
+                    ["FireRate"] = 0.14,
+                    ["CanDrop"] = true,
+                    ["DMG"] = 35,
+                    ["Penetration"] = 100,
+                    ["Secondary"] = true,
+                    ["Gun"] = game:GetService("ReplicatedStorage").Viewmodels["v_Ban Hammer"].Hammer, -- Use the Gun for the current player
+                    ["Spread"] = {
+                        ["Move"] = 10,
+                        ["Crouch"] = 3.68,
+                        ["Stand"] = 4.9,
+                        ["MaxInaccuracy"] = 0,
+                        ["Land"] = 19.1,
+                        ["Value"] = 2.5,
+                        ["Jump"] = 94.48,
+                        ["Ladder"] = 138.32,
+                        ["RecoveryTime"] = {
+                            ["Value"] = 0.349,
+                            ["Crouched"] = 0.291
+                        }
+                    },
+                    ["BulletPerTrail"] = 0,
+                    ["ArmorPenetration"] = 50.5,
+                    ["AccuracyDivisor"] = -1,
+                    ["Tagging"] = 0.44,
+                    ["KillAward"] = 150,
+                    ["Ammo"] = 2222,
+                    ["PointsAward"] = 12,
+                    ["RangeModifier"] = 91,
+                    ["StoredAmmo"] = 24,
+                    ["RemoveTime"] = 3.65,
+                    ["ApplyTime"] = 3,
+                    ["Name"] = "P2000",
+                    ["AccuracyOffset"] = 0,
+                    ["ReloadTime"] = 2.17,
+                    ["EquipTime"] = 1,
+                    ["Auto"] = false,
+                    ["Recoil"] = {
+                        ["Value"] = 23,
+                        ["X"] = 0,
+                        ["Y"] = 2222
+                    }
+                }
+        
+                local ohInstance2 = players.LocalPlayer
+        
+                -- Fire the remote event for this player's gun
+                replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+            
+            end
+        end
+            end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
+RightGroupbox:AddButton({
+    Text = 'BODY PILLOW (LOL?) melee ',
+    Func = function()
+        local players = game:GetService("Players")
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+        
+        for _, player in pairs(players:GetPlayers()) do
+            -- Ensure the player has a character and the Gun exists
+            if player.Character and player.Character:FindFirstChild("Gun") then
+                -- Create a copy of the original table for each player
+                local ohTable1 = {
+                    ["MinDmg"] = 0,
+                    ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+                    ["Bullets"] = 1,
+                    ["Range"] = 8192,
+                    ["FireRate"] = 0.14,
+                    ["CanDrop"] = true,
+                    ["DMG"] = 35,
+                    ["Penetration"] = 100,
+                    ["Secondary"] = true,
+                    ["Gun"] = game:GetService("ReplicatedStorage").Viewmodels.v_Trolling.Handle, -- Use the Gun for the current player
+                    ["Spread"] = {
+                        ["Move"] = 10,
+                        ["Crouch"] = 3.68,
+                        ["Stand"] = 4.9,
+                        ["MaxInaccuracy"] = 0,
+                        ["Land"] = 19.1,
+                        ["Value"] = 2.5,
+                        ["Jump"] = 94.48,
+                        ["Ladder"] = 138.32,
+                        ["RecoveryTime"] = {
+                            ["Value"] = 0.349,
+                            ["Crouched"] = 0.291
+                        }
+                    },
+                    ["BulletPerTrail"] = 0,
+                    ["ArmorPenetration"] = 50.5,
+                    ["AccuracyDivisor"] = -1,
+                    ["Tagging"] = 0.44,
+                    ["KillAward"] = 150,
+                    ["Ammo"] = 2222,
+                    ["PointsAward"] = 12,
+                    ["RangeModifier"] = 91,
+                    ["StoredAmmo"] = 24,
+                    ["RemoveTime"] = 3.65,
+                    ["ApplyTime"] = 3,
+                    ["Name"] = "P2000",
+                    ["AccuracyOffset"] = 0,
+                    ["ReloadTime"] = 2.17,
+                    ["EquipTime"] = 1,
+                    ["Auto"] = false,
+                    ["Recoil"] = {
+                        ["Value"] = 23,
+                        ["X"] = 0,
+                        ["Y"] = 2222
+                    }
+                }
+        
+                local ohInstance2 = players.LocalPlayer
+        
+                -- Fire the remote event for this player's gun
+                replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+            
+            end
+        end    end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
+
+
+RightGroupbox:AddButton({
+    Text = 'Cigarette (smoke effect) melee',
+    Func = function()
+        local players = game:GetService("Players")
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+        
+        for _, player in pairs(players:GetPlayers()) do
+            -- Ensure the player has a character and the Gun exists
+            if player.Character and player.Character:FindFirstChild("Gun") then
+                -- Create a copy of the original table for each player
+                local ohTable1 = {
+                    ["MinDmg"] = 0,
+                    ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+                    ["Bullets"] = 1,
+                    ["Range"] = 8192,
+                    ["FireRate"] = 0.14,
+                    ["CanDrop"] = true,
+                    ["DMG"] = 35,
+                    ["Penetration"] = 100,
+                    ["Secondary"] = true,
+                    ["Gun"] = game:GetService("ReplicatedStorage").Viewmodels.v_Smoky.Handle, -- Use the Gun for the current player
+                    ["Spread"] = {
+                        ["Move"] = 10,
+                        ["Crouch"] = 3.68,
+                        ["Stand"] = 4.9,
+                        ["MaxInaccuracy"] = 0,
+                        ["Land"] = 19.1,
+                        ["Value"] = 2.5,
+                        ["Jump"] = 94.48,
+                        ["Ladder"] = 138.32,
+                        ["RecoveryTime"] = {
+                            ["Value"] = 0.349,
+                            ["Crouched"] = 0.291
+                        }
+                    },
+                    ["BulletPerTrail"] = 0,
+                    ["ArmorPenetration"] = 50.5,
+                    ["AccuracyDivisor"] = -1,
+                    ["Tagging"] = 0.44,
+                    ["KillAward"] = 150,
+                    ["Ammo"] = 2222,
+                    ["PointsAward"] = 12,
+                    ["RangeModifier"] = 91,
+                    ["StoredAmmo"] = 24,
+                    ["RemoveTime"] = 3.65,
+                    ["ApplyTime"] = 3,
+                    ["Name"] = "P2000",
+                    ["AccuracyOffset"] = 0,
+                    ["ReloadTime"] = 2.17,
+                    ["EquipTime"] = 1,
+                    ["Auto"] = false,
+                    ["Recoil"] = {
+                        ["Value"] = 23,
+                        ["X"] = 0,
+                        ["Y"] = 2222
+                    }
+                }
+        
+                local ohInstance2 = players.LocalPlayer
+        
+                -- Fire the remote event for this player's gun
+                replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+            
+            end
+        end
+            end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
+
+
+
+RightGroupbox:AddButton({
+    Text = 'Random ass arm ',
+    Func = function()
+        local players = game:GetService("Players")
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+        
+        for _, player in pairs(players:GetPlayers()) do
+            -- Ensure the player has a character and the Gun exists
+            if player.Character and player.Character:FindFirstChild("Gun") then
+                -- Create a copy of the original table for each player
+                local ohTable1 = {
+                    ["MinDmg"] = 0,
+                    ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+                    ["Bullets"] = 1,
+                    ["Range"] = 8192,
+                    ["FireRate"] = 0.14,
+                    ["CanDrop"] = true,
+                    ["DMG"] = 35,
+                    ["Penetration"] = 100,
+                    ["Secondary"] = true,
+                    ["Gun"] = game:GetService("ReplicatedStorage").Viewmodels.DinBloksARMS["Right Arm"], -- Use the Gun for the current player
+                    ["Spread"] = {
+                        ["Move"] = 10,
+                        ["Crouch"] = 3.68,
+                        ["Stand"] = 4.9,
+                        ["MaxInaccuracy"] = 0,
+                        ["Land"] = 19.1,
+                        ["Value"] = 2.5,
+                        ["Jump"] = 94.48,
+                        ["Ladder"] = 138.32,
+                        ["RecoveryTime"] = {
+                            ["Value"] = 0.349,
+                            ["Crouched"] = 0.291
+                        }
+                    },
+                    ["BulletPerTrail"] = 0,
+                    ["ArmorPenetration"] = 50.5,
+                    ["AccuracyDivisor"] = -1,
+                    ["Tagging"] = 0.44,
+                    ["KillAward"] = 150,
+                    ["Ammo"] = 2222,
+                    ["PointsAward"] = 12,
+                    ["RangeModifier"] = 91,
+                    ["StoredAmmo"] = 24,
+                    ["RemoveTime"] = 3.65,
+                    ["ApplyTime"] = 3,
+                    ["Name"] = "P2000",
+                    ["AccuracyOffset"] = 0,
+                    ["ReloadTime"] = 2.17,
+                    ["EquipTime"] = 1,
+                    ["Auto"] = false,
+                    ["Recoil"] = {
+                        ["Value"] = 23,
+                        ["X"] = 0,
+                        ["Y"] = 2222
+                    }
+                }
+        
+                local ohInstance2 = players.LocalPlayer
+        
+                -- Fire the remote event for this player's gun
+                replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+            
+            end
+        end    end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
+
+
+_G.RandomStuff = true
+function RandomStuff()
+    while _G.RandomStuff do
+-- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+
+-- Loop through all parts in the workspace.Map model and filter unanchored parts
+local unanchoredParts = {}
+
+for _, part in pairs(workspace.Map:GetDescendants()) do
+    if part:IsA("BasePart") and not part.Anchored then
+        table.insert(unanchoredParts, part)
+    end
+end
+
+-- Ensure there are unanchored parts
+if #unanchoredParts > 0 then
+    -- Loop through each unanchored part and fire the remote event
+    for _, unanchoredPart in ipairs(unanchoredParts) do
+        local ohTable1 = {
+            ["MinDmg"] = 0,
+            ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets["CT Knife"].Configuration,
+            ["Ammo"] = 999999,
+            ["Range"] = 64,
+            ["FireRate"] = 0.4,
+            ["CanDrop"] = false,
+            ["DMG"] = 40,
+            ["Penetration"] = 50,
+            ["Gun"] = unanchoredPart,  -- Use the current unanchored part
+            ["Chamber"] = true,
+            ["BulletPerTrail"] = 1,
+            ["ArmorPenetration"] = 85,
+            ["Bullets"] = 1,
+            ["Auto"] = true,
+            ["AccuracyOffset"] = 0.3,
+            ["KillAward"] = 750,
+            ["PointsAward"] = 20,
+            ["RangeModifier"] = 99,
+            ["EquipTime"] = 0.6,
+            ["Melee"] = true,
+            ["Spread"] = 5,
+            ["Name"] = "CT Knife",
+            ["StoredAmmo"] = 0,
+            ["ReloadTime"] = 2.2,
+            ["AccuracyDivisor"] = 220,
+            ["Tagging"] = 0.65,
+            ["Recoil"] = 0
+        }
+
+        -- Fire the remote event for each unanchored part
+        game:GetService("ReplicatedStorage").Events.ApplyGun:FireServer(ohTable1)
+    end
+end
+
+
+        wait(1)
+    end
+end
+
+
+
+
+
+RightGroupbox:AddToggle('MyToggle', {
+    Text = 'TP random stuff? ',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Only others can see', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.RandomStuff = Value
+        RandomStuff()
+    end
+})
+
+
+
+RightGroupbox:AddButton({
+    Text = 'Get accessories (LAGGY)',
+    Func = function()
+-- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+function tpAccesorries()
+local accessories = {}
+
+for _, descendant in pairs(game:GetService("ReplicatedStorage"):GetDescendants()) do
+    if descendant:IsA("Accessory") then
+        table.insert(accessories, descendant)
+    end
+end
+
+-- Ensure there are accessories to process
+if #accessories > 0 then
+    -- Loop through each accessory and fire the remote event
+    for _, accessory in ipairs(accessories) do
+        local ohTable1 = {
+            ["MinDmg"] = 0,
+            ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets["CT Knife"].Configuration,
+            ["Ammo"] = 999999,
+            ["Range"] = 64,
+            ["FireRate"] = 0.4,
+            ["CanDrop"] = false,
+            ["DMG"] = 40,
+            ["Penetration"] = 50,
+            ["Gun"] = accessory,  -- Use the current accessory
+            ["Chamber"] = true,
+            ["BulletPerTrail"] = 1,
+            ["ArmorPenetration"] = 85,
+            ["Bullets"] = 1,
+            ["Auto"] = true,
+            ["AccuracyOffset"] = 0.3,
+            ["KillAward"] = 750,
+            ["PointsAward"] = 20,
+            ["RangeModifier"] = 99,
+            ["EquipTime"] = 0.6,
+            ["Melee"] = true,
+            ["Spread"] = 5,
+            ["Name"] = "CT Knife",
+            ["StoredAmmo"] = 0,
+            ["ReloadTime"] = 2.2,
+            ["AccuracyDivisor"] = 220,
+            ["Tagging"] = 0.65,
+            ["Recoil"] = 0
+        }
+
+        -- Fire the event for each accessory
+        game:GetService("ReplicatedStorage").Events.ApplyGun:FireServer(ohTable1)
+    end
+end
+end
+tpAccesorries()
+end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
+
+
+
+
+LeftGroupBox:AddLabel('Sound')
+
+
+
+
+
+
+
+
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Hit sound',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.AnnoyingSound = Value
+        AnnoyingSound()
+    end
+})
+
+_G.ShootSound = true
+function ShootSound()
+    while _G.ShootSound do
+
+local localPlayer = game.Players.LocalPlayer
+
+if localPlayer and localPlayer.Character and localPlayer.Character:FindFirstChild("Gun") and localPlayer.Character.Gun:FindFirstChild("Flash") then
+    local ohTable1 = {
+        [1] = "createparticle",
+        [2] = "muzzle",
+        [3] = localPlayer.Character.Gun.Flash
+    }
+
+    game:GetService("ReplicatedStorage").Events.RemoteEvent:FireServer(ohTable1)
+end
+
+
+
+        wait(0.01)
+    end
+end
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Gun shoot sound',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.ShootSound = Value
+        ShootSound()
+    end
+})
+
+
+
+
+_G.FallDamageSound = true
+function FallDamageSound()
+    while _G.FallDamageSound do
+
+local ohNumber1 = 0
+
+game:GetService("ReplicatedStorage").Events.FallDamage:FireServer(ohNumber1)
+        wait(0.01)
+    end
+end
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Fall dmg sound',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.FallDamageSound = Value
+        FallDamageSound()
+    end
+})
+
+
+
+_G.Othersgun = true
+function Othersgun()
+    while _G.Othersgun do
+
+        local players = game:GetService("Players")
+
+        for _, player in pairs(players:GetPlayers()) do
+            local character = player.Character
+            if character then
+                local gun = character:FindFirstChild("Gun")
+                if gun and gun:FindFirstChild("Flash") then
+                    local ohTable1 = {
+                        [1] = "createparticle",
+                        [2] = "muzzle",
+                        [3] = gun.Flash
+                    }
+                    game:GetService("ReplicatedStorage").Events.RemoteEvent:FireServer(ohTable1)
+                end
+            end
+        end
+        
+        wait(0.01)
+    end
+end
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Make others shoot',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.Othersgun = Value
+        Othersgun()
+    end
+})
+
+
+
+
+LeftGroupBox:AddLabel('Combat')
+
+
+
+
+
+
+
+
+
+_G.AutoShoot = true
+
+function AutoShoot()
+    while _G.AutoShoot == true do
+        local notificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/laagginq/ui-libraries/main/xaxas-notification/src.lua"))();
+local notifications = notificationLibrary.new({            
+    NotificationLifetime = 3, 
+    NotificationPosition = "Middle",
+    
+    TextFont = Enum.Font.Code,
+    TextColor = Color3.fromRGB(255, 0, 0),
+    TextSize = 15,
+    
+    TextStrokeTransparency = 0, 
+    TextStrokeColor = Color3.fromRGB(0, 0, 0)
+});
+
+
+
+
+        local localPlayer = game.Players.LocalPlayer
+        local closestPlayer = nil
+        local closestDistance = math.huge  -- Set an initial high distance
+
+        -- Check if localPlayer exists using pcall to avoid errors
+        local success, err = pcall(function()
+            if not localPlayer or not localPlayer.Character or not localPlayer.Character:FindFirstChild("Humanoid") then
+                return
+            end
+        end)
+        
+        -- Skip if there was an error
+        if not success then
+            print("Error: " .. err)
+            wait(.1)  -- Wait before continuing the loop
+            continue
+        end
+        
+        -- Loop through all the models in workspace to find the closest player
+        for _, playerModel in pairs(workspace:GetChildren()) do
+            if playerModel:IsA("Model") and playerModel:FindFirstChild("Humanoid") and playerModel.Name ~= localPlayer.Name then
+                if playerModel.PrimaryPart and localPlayer.Character and localPlayer.Character.PrimaryPart then
+                    -- Check if players are on the same team
+                    local player = game.Players:FindFirstChild(playerModel.Name)
+                    if player and player.Team == localPlayer.Team then
+                        -- Skip if the target is on the same team as the local player
+                        continue
+                    end
+                    
+                    local distance = (playerModel.PrimaryPart.Position - localPlayer.Character.PrimaryPart.Position).Magnitude
+        
+                    if distance < closestDistance then
+                        closestDistance = distance
+                        closestPlayer = playerModel
+                    end
+                else
+                    -- Skip this player model if required parts are missing
+                    continue
+                end
+            end
+        end
+        
+        -- If no closest player is found, skip this iteration
+        if not closestPlayer then
+            print("No target found, continuing to next iteration...")
+            wait(.1)  -- Wait before continuing the loop
+            continue  -- Skip to the next iteration of the loop
+        end
+        
+        -- Ensure the .Gun exists and use it for raycasting with pcall
+        local gunPart = nil
+        success, err = pcall(function()
+            gunPart = localPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if not gunPart == nil then
+                return
+            end
+        end)
+        
+        if not success then
+            return  -- Skip this iteration and move to the next one
+        end
+        
+        -- Ensure gunPart exists before proceeding further
+        if not gunPart then
+            return  -- Skip this iteration of the loop if gunPart is missing
+        end
+
+        -- If gunPart exists, proceed with raycasting and other actions...
+        
+        local rayOrigin = gunPart.Position  -- This will now only execute if gunPart exists
+
+
+        
+        -- Create an ignore list for raycasting (including localPlayer's character)
+        local ignoreList = {localPlayer.Character}
+
+        if workspace:FindFirstChild("Camera") and workspace.Camera:FindFirstChild("Arms") then
+            table.insert(ignoreList, workspace.Camera.Arms)
+        else
+            return
+        end
+        
+        -- Add any accessories to the ignore list (like Hat1, Hat2, Hat3, Hat4)
+        if closestPlayer then
+            for _, accessory in pairs(closestPlayer:GetChildren()) do
+                if accessory:IsA("Accessory") and accessory:FindFirstChild("Handle") then
+                    table.insert(ignoreList, accessory.Handle)
+                end
+            end
+        end
+
+        
+        
+        -- Create a function to handle raycasting to any part of the target model
+        local hitPart = nil
+        local maxDistance = closestDistance
+        local fullPath = ""  -- Store the full path of the raycast hits
+        
+        -- Loop through all parts in the target model to check for obstructions
+        local targetParts = {}
+        if closestPlayer then
+            -- Check if 'HeadHB' exists, if not skip
+            if not closestPlayer:FindFirstChild("HeadHB") then
+                print("HeadHB not found, skipping this target.")
+                continue  -- Skip if HeadHB is not found
+            end
+            
+            for _, part in pairs(closestPlayer:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    table.insert(targetParts, part)
+                end
+            end
+        end
+        if closestPlayer:FindFirstChild("ForceField") then
+            continue
+        end
+        
+        -- Raycast and trace towards each part
+        for _, targetPart in pairs(targetParts) do
+            local rayDirection = (targetPart.Position - rayOrigin).unit * maxDistance
+            local ray = Ray.new(rayOrigin, rayDirection)
+            
+            -- Raycasting to the target part
+            local hitResult, hitPosition = workspace:FindPartOnRayWithIgnoreList(ray, ignoreList)
+        
+            -- Check if the ray hits the part of the target model
+            if hitResult then
+                -- Update the fullPath string with the part hit
+                fullPath = hitResult:GetFullName()  -- Get the full path of the part hit
+        
+                -- Fire the remote for the target model when hit
+                if hitResult.Parent == closestPlayer then
+                    notifications:BuildNotificationUI();
+                    notifications:Notify("Hit " .. closestPlayer.Name .. " at " .. hitResult.Name);
+
+                    -- Define the parameters
+                    local ohInstance1 = closestPlayer.HeadHB
+                    local ohVector32 = Vector3.new(0, 0, 0)
+                    local ohString3 = "Vandal RGX"
+                    local ohNumber4 = math.huge
+                    local ohInstance5 = workspace:FindFirstChild(localPlayer.Name) and workspace[localPlayer.Name]:FindFirstChild("Gun") or nil
+                    local ohNil6 = nil
+                    local ohNil7 = nil
+                    local ohNumber8 = 10
+                    local ohBoolean9 = false
+                    local ohBoolean10 = true
+                    local ohVector311 = Vector3.new(0, 0, 0)
+                    local ohNumber12 = math.huge
+                    local ohVector313 = Vector3.new(0, 0, 0)
+                    local ohBoolean14 = true
+                    local ohNumber15 = 36
+                    local ohNumber16 = 86
+
+                    -- Find the event dynamically
+                    local replicatedStorage = game:GetService("ReplicatedStorage")
+                    local eventsFolder = replicatedStorage:FindFirstChild("Events")
+                    local targetEvent = nil
+
+                    if eventsFolder then
+                        local eventNamePattern = "^%w+%-%w+%-%w+$" -- Alphanumeric with dashes
+                        for _, child in pairs(eventsFolder:GetChildren()) do
+                            if child:IsA("RemoteEvent") and child.Name:match(eventNamePattern) then
+                                targetEvent = child
+                                break -- Stop after finding the first matching event
+                            end
+                        end
+                    end
+
+                    -- Ensure the event is found before firing
+                    if targetEvent then
+                        targetEvent:FireServer(
+                            ohInstance1, ohVector32, ohString3, ohNumber4, ohInstance5,
+                            ohNil6, ohNil7, ohNumber8, ohBoolean9, ohBoolean10, ohVector311,
+                            ohNumber12, ohVector313, ohBoolean14, ohNumber15, ohNumber16
+                        )
+                    else
+                        print("Target RemoteEvent not found!")
+                    end
+-- Services
+local dkpvha = game:GetService("Players")
+local nqkmsp = game:GetService("TweenService")
+local hfrvla = game:GetService("SoundService")
+
+-- Get the LocalPlayer
+local azmjwb = dkpvha.LocalPlayer
+local pscklg = azmjwb:WaitForChild("PlayerGui")
+
+-- Create the Hitmarker GUI
+local ghrxuf = Instance.new("ScreenGui")
+ghrxuf.Name = "HitmarkerGui"
+ghrxuf.ResetOnSpawn = false
+ghrxuf.Parent = pscklg
+
+-- Create the ImageLabel for the hitmarker
+local jxwrub = Instance.new("ImageLabel")
+jxwrub.Name = "Hitmarker"
+jxwrub.Size = UDim2.new(0, 35, 0, 35) -- Size of the hitmarker
+jxwrub.Position = UDim2.new(0.5, 0, 0.5, -27) -- Position exactly at the center of the screen
+jxwrub.AnchorPoint = Vector2.new(0.5, 0.5) -- Anchor to the center
+jxwrub.BackgroundTransparency = 1 -- Transparent background
+jxwrub.Image = "rbxassetid://8797893157" -- Your hitmarker image ID
+jxwrub.ImageTransparency = 1 -- Start invisible
+jxwrub.Visible = false
+jxwrub.Parent = ghrxuf
+
+-- Create the Sound for the hitmarker
+local qktvpl = Instance.new("Sound")
+qktvpl.SoundId = "rbxassetid://1129547534"  -- Sound ID
+qktvpl.Volume = 2 -- Set the volume (adjust if needed)
+qktvpl.Parent = azmjwb.Character or azmjwb -- Attach the sound to the player or character
+
+-- Function to show the hitmarker and play the sound
+local function lvhjzw()
+    -- Ensure it's not blocked by other scripts
+    task.spawn(function()
+        -- Show hitmarker
+        jxwrub.Visible = true
+        jxwrub.ImageTransparency = 0 -- Make it visible
+        
+        -- Play the sound
+        qktvpl:Play()
+
+        -- Tween for fade-out effect
+        local rfqjxk = TweenInfo.new(1.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+        local aspldv = nqkmsp:Create(jxwrub, rfqjxk, {ImageTransparency = 1})
+        aspldv:Play()
+        
+        -- Hide after fade-out
+        aspldv.Completed:Connect(function()
+            jxwrub.Visible = false
+            jxwrub.ImageTransparency = 0 -- Reset for future use
+        end)
+    end)
+end
+
+-- Test the showHitmarker function (call it manually or in a damage system)
+lvhjzw()
+                
+                    
+
+                    -- Now that the remote has been fired, start the tracer effect
+                    local startPart = Instance.new("Part")
+                    startPart.Size = Vector3.new(0.1, 0.1, 0.1)
+                    startPart.CFrame = CFrame.new(gunPart.Position)
+                    startPart.Anchored = true
+                    startPart.CanCollide = false
+                    startPart.Transparency = 1
+                    startPart.Parent = workspace
+        
+                    local endPart = Instance.new("Part")
+                    endPart.Size = Vector3.new(0.1, 0.1, 0.1)
+                    endPart.CFrame = CFrame.new(hitPosition)
+                    endPart.Anchored = true
+                    endPart.CanCollide = false
+                    endPart.Transparency = 1
+                    endPart.Parent = workspace
+        
+                    -- Create attachments for the Beam
+                    local attachment0 = Instance.new("Attachment", startPart)
+                    local attachment1 = Instance.new("Attachment", endPart)
+        
+                    -- Create Beam for the tracer effect
+                    local beam = Instance.new("Beam")
+                    beam.Attachment0 = attachment0
+                    beam.Attachment1 = attachment1
+                    beam.Texture = "rbxassetid://4728233934" -- Apply the decal texture (you can change the texture id)
+                    beam.TextureMode = Enum.TextureMode.Stretch
+                    beam.TextureLength = 5
+                    beam.FaceCamera = true
+                    beam.LightEmission = 1
+                    beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 0)) -- Set beam color to red
+                    beam.Width0 = 0.2
+                    beam.Width1 = 0.2
+                    beam.Parent = workspace
+        
+                    -- Move the endPart (tracer) to the hit position
+                    endPart.CFrame = CFrame.new(hitPosition)
+        
+                    -- Clean up the beam and start/end parts after the tracer effect
+                    local function fadeBeam(beam)
+                        local fadeDuration = .84 -- Duration of the fade in seconds
+                        local steps = 20 -- Number of steps for the fade
+                        local interval = fadeDuration / steps -- Time between each step
+
+                        for i = 0, steps do
+                            local transparencyValue = i / steps -- Gradual increase from 0 to 1
+                            -- Update transparency of both keypoints
+                            beam.Transparency = NumberSequence.new({
+                                NumberSequenceKeypoint.new(0, transparencyValue),  -- Start of the beam
+                                NumberSequenceKeypoint.new(1, transparencyValue)   -- End of the beam
+                            })
+                            task.wait(interval)
+                        end
+
+                        -- Clean up the beam and attachments after fading
+                        beam:Destroy() -- Destroy the beam
+                    end
+
+                    task.spawn(function()
+                        fadeBeam(beam)
+                    end)
+                    break  -- Exit the loop once the ray hits the target model and remote is fired
+                end
+            end
+        end
+        
+        wait(0.01)
+    end
+end
+
+
+
+
+
+
+
+
+
+-- Toggle for enabling AutoShoot
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Auto shoot (Read tooltip)',
+    Default = false, -- Default value (true / false)
+    Tooltip = '', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.AutoShoot = Value
+            AutoShoot()  -- Only start AutoShoot if the toggle is enabled
+    end
+})
+
+LeftGroupBox:AddLabel('Blatant')
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Kill all',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.KillAllFast = Value
+        KillAllFast()
+        
+    end
+})
+
+
+LeftGroupBox:AddLabel('Anti aim')
+
+
+
+
+
+-- Add the Spin Toggle to control whether the character spins
+LeftGroupBox:AddToggle('SpinToggle2', {
+    Text = 'Custom AA',
+    Default = false, -- Default value (false means not spinning initially)
+    Tooltip = 'Enable or disable fast character spinning', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.SpinningActive = Value
+        StartSpinning()
+
+        -- Enable or disable the slider based on the toggle
+        if Value then
+            -- Enable the slider and set the default value
+            Options.AASlider:SetValue(0)
+            Options.AASlider:SetEnabled(true)
+        else
+            -- Disable the slider when toggle is off
+            Options.AASlider:SetEnabled(false)
+            -- Reset the hook when toggle is off
+            ResetControlHook()
+        end
+    end
+})
+
+-- Add the AA Slider for changing the value
+LeftGroupBox:AddSlider('AASlider', {
+    Text = 'Custom AA Slider',
+    Default = 0,
+    Min = -30,
+    Max = 30,   
+    Rounding = 1,
+    Compact = false,
+
+    Callback = function(Value)
+        -- Update the value based on the slider's value
+        if _G.SpinningActive then
+            -- Update FireServer logic with the slider's value
+            UpdateControlRemote(Value)
+        end
+    end
+})
+
+-- The FireServer hook to manipulate the Control remote
+local OriginalMethod; 
+OriginalMethod = hookmetamethod(game, "__namecall", function(Self, ...)
+    local String = tostring(Self)
+    local Method = getnamecallmethod()
+    local Arguments = {...}
+
+    if Method == "FireServer" and String == "Control" then
+        -- Check if the spin toggle is active, and if slider is enabled
+        if _G.SpinningActive and Options.AASlider.Value ~= 0 then
+            Arguments[1] = Options.AASlider.Value
+        end
+        -- Call the original function with updated arguments
+        return OriginalMethod(Self, table.unpack(Arguments))
+    end
+
+    return OriginalMethod(Self, ...)
+end)
+
+-- Function to reset the remote hook (if needed when toggled off)
+function ResetControlHook()
+    if OriginalMethod then
+        -- Reset the hook when the toggle is off
+        OriginalMethod = nil
+        print("[INFO] Remote hook has been reset.")
+    end
+end
+
+-- Function to fire the Control remote with updated values
+function UpdateControlRemote(Value)
+    -- Logic to fire the remote with the updated slider value
+    local Arguments = {Value, false} -- Just an example, use appropriate arguments for your game
+    game:GetService("ReplicatedStorage").Events.Control:FireServer(table.unpack(Arguments))
+    print("[INFO] Remote fired with value: " .. Value)
+end
+
+-- Function to simulate the spinning behavior
+function StartSpinning()
+    if _G.SpinningActive then
+        -- Logic for fast spinning (camera or character)
+        while _G.SpinningActive do
+            -- Implement spinning code here (e.g., rotating the camera or character)
+            -- For example: character:RotateTo() or Camera rotation changes
+            wait(0.01)
+        end
+    end
+end
+
+
+-- Add a toggle to control the character's rotation (face camera or not)
+LeftGroupBox:AddToggle('FaceCameraToggle_SpinModule3', {
+    Text = 'Roll AA',
+    Default = false, -- Default value (false means face away initially)
+    Tooltip = 'Toggle the character to face the camera or not',
+
+    Callback = function(Value)
+        -- Declare variables for rotation and hook
+        local rotationThread
+        local originalHook
+        local currentValue = 1
+
+        -- Check if the toggle is enabled
+        if Value then
+            -- Reference the CurrentCamera
+            local Camera = workspace.CurrentCamera
+
+            -- Variables to control the rotation
+            local rotationAngle = math.rad(0.1) -- Rotation angle in radians (small for subtle movement)
+            local direction = 1               -- Direction: 1 for right, -1 for left
+
+            -- Spoof camera rotation by applying small angular changes
+            rotationThread = task.spawn(function()
+                while Value do -- Keep rotating while toggle is enabled
+                    -- Rotate the camera slightly to the left or right
+                    local currentCFrame = Camera.CFrame
+                    Camera.CFrame = currentCFrame * CFrame.Angles(0, rotationAngle * direction, 0)
+
+                    -- Reverse the direction after each move
+                    direction = -direction
+
+                    -- Wait for a short time before repeating
+                    task.wait(0) -- Adjust speed of rotation
+                end
+            end)
+
+            -- Hook Metamethod for FireServer only if it's not already hooked
+            if not originalHook then
+                originalHook = hookmetamethod(game, "__namecall", function(Self, ...)
+                    local String = tostring(Self)
+                    local Method = getnamecallmethod()
+                    local Arguments = {...}
+
+                    if Method == "FireServer" and String == "Control" then
+                        -- Update the first argument to the currentValue
+                        Arguments[1] = currentValue
+
+                        -- Increment the value, reset to 1 if it exceeds 30
+                        currentValue = currentValue + 1
+                        if currentValue > 30 then
+                            currentValue = 1
+                        end
+
+                        return originalHook(Self, table.unpack(Arguments))
+                    end
+
+                    return originalHook(Self, ...)
+                end)
+
+                -- Debugging message
+                print("[INFO] Camera left-right rotation spoof and remote hook successfully applied!")
+            end
+
+        else
+            -- If the toggle is off, stop the camera rotation and unhook the remote
+            -- Stop the camera rotation by killing the thread
+            if rotationThread then
+                pcall(function()
+                    rotationThread = nil  -- Stop the loop by setting the thread to nil
+                    print("[INFO] Camera rotation stopped.")
+                end)
+            end
+
+            -- Reset the value to 0 when the toggle is turned off
+            currentValue = 0
+
+            -- Unhook the FireServer remote if it was hooked
+            if originalHook then
+                pcall(function()
+                    -- Properly reset the hook to the original state
+                    hookmetamethod(game, "__namecall", originalHook)
+                    originalHook = nil -- Clear the hook reference
+                    print("[INFO] Remote hook removed.")
+                end)
+            end
+
+            -- Optionally print message for debugging purposes
+            print("[INFO] Toggle turned off, camera stopped and value reset to 0.")
+        end
+    end
+})
+
+
+
+
+
+
+LeftGroupBox:AddLabel('Misc')
+
+
+
+
+
+
+
+
+LeftGroupBox:AddButton({
+    Text = 'Tp all (doesnt work in warmup)',
+    Func = function()
+-- Get the local player
+local localPlayer = game:GetService("Players").LocalPlayer
+
+-- Iterate through all players
+for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+    -- Skip the local player
+    if player ~= localPlayer then
+        -- Ensure the player has a character and the required Gun object
+        local character = player.Character
+        if character and character:FindFirstChild("Gun") then
+            local ohTable1 = {
+                ["MinDmg"] = 0,
+                ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets.P2000.Configuration,
+                ["Bullets"] = 1,
+                ["Range"] = 8192,
+                ["FireRate"] = 0.14,
+                ["CanDrop"] = true,
+                ["DMG"] = 35,
+                ["Penetration"] = 100,
+                ["Secondary"] = true,
+                ["Gun"] = character.Gun, -- Set to the current player's Gun
+                ["Spread"] = {
+                    ["Move"] = 10,
+                    ["Crouch"] = 3.68,
+                    ["Stand"] = 4.9,
+                    ["MaxInaccuracy"] = 0,
+                    ["Land"] = 19.1,
+                    ["Value"] = 2.5,
+                    ["Jump"] = 94.48,
+                    ["Ladder"] = 138.32,
+                    ["RecoveryTime"] = {
+                        ["Value"] = 0.349,
+                        ["Crouched"] = 0.291
+                    }
+                },
+                ["BulletPerTrail"] = 0,
+                ["ArmorPenetration"] = 50.5,
+                ["AccuracyDivisor"] = -1,
+                ["Tagging"] = 0.44,
+                ["KillAward"] = 150,
+                ["Ammo"] = 12,
+                ["PointsAward"] = 12,
+                ["RangeModifier"] = 91,
+                ["StoredAmmo"] = 24,
+                ["RemoveTime"] = 3.65,
+                ["ApplyTime"] = 3,
+                ["Name"] = "P2000",
+                ["AccuracyOffset"] = 0,
+                ["ReloadTime"] = 2.17,
+                ["EquipTime"] = 1,
+                ["Auto"] = false,
+                ["Recoil"] = {
+                    ["Value"] = 23,
+                    ["X"] = 0,
+                    ["Y"] = 0
+                }
+            }
+
+            -- Get the position of the local player's HumanoidRootPart
+            local playerPosition = localPlayer.Character.HumanoidRootPart.Position
+            local ohCFrame2 = CFrame.new(playerPosition)
+            local ohNumber3 = 12
+            local ohNumber4 = 24
+            local ohBoolean5 = false
+            local ohInstance6 = localPlayer
+            local ohBoolean7 = false
+            local ohBoolean8 = false
+
+            -- Fire the remote event for this player
+            game:GetService("ReplicatedStorage").Events.Drop:FireServer(ohTable1, ohCFrame2, ohNumber3, ohNumber4, ohBoolean5, ohInstance6, ohBoolean7, ohBoolean8)
+        end
+    end
+end
+
+            end,
+    DoubleClick = false,
+    Tooltip = 'lol'
+})
+
+
+
+
+
+
+LeftGroupBox:AddButton({
+    Text = 'Kick all (doesnt work in warmup)',
+    Func = function()
+-- Get the local player
+local localPlayer = game:GetService("Players").LocalPlayer
+
+-- Iterate through all players
+for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+    -- Skip the local player
+    if player ~= localPlayer then
+        -- Ensure the player has a character and the required Gun object
+        local character = player.Character
+        if character and character:FindFirstChild("Gun") then
+            local ohTable1 = {
+                ["MinDmg"] = 0,
+                ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets.P2000.Configuration,
+                ["Bullets"] = 1,
+                ["Range"] = 8192,
+                ["FireRate"] = 0.14,
+                ["CanDrop"] = true,
+                ["DMG"] = 35,
+                ["Penetration"] = 100,
+                ["Secondary"] = true,
+                ["Gun"] = character.Gun, -- Set to the current player's Gun
+                ["Spread"] = {
+                    ["Move"] = 10,
+                    ["Crouch"] = 3.68,
+                    ["Stand"] = 4.9,
+                    ["MaxInaccuracy"] = 0,
+                    ["Land"] = 19.1,
+                    ["Value"] = 2.5,
+                    ["Jump"] = 94.48,
+                    ["Ladder"] = 138.32,
+                    ["RecoveryTime"] = {
+                        ["Value"] = 0.349,
+                        ["Crouched"] = 0.291
+                    }
+                },
+                ["BulletPerTrail"] = 0,
+                ["ArmorPenetration"] = 50.5,
+                ["AccuracyDivisor"] = -1,
+                ["Tagging"] = 0.44,
+                ["KillAward"] = 150,
+                ["Ammo"] = 12,
+                ["PointsAward"] = 12,
+                ["RangeModifier"] = 91,
+                ["StoredAmmo"] = 24,
+                ["RemoveTime"] = 3.65,
+                ["ApplyTime"] = 3,
+                ["Name"] = "P2000",
+                ["AccuracyOffset"] = 0,
+                ["ReloadTime"] = 2.17,
+                ["EquipTime"] = 1,
+                ["Auto"] = false,
+                ["Recoil"] = {
+                    ["Value"] = 23,
+                    ["X"] = 0,
+                    ["Y"] = 0
+                }
+            }
+
+            -- Get the position of the local player's HumanoidRootPart
+            local playerPosition = localPlayer.Character.HumanoidRootPart.Position
+            local ohCFrame2 = CFrame.new(0,math.huge,0)
+            local ohNumber3 = 12
+            local ohNumber4 = 24
+            local ohBoolean5 = false
+            local ohInstance6 = localPlayer
+            local ohBoolean7 = false
+            local ohBoolean8 = false
+
+            -- Fire the remote event for this player
+            game:GetService("ReplicatedStorage").Events.Drop:FireServer(ohTable1, ohCFrame2, ohNumber3, ohNumber4, ohBoolean5, ohInstance6, ohBoolean7, ohBoolean8)
+        end
+    end
+end
+
+            end,
+    DoubleClick = false,
+    Tooltip = 'lol'
+})
+
+
+
+-- Arguments: Idx, Info
+LeftGroupBox:AddInput('MyTextbox', {
+    Default = '',
+    Numeric = false, -- true / false, only allows numbers
+    Finished = true, -- true / false, only calls callback when you press enter
+
+    Text = 'Type Anything',
+    Tooltip = 'No hashtags', -- Information shown when you hover over the textbox
+
+    Placeholder = 'Placeholder text', -- placeholder text when the box is empty
+    -- MaxLength is also an option which is the max length of the text
+
+    Callback = function(Value)
+        -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+
+local ohString1 = Value
+local ohBoolean2 = false
+local ohString3 = "Innocent"
+local ohBoolean4 = false
+local ohBoolean5 = false
+local ohBoolean6 = false
+
+game:GetService("ReplicatedStorage").Events.PlayerChatted:FireServer(ohString1, ohBoolean2, ohString3, ohBoolean4, ohBoolean5, ohBoolean6)
+    end
+})
+
+
+_G.Uhhwhat = true
+function Uhhwhat()
+    while _G.Uhhwhat == true do
+-- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+
+local ohString1 = "Sync.wtf ON FUCKING TOP NIGGERS NIGGERS NIGGERS (Hi from 4stud 👋🥰)"
+local ohBoolean2 = false
+local ohString3 = "Innocent"
+local ohBoolean4 = false
+local ohBoolean5 = false
+local ohBoolean6 = false
+
+game:GetService("ReplicatedStorage").Events.PlayerChatted:FireServer(ohString1, ohBoolean2, ohString3, ohBoolean4, ohBoolean5, ohBoolean6)
+wait(1)
+    end
+end
+-- Add the Toggle to turn SpeedSpeed on/off
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Uhh what',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Enable continuous movement without jumping', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+       _G.Uhhwhat = Value
+       Uhhwhat()
+    end
+})
+
+
+
+LeftGroupBox:AddButton({
+    Text = 'Tp bomb to nowhere (need to stand on site)',
+    Func = function()
+
+local ohCFrame1 = CFrame.new(mathrandom,mathrandom,mathrandom)
+local ohString2 = "Sync.wtf"
+
+game:GetService("ReplicatedStorage").Events.PlantC4:FireServer(ohCFrame1, ohString2)
+            end,
+    DoubleClick = false,
+    Tooltip = 'lol'
+})
+
+LeftGroupBox:AddButton({
+    Text = 'Defuse bomb',
+    Func = function()
+        local C4 = game:GetService("Workspace"):FindFirstChild("C4")
+
+        game:GetService("Players").LocalPlayer.Backpack.Defuse:FireServer(C4)
+            end,
+    DoubleClick = false,
+    Tooltip = 'lol'
+})
+
+LeftGroupBox:AddLabel('Local')
+
+-- Initialize AutoBhop and Movement Speed
+_G.SpeedSpeed = false  -- Default to off
+local movementSpeed = 10  -- Default speed value (this can be changed via the slider)
+
+local player = game.Players.LocalPlayer
+local runService = game:GetService("RunService")
+
+-- Function to apply velocity based on player input and toggle state
+local function ApplyMovement()
+    runService.RenderStepped:Connect(function()
+        if _G.SpeedSpeed then  -- Only apply movement if SpeedSpeed is enabled
+            local character = player.Character
+            if character then
+                local humanoid = character:FindFirstChild("Humanoid")
+                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                
+                if humanoid and humanoidRootPart then
+                    -- Get the direction the player is moving based on the keys pressed (W, A, S, D)
+                    local moveDirection = humanoid.MoveDirection
+
+                    -- If there is any movement input (non-zero direction)
+                    if moveDirection.Magnitude > 0 then
+                        -- Apply velocity to the humanoid root part
+                        humanoidRootPart.Velocity = Vector3.new(moveDirection.X * movementSpeed, humanoidRootPart.Velocity.Y, moveDirection.Z * movementSpeed)
+                    end
+                end
+            end
+        end
+    end)
+end
+
+-- Add the AA Slider for changing the speed value
+LeftGroupBox:AddSlider('MovementSpeed', {
+    Text = 'Movement Speed',
+    Default = 10,  -- Default speed value
+    Min = 10,      -- Minimum speed value
+    Max = 200,     -- Maximum speed value
+    Rounding = 1,
+    Compact = false,
+
+    Callback = function(Value)
+        -- Update the movement speed if SpeedSpeed is enabled
+        if _G.SpeedSpeed then
+            movementSpeed = Value  -- Set the movement speed to the value from the slider
+            print("Movement speed updated to: " .. movementSpeed)  -- Optional: Print for debugging
+        end
+    end
+})
+
+-- Add the Toggle to turn SpeedSpeed on/off
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Speed',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Enable continuous movement without jumping', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        -- Enable or disable movement based on the toggle
+        _G.SpeedSpeed = Value
+
+        -- If SpeedSpeed is enabled, start applying movement, otherwise stop
+        if _G.SpeedSpeed then
+            ApplyMovement()  -- Start the movement function
+        end
+    end
+})
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Bhop',
+    Default = false, -- Default value (true / false)
+    Tooltip = '', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.AutoBhop = Value
+        AutoBhop()  
+    end
+})
+
+
+-- Listen for character respawn event
+LeftGroupBox:AddLabel('Sky')
+
+
+
+-- Fetching a toggle object for later use:
+-- Toggles.MyToggle.Value
+
+-- Toggles is a table added to getgenv() by the library
+-- You index Toggles with the specified index, in this case it is 'MyToggle'
+-- To get the state of the toggle you do toggle.Value
+
+-- Calls the passed function when the toggle is updated
+
+-- This should print to the console: "My toggle state changed! New value: false"
+
+-- 1/15/23
+-- Deprecated old way of creating buttons in favor of using a table
+-- Added DoubleClick button functionality
+
+--[[
+    Groupbox:AddButton
+    Arguments: {
+        Text = string,
+        Func = function,
+        DoubleClick = boolean
+        Tooltip = string,
+    }
+
+    You can call :AddButton on a button to add a SubButton!
+]]
+
+local MyButton = LeftGroupBox:AddButton({
+    Text = 'Skybox (Night)',
+    Func = function()
+-- Asset ID replacements
+local skyTextures = {
+    Up = "rbxassetid://163208535",
+    Front = "rbxassetid://163208688",
+    Left = "rbxassetid://163208660",
+    Down = "rbxassetid://163208725",
+    Back = "rbxassetid://163208826",
+    Right = "rbxassetid://163208589"
+}
+
+-- Get the Lighting service
+local lighting = game:GetService("Lighting")
+
+-- Iterate through all children of Lighting and check if they are of class Sky
+for _, sky in pairs(lighting:GetChildren()) do
+    if sky:IsA("Sky") then
+        print("Found Sky at: " .. sky:GetFullName())  -- Print the path of the Sky object
+        
+        -- Set the Sky textures with the specified asset IDs
+        sky.SkyboxUp = skyTextures.Up
+        print("Updated SkyboxUp: " .. sky.SkyboxUp)
+        
+        sky.SkyboxFt = skyTextures.Front
+        print("Updated SkyboxFt: " .. sky.SkyboxFt)
+        
+        sky.SkyboxLf = skyTextures.Left
+        print("Updated SkyboxLf: " .. sky.SkyboxLf)
+        
+        sky.SkyboxDn = skyTextures.Down
+        print("Updated SkyboxDn: " .. sky.SkyboxDn)
+        
+        sky.SkyboxBk = skyTextures.Back
+        print("Updated SkyboxBk: " .. sky.SkyboxBk)
+        
+        sky.SkyboxRt = skyTextures.Right
+        print("Updated SkyboxRt: " .. sky.SkyboxRt)
+    end
+end
+    end,
+    DoubleClick = false,
+    Tooltip = 'Change ur skybox'
+})
+
+local MyButton2 = MyButton:AddButton({
+    Text = 'Skybox (wtf)',
+    Func = function()
+-- Asset ID replacements
+local skyTextures = {
+    Up = "rbxassetid://2668798561",
+    Front = "rbxassetid://2668798561",
+    Left = "rbxassetid://2668798561",
+    Down = "rbxassetid://2668798561",
+    Back = "rbxassetid://2668798561",
+    Right = "rbxassetid://2668798561"
+}
+
+-- Get the Lighting service
+local lighting = game:GetService("Lighting")
+
+-- Iterate through all children of Lighting and check if they are of class Sky
+for _, sky in pairs(lighting:GetChildren()) do
+    if sky:IsA("Sky") then
+        print("Found Sky at: " .. sky:GetFullName())  -- Print the path of the Sky object
+        
+        -- Set the Sky textures with the specified asset IDs
+        sky.SkyboxUp = skyTextures.Up
+        print("Updated SkyboxUp: " .. sky.SkyboxUp)
+        
+        sky.SkyboxFt = skyTextures.Front
+        print("Updated SkyboxFt: " .. sky.SkyboxFt)
+        
+        sky.SkyboxLf = skyTextures.Left
+        print("Updated SkyboxLf: " .. sky.SkyboxLf)
+        
+        sky.SkyboxDn = skyTextures.Down
+        print("Updated SkyboxDn: " .. sky.SkyboxDn)
+        
+        sky.SkyboxBk = skyTextures.Back
+        print("Updated SkyboxBk: " .. sky.SkyboxBk)
+        
+        sky.SkyboxRt = skyTextures.Right
+        print("Updated SkyboxRt: " .. sky.SkyboxRt)
+    end
+end    end,
+    DoubleClick = false, -- You will have to click this button twice to trigger the callback
+    Tooltip = 'Skybox changer'
+})
+
+
+local MyButton3 = MyButton2:AddButton({
+    Text = 'Skybox (wtf)',
+    Func = function()
+-- Asset ID replacements
+local skyTextures = {
+    Up = "rbxassetid://2668798561",
+    Front = "rbxassetid://2668798561",
+    Left = "rbxassetid://2668798561",
+    Down = "rbxassetid://2668798561",
+    Back = "rbxassetid://2668798561",
+    Right = "rbxassetid://2668798561"
+}
+
+-- Get the Lighting service
+local lighting = game:GetService("Lighting")
+
+-- Iterate through all children of Lighting and check if they are of class Sky
+for _, sky in pairs(lighting:GetChildren()) do
+    if sky:IsA("Sky") then
+        print("Found Sky at: " .. sky:GetFullName())  -- Print the path of the Sky object
+        
+        -- Set the Sky textures with the specified asset IDs
+        sky.SkyboxUp = skyTextures.Up
+        print("Updated SkyboxUp: " .. sky.SkyboxUp)
+        
+        sky.SkyboxFt = skyTextures.Front
+        print("Updated SkyboxFt: " .. sky.SkyboxFt)
+        
+        sky.SkyboxLf = skyTextures.Left
+        print("Updated SkyboxLf: " .. sky.SkyboxLf)
+        
+        sky.SkyboxDn = skyTextures.Down
+        print("Updated SkyboxDn: " .. sky.SkyboxDn)
+        
+        sky.SkyboxBk = skyTextures.Back
+        print("Updated SkyboxBk: " .. sky.SkyboxBk)
+        
+        sky.SkyboxRt = skyTextures.Right
+        print("Updated SkyboxRt: " .. sky.SkyboxRt)
+    end
+end    end,
+    DoubleClick = false, -- You will have to click this button twice to trigger the callback
+    Tooltip = 'Skybox changer'
+})
+
+
+
+LeftGroupBox:AddLabel('Auto shoot'):AddKeyPicker('KeyPicker', {
+    -- SyncToggleState only works with toggles.
+    -- It allows you to make a keybind which has its state synced with its parent toggle
+
+    -- Example: Keybind which you use to toggle flyhack, etc.
+    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
+
+    Default = 'T', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+    SyncToggleState = false,
+
+
+    -- You can define custom Modes but I have never had a use for it.
+    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+
+    Text = 'AutoShoot', -- Text to display in the keybind menu
+    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+
+    Callback = function(Value)
+        _G.AutoShoot  = Value
+        AutoShoot()
+    end,
+
+    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+    ChangedCallback = function(New)
+        print('[cb] Keybind changed!', New)
+    end
+})
+Options.KeyPicker:SetValue({ 'T', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
+
+
+
+
+
+
+LeftGroupBox:AddLabel('Third person'):AddKeyPicker('KeyPicker', {
+    -- SyncToggleState only works with toggles.
+    -- It allows you to make a keybind which has its state synced with its parent toggle
+
+    -- Example: Keybind which you use to toggle flyhack, etc.
+    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
+
+    Default = 'X', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+    SyncToggleState = false,
+
+
+    -- You can define custom Modes but I have never had a use for it.
+    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+
+    Text = 'Third person', -- Text to display in the keybind menu
+    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+
+    Callback = function(Value)
+        if Value then
+            enableThirdPerson() -- Enable third-person mode
+        else
+            disableThirdPerson() -- Disable third-person mode
+        end
+    end,
+
+    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+    ChangedCallback = function(New)
+        print('[cb] Keybind changed!', New)
+    end
+})
+
+
+
+-- OnClick is only fired when you press the keybind and the mode is Toggle
+-- Otherwise, you will have to use Keybind:GetState()
+
+
+
+
+Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
+
+        LeftGroupBox:AddLabel('Bhop'):AddKeyPicker('KeyPicker', {
+            -- SyncToggleState only works with toggles.
+            -- It allows you to make a keybind which has its state synced with its parent toggle
+        
+            -- Example: Keybind which you use to toggle flyhack, etc.
+            -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
+        
+            Default = 'H', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+            SyncToggleState = false,
+        
+        
+            -- You can define custom Modes but I have never had a use for it.
+            Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+        
+            Text = 'Bhop', -- Text to display in the keybind menu
+            NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+        
+            Callback = function(Value)
+                -- Enable or disable AutoBhop based on the toggle
+        _G.AutoBhop = Value
+        AutoBhop()
+
+
+            end,
+        
+            -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+            ChangedCallback = function(New)
+                print('[cb] Keybind changed!', New)
+            end
+        })
+        
+        
+        
+        -- OnClick is only fired when you press the keybind and the mode is Toggle
+        -- Otherwise, you will have to use Keybind:GetState()
+        
+        
+        
+        
+        Options.KeyPicker:SetValue({ 'H', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
+
+-- Library functions
+-- Sets the watermark visibility
+Library:SetWatermarkVisibility(true)
+
+-- Example of dynamically-updating watermark with common traits (fps and ping)
+local FrameTimer = tick()
+local FrameCounter = 0;
+local FPS = 60;
+
+local WatermarkConnection = game:GetService('RunService').RenderStepped:Connect(function()
+    FrameCounter += 1;
+
+    if (tick() - FrameTimer) >= 1 then
+        FPS = FrameCounter;
+        FrameTimer = tick();
+        FrameCounter = 0;
+    end;
+
+    Library:SetWatermark(('Sync.wtf (Private) | %s fps | %s ms'):format(
+        math.floor(FPS),
+        math.floor(game:GetService('Stats').Network.ServerStatsItem['Data Ping']:GetValue())
+    ));
+end);
+
+Library.KeybindFrame.Visible = true; -- todo: add a function for this
+
+Library:OnUnload(function()
+    WatermarkConnection:Disconnect()
+
+    print('Unloaded!')
+    Library.Unloaded = true
+end)
+
+-- UI Settings
+local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
+
+-- I set NoUI so it does not show up in the keybinds menu
+MenuGroup:AddButton('Unload', function() Library:Unload() end)
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' })
+
+Library.ToggleKeybind = Options.MenuKeybind -- Allows you to have a custom keybind for the menu
+
+-- Addons:
+-- SaveManager (Allows you to have a configuration system)
+-- ThemeManager (Allows you to have a menu theme system)
+
+-- Hand the library over to our managers
+ThemeManager:SetLibrary(Library)
+SaveManager:SetLibrary(Library)
+
+SaveManager:IgnoreThemeSettings()
+
+
+SaveManager:SetIgnoreIndexes({ 'MenuKeybind' })
+
+-- use case for doing it this way:
+-- a script hub could have themes in a global folder
+-- and game configs in a separate folder per game
+ThemeManager:SetFolder('MyScriptHub')
+SaveManager:SetFolder('MyScriptHub/specific-game')
+
+
+SaveManager:BuildConfigSection(Tabs['UI Settings'])
+
+
+ThemeManager:ApplyToTab(Tabs['UI Settings'])
+
+SaveManager:LoadAutoloadConfig()
