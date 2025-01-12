@@ -853,7 +853,7 @@ end
 end
 
 LeftGroupBox:AddToggle('MyToggle', {
-    Text = 'Attach all to ur gun',
+    Text = 'Attach players to ur gun',
     Default = false, -- Default value (true / false)
     Tooltip = 'lol', -- Information shown when you hover over the toggle
 
