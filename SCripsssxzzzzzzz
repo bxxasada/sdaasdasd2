@@ -879,7 +879,7 @@ RightGroupbox:AddButton({
     Text = 'Sync.wtf pfp',
     Func = function()
         local ohString1 = "save"
-local ohString2 = "rbxassetid://88623550306743"
+local ohString2 = "rbxassetid://113675824774205"
 
 game:GetService("ReplicatedStorage").ProfileUpdateEvent:FireServer(ohString1, ohString2)
 
