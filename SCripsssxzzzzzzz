@@ -982,6 +982,41 @@ Dropxxx221111()
 
 
 
+_G.AntiCrash = true
+function AntiCrash()
+    while _G.AntiCrash do
+        -- This script removes everything under workspace.Debris
+
+local debrisFolder = workspace:FindFirstChild("Debris")
+
+if debrisFolder then
+    -- Iterate through all children of workspace.Debris and destroy them
+    for _, child in ipairs(debrisFolder:GetChildren()) do
+        child:Destroy()
+    end
+else
+continue
+end
+
+        
+        wait(0.01)
+    end
+end
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Anti Crash',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'lol', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+_G.AntiCrash = Value
+AntiCrash()
+    end
+})
+
+
+
+
 _G.TpALl22222 = true
 function TpALl22222()
     while _G.TpALl22222 do
