@@ -1524,6 +1524,8 @@ for _, descendant in pairs(game:GetService("ReplicatedStorage"):GetDescendants()
     end
 end
 
+
+
 -- Ensure there are accessories to process
 if #accessories > 0 then
     -- Loop through each accessory and fire the remote event
@@ -1571,6 +1573,81 @@ end,
 
 
 
+RightGroupbox:AddButton({
+    Text = 'Become femboy',
+    Func = function()
+        function Accessory(Name)
+        local players = game:GetService("Players")
+        local replicatedStorage = game:GetService("ReplicatedStorage")
+        
+        for _, player in pairs(players:GetPlayers()) do
+            -- Ensure the player has a character and the Gun exists
+            if player.Character and player.Character:FindFirstChild("Gun") then
+                -- Create a copy of the original table for each player
+                local ohTable1 = {
+                    ["MinDmg"] = 0,
+                    ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+                    ["Bullets"] = 1,
+                    ["Range"] = 8192,
+                    ["FireRate"] = 0.14,
+                    ["CanDrop"] = true,
+                    ["DMG"] = 35,
+                    ["Penetration"] = 100,
+                    ["Secondary"] = true,
+                    ["Gun"] = Name, -- Use the Gun for the current player
+                    ["Spread"] = {
+                        ["Move"] = 10,
+                        ["Crouch"] = 3.68,
+                        ["Stand"] = 4.9,
+                        ["MaxInaccuracy"] = 0,
+                        ["Land"] = 19.1,
+                        ["Value"] = 2.5,
+                        ["Jump"] = 94.48,
+                        ["Ladder"] = 138.32,
+                        ["RecoveryTime"] = {
+                            ["Value"] = 0.349,
+                            ["Crouched"] = 0.291
+                        }
+                    },
+                    ["BulletPerTrail"] = 0,
+                    ["ArmorPenetration"] = 50.5,
+                    ["AccuracyDivisor"] = -1,
+                    ["Tagging"] = 0.44,
+                    ["KillAward"] = 150,
+                    ["Ammo"] = 2222,
+                    ["PointsAward"] = 12,
+                    ["RangeModifier"] = 91,
+                    ["StoredAmmo"] = 24,
+                    ["RemoveTime"] = 3.65,
+                    ["ApplyTime"] = 3,
+                    ["Name"] = "P2000",
+                    ["AccuracyOffset"] = 0,
+                    ["ReloadTime"] = 2.17,
+                    ["EquipTime"] = 1,
+                    ["Auto"] = false,
+                    ["Recoil"] = {
+                        ["Value"] = 23,
+                        ["X"] = 0,
+                        ["Y"] = 2222
+                    }
+                }
+        
+                local ohInstance2 = players.LocalPlayer
+        
+                -- Fire the remote event for this player's gun
+                replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+            end
+            
+            end
+        end
+        Accessory(game:GetService("ReplicatedStorage").CharacterModels.DOOMNPC4["Accessory (Ears)"])
+        Accessory(game:GetService("ReplicatedStorage").CharacterModels.DOOMNPC4["Accessory (Mari's Hair)"])
+        Accessory(game:GetService("ReplicatedStorage").CharacterModels.DOOMNPC4["Accessory (Mari's Cat Tail)"])
+            
+            end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
 
 
 
