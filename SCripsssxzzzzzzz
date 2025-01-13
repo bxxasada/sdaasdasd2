@@ -2164,7 +2164,7 @@ LeftGroupBox:AddInput('MyTextbox', {
     Finished = true, -- Updates in real-time
     Text = 'Value Amount',
     Tooltip = 'No hashtags',
-    Placeholder = 'Placeholder text',
+    Placeholder = 'Number',
 
     Callback = function(userInputValue)
         -- Update the current input value whenever the user types
@@ -2207,7 +2207,7 @@ LeftGroupBox:AddInput('MyTextbox', {
     Finished = true, -- Updates in real-time
     Text = 'Add any skin',
     Tooltip = 'Provide full name Eg. "AK47 | Evolved Blocks" or "Classic Karambit | Gold" ',
-    Placeholder = 'Placeholder text',
+    Placeholder = 'Name',
 
     Callback = function(Value)
 
