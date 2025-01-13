@@ -2139,8 +2139,107 @@ LeftGroupBox:AddToggle('MyToggle', {
     end
 })
 
-LeftGroupBox:AddLabel('Blatant')
+LeftGroupBox:AddLabel('idk')
 
+
+
+RightGroupbox:AddButton({
+    Text = 'INF xp',
+    Func = function()
+        game:GetService("ReplicatedStorage").AddXP:FireServer(math.huge)
+            end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+LeftGroupBox:AddLabel('Trading')
+
+local isToggleActiveForInventoryUpdate = false
+local currentInputValueFromTextbox = ""
+
+-- Add the textbox input
+LeftGroupBox:AddInput('MyTextbox', {
+    Default = '',
+    Numeric = false, -- Allows any text
+    Finished = true, -- Updates in real-time
+    Text = 'Value Amount',
+    Tooltip = 'No hashtags',
+    Placeholder = 'Placeholder text',
+
+    Callback = function(userInputValue)
+        -- Update the current input value whenever the user types
+        currentInputValueFromTextbox = userInputValue
+    end
+})
+
+
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Get any value (Trading serv)',
+    Default = false,
+    Tooltip = 'Ez',
+
+    Callback = function(toggleStateValue)
+        isToggleActiveForInventoryUpdate = toggleStateValue -- Update the toggle state
+
+        -- If the toggle is turned on, start the loop
+        if isToggleActiveForInventoryUpdate then
+            -- Start a loop that runs while the toggle is active
+            task.spawn(function()
+                while isToggleActiveForInventoryUpdate do
+                    -- Fire the RemoteEvent with the current textbox value
+                    game:GetService("ReplicatedStorage").UpdateInventoryValue:FireServer(currentInputValueFromTextbox)
+
+                    -- Add a small delay to prevent overwhelming the server
+                    task.wait(0.5)
+                end
+            end)
+        end
+    end
+})
+
+
+
+
+LeftGroupBox:AddInput('MyTextbox', {
+    Default = '',
+    Numeric = false, -- Allows any text
+    Finished = true, -- Updates in real-time
+    Text = 'Add any skin',
+    Tooltip = 'Provide full name Eg. "AK47 | Evolved Blocks" or "Classic Karambit | Gold" ',
+    Placeholder = 'Placeholder text',
+
+    Callback = function(Value)
+
+
+function SkinAdd(SkinName)
+local ohTable1 = {
+	["IsStatTrak"] = true,
+	["ItemName"] = SkinName,
+	["Rarity"] = "",
+	["Amount"] = 1,
+	["Tradable"] = true,
+	["SkinName"] = "Gold",
+	["Count"] = 1,
+	["Weapon"] = "Classic Karambit"
+}
+local ohString2 = "Container"
+local ohString3 = "Player1Giving"
+local ohNumber4 = 1
+
+game:GetService("ReplicatedStorage").Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
+end
+SkinAdd(Value)
+
+
+    end
+})
+
+
+
+
+
+LeftGroupBox:AddLabel('Blatant')
 
 
 LeftGroupBox:AddToggle('MyToggle', {
@@ -2149,8 +2248,8 @@ LeftGroupBox:AddToggle('MyToggle', {
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
-        _G.KillAllFast = Value
-        KillAllFast()
+        
+        
         
     end
 })
