@@ -448,31 +448,26 @@ function UpdateLightingColor()
         if lighting:FindFirstChild("dust2ColorCorrection") then
             lighting.dust2ColorCorrection.TintColor = SelectedColor4
             -- Debug: Print path of the changed object
-            print("Updated TintColor for: Lighting.dust2ColorCorrection")
         end
         
         if lighting:FindFirstChild("mirageColorCorrection") then
             lighting.mirageColorCorrection.TintColor = SelectedColor4
             -- Debug: Print path of the changed object
-            print("Updated TintColor for: Lighting.mirageColorCorrection")
         end
         
         if lighting:FindFirstChild("crossfireColorCorrection") then
             lighting.crossfireColorCorrection.TintColor = SelectedColor4
             -- Debug: Print path of the changed object
-            print("Updated TintColor for: Lighting.crossfireColorCorrection")
         end
         
         if lighting:FindFirstChild("spookfaceColorCorrection") then
             lighting.spookfaceColorCorrection.TintColor = SelectedColor4
             -- Debug: Print path of the changed object
-            print("Updated TintColor for: Lighting.spookfaceColorCorrection")
         end
         
         if lighting:FindFirstChild("ColorCorrection") then
             lighting.ColorCorrection.TintColor = SelectedColor4
             -- Debug: Print path of the changed object
-            print("Updated TintColor for: Lighting.ColorCorrection")
         end
         
         wait(0.01)  -- Wait briefly before repeating
@@ -1853,7 +1848,6 @@ local notifications = notificationLibrary.new({
         
         -- If no closest player is found, skip this iteration
         if not closestPlayer then
-            print("No target found, continuing to next iteration...")
             wait(.1)  -- Wait before continuing the loop
             continue  -- Skip to the next iteration of the loop
         end
