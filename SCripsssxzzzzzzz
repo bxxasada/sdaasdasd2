@@ -3106,6 +3106,91 @@ Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
         
         Options.KeyPicker:SetValue({ 'H', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
 
+
+
+        local player323232 = game.Players.LocalPlayer
+        local character223 = player323232.Character or player323232.CharacterAdded:Wait()
+        local rootPart112 = character223:WaitForChild("HumanoidRootPart")
+        
+        -- Variable to store the saved position, outline part, and highlight
+        local savedPosition = nil
+        local outlinePart = nil
+        local highlight = nil
+        
+        -- Function to create a simple 1x1 stud part with a highlight at the root position
+        local function createOutline(character)
+            -- Create a 1x1 stud part at the position of the HumanoidRootPart
+            outlinePart = Instance.new("Part")
+            outlinePart.Size = Vector3.new(1, 1, 1)  -- 1x1x1 stud part
+            outlinePart.Position = rootPart112.Position  -- Set position to the root part's position
+            outlinePart.Anchored = true  -- Anchor the part so it stays in place
+            outlinePart.CanCollide = false  -- Disable collisions for the outline part
+            outlinePart.Material = Enum.Material.Neon  -- Neon material for visibility
+            outlinePart.Color = Color3.fromRGB(255, 0, 0)  -- Red color for the outline
+            outlinePart.Transparency = 0  -- Semi-transparent part
+            outlinePart.Parent = workspace  -- Parent the part to the Workspace
+        
+            -- Create a highlight to make the part visible through walls
+            highlight = Instance.new("Highlight")
+            highlight.Adornee = outlinePart  -- The part the highlight will apply to
+            highlight.FillTransparency = 0.5  -- Make the part semi-transparent
+            highlight.OutlineTransparency = 0  -- Make the outline fully visible
+            highlight.FillColor = Color3.fromRGB(255, 0, 0)  -- Red color for the fill
+            highlight.OutlineColor = Color3.fromRGB(0, 0, 0)  -- White outline for visibility through walls
+            highlight.Parent = outlinePart  -- Parent the highlight to the part
+        end
+        
+        -- Function to remove the outline part and highlight
+        local function removeOutline()
+            if outlinePart then
+                if highlight then
+                    highlight:Destroy()  -- Remove the highlight
+                    highlight = nil
+                end
+                outlinePart:Destroy()  -- Destroy the outline part
+                outlinePart = nil
+            end
+        end
+    
+
+
+        -- Add the Bhop label and key picker
+        LeftGroupBox:AddLabel('Auto peak'):AddKeyPicker('KeyPicker', {
+            Default = 'G', -- Default keybind
+            SyncToggleState = false,
+            Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+            Text = 'Auto peak', -- Text to display in the keybind menu
+            NoUI = false, -- Display in the Keybind menu
+        
+            -- Callback when the key is pressed
+            Callback = function(isPressed)
+                if isPressed == true then
+                    -- Save the current position
+                    savedPosition = rootPart112.Position
+                    print("Position saved:", savedPosition)
+        
+                    -- Create the simple outline at the player's current position
+                    createOutline(character223)
+        
+                elseif isPressed == false then
+                    -- Teleport back to the saved position while maintaining rotation
+                    if savedPosition then
+                        rootPart112.CFrame = CFrame.new(savedPosition) * CFrame.Angles(
+                            rootPart112.CFrame:ToEulerAnglesXYZ()
+                        )
+                        print("Teleported back to position while maintaining rotation.")
+                    end
+        
+                    -- Remove the outline when the key is released
+                    removeOutline()
+                end
+            end,
+        
+            -- Callback when the keybind itself is changed
+        })
+        
+        
+
 -- Library functions
 -- Sets the watermark visibility
 Library:SetWatermarkVisibility(true)
