@@ -60,7 +60,7 @@ local Skins = Tabs.Main:AddRightGroupbox('Skins')
 
 
 
-local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updates (11-01-2025) (17:50 GMT+1)')
+local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (14-01-2025) (17:56 GMT+1)')
 local LeftGroupBox3 = Tabs.Farm:AddLeftGroupbox('Auto open cases')
 
 
@@ -84,7 +84,7 @@ local Tab2 = TabBox:AddTab('Tab 2')
 
 
 
-LeftGroupBox2:AddLabel('- Added TeamCheck \n- Added 2 New AA (Anti Aims) \n- Added Speed n Bhop \n- Added Fov changer \n- Added Alot of new fucked shit including tp all, kick all, etc\n- Added Gun sound \n- Added ForceField + Hitmaker check to AutoShoot \n- Added ALOT of new shit', true)
+LeftGroupBox2:AddLabel('- Visual updates \n- Added Auto peak (Manual)', true)
 
 
 
