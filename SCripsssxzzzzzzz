@@ -2315,10 +2315,78 @@ SkinAdd(Value)
 })
 
 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Equipment = ReplicatedStorage.FRAMEWORK.Shared.SkinManager.Equipment
 
+-- Collect names of the immediate children in Equipment
+local skinNames = {}
+for _, child in ipairs(Equipment:GetChildren()) do
+    table.insert(skinNames, child.Name)
+end
 
+-- Create the dropdown
+Trading:AddDropdown('SkinDropdown', {
+    Values = skinNames,
+    Default = 0, -- Default to the first skin in the list
+    Multi = false, -- Single selection only
 
+    Text = 'Semi-unob Skins',
+    Tooltip = 'Choose a skin to apply',
 
+    Callback = function(selectedSkin)
+        -- Callback function for when the dropdown value changes
+        print('[cb] Dropdown changed. Selected skin:', selectedSkin)
+
+        -- Define the table and variables for the server event
+        local ohTable1 = {
+            ["IsStatTrak"] = true,
+            ["ItemName"] = selectedSkin,
+            ["Rarity"] = "",
+            ["Amount"] = 1,
+            ["Tradable"] = true,
+            ["SkinName"] = selectedSkin,
+            ["Count"] = 1,
+            ["Weapon"] = "Classic Karambit"
+        }
+        local ohString2 = "Container"
+        local ohString3 = "Player1Giving"
+        local ohNumber4 = 1
+
+        -- Fire the server event with the updated skin name
+        ReplicatedStorage.Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
+    end
+})
+
+Trading:AddDropdown('SkinDropdown2', {
+    Values = {"Classic Karambit | Gold", "AK47 | Evolved Blocks", "AWP | Dragon Lore", "AWP | JTF2"},
+    Default = 0, -- Default to the first skin in the list
+    Multi = false, -- Single selection only
+
+    Text = 'Popular Skins',
+    Tooltip = 'Choose a skin to apply',
+
+    Callback = function(selectedSkin2)
+        -- Callback function for when the dropdown value changes
+
+        -- Define the table and variables for the server event
+        local ohTable1 = {
+            ["IsStatTrak"] = true,
+            ["ItemName"] = selectedSkin2,
+            ["Rarity"] = "",
+            ["Amount"] = 1,
+            ["Tradable"] = true,
+            ["SkinName"] = selectedSkin2,
+            ["Count"] = 1,
+            ["Weapon"] = "Classic Karambit"
+        }
+        local ohString2 = "Container"
+        local ohString3 = "Player1Giving"
+        local ohNumber4 = 1
+
+        -- Fire the server event with the updated skin name
+        ReplicatedStorage.Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
+    end
+})
 
 Blatant:AddToggle('MyToggle', {
     Text = 'Kill all',
