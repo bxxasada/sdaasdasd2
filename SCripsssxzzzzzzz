@@ -85,6 +85,7 @@ local Tab2 = TabBox:AddTab('Tab 2')
 
 
 LeftGroupBox2:AddLabel('- Visual updates \n- Added Auto peak (Manual)', true)
+Library:Notify("Counter Blox Evolved Loaded!",5)
 
 
 
@@ -1829,20 +1830,6 @@ _G.AutoShoot = true
 
 function AutoShoot()
     while _G.AutoShoot == true do
-        local notificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/laagginq/ui-libraries/main/xaxas-notification/src.lua"))();
-local notifications = notificationLibrary.new({            
-    NotificationLifetime = 3, 
-    NotificationPosition = "Middle",
-    
-    TextFont = Enum.Font.Code,
-    TextColor = Color3.fromRGB(255, 0, 0),
-    TextSize = 15,
-    
-    TextStrokeTransparency = 0, 
-    TextStrokeColor = Color3.fromRGB(0, 0, 0)
-});
-
-
 
 
         local localPlayer = game.Players.LocalPlayer
@@ -1976,8 +1963,8 @@ local notifications = notificationLibrary.new({
         
                 -- Fire the remote for the target model when hit
                 if hitResult.Parent == closestPlayer then
-                    notifications:BuildNotificationUI();
-                    notifications:Notify("Hit " .. closestPlayer.Name .. " at " .. hitResult.Name);
+                    Library:Notify("Hit " .. closestPlayer.Name .. " at " .. hitResult.Name,5)
+
 
                     -- Define the parameters
                     local ohInstance1 = closestPlayer.HeadHB
@@ -2313,15 +2300,24 @@ SkinAdd(Value)
 
     end
 })
-
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Equipment = ReplicatedStorage.FRAMEWORK.Shared.SkinManager.Equipment
+local success, Equipment = pcall(function()
+    return ReplicatedStorage:FindFirstChild("FRAMEWORK")
+        and ReplicatedStorage.FRAMEWORK:FindFirstChild("Shared")
+        and ReplicatedStorage.FRAMEWORK.Shared:FindFirstChild("SkinManager")
+        and ReplicatedStorage.FRAMEWORK.Shared.SkinManager:FindFirstChild("Equipment")
+end)
 
--- Collect names of the immediate children in Equipment
 local skinNames = {}
-for _, child in ipairs(Equipment:GetChildren()) do
-    table.insert(skinNames, child.Name)
+
+if success and Equipment then
+    print("in trading server")
+    for _, child in ipairs(Equipment:GetChildren()) do
+        table.insert(skinNames, child.Name)
+    end
+else
+    print("not in trading server")
+    table.insert(skinNames, "Not in trading server") -- Add default value if not in trading server
 end
 
 -- Create the dropdown
@@ -2335,7 +2331,6 @@ Trading:AddDropdown('SkinDropdown', {
 
     Callback = function(selectedSkin)
         -- Callback function for when the dropdown value changes
-        print('[cb] Dropdown changed. Selected skin:', selectedSkin)
 
         -- Define the table and variables for the server event
         local ohTable1 = {
@@ -2353,7 +2348,7 @@ Trading:AddDropdown('SkinDropdown', {
         local ohNumber4 = 1
 
         -- Fire the server event with the updated skin name
-        ReplicatedStorage.Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
+        game:GetService("ReplicatedStorage").Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
     end
 })
 
@@ -2384,7 +2379,7 @@ Trading:AddDropdown('SkinDropdown2', {
         local ohNumber4 = 1
 
         -- Fire the server event with the updated skin name
-        ReplicatedStorage.Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
+        game:GetService("ReplicatedStorage").Events.UpdateItem:FireServer(ohTable1, ohString2, ohString3, ohNumber4)
     end
 })
 
@@ -2394,8 +2389,8 @@ Blatant:AddToggle('MyToggle', {
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
-        
-        
+        _G.KillAllFast = Value
+        KillAllFast()
         
     end
 })
