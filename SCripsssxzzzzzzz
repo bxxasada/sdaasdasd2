@@ -2204,12 +2204,32 @@ Options.KeyPicker:SetValue({ 'T', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
 
 
 Other:AddButton({
-    Text = 'INF xp',
+    Text = 'INF exp',
     Func = function()
         game:GetService("ReplicatedStorage").AddXP:FireServer(math.huge)
             end,
     DoubleClick = false,
-    Tooltip = 'Gives u all battlepass lvls'
+    Tooltip = 'Gives u all battlepass lvls (Rejoin)'
+})
+
+
+Other:AddButton({
+    Text = 'Claim all battlepass rewards',
+    Func = function()
+        local ohBoolean2 = false
+
+        for i = 1, 50 do
+            game:GetService("ReplicatedStorage").ClaimTier:FireServer(i, ohBoolean2)
+        end
+        local ohBoolean2 = true
+
+for i = 1, 50 do
+    game:GetService("ReplicatedStorage").ClaimTier:FireServer(i, ohBoolean2)
+end
+
+                    end,
+    DoubleClick = false,
+    Tooltip = 'Claims all battlepass rewards'
 })
 
 
@@ -3267,10 +3287,19 @@ end    end,
 
 
 
-        local player323232 = game.Players.LocalPlayer
-        local character223 = player323232.Character or player323232.CharacterAdded:Wait()
-        local rootPart112 = character223:WaitForChild("HumanoidRootPart")
-        
+local player32332 = game.Players.LocalPlayer
+
+-- Check if the character exists in the workspace
+local character5512 = workspace:FindFirstChild(player32332.Name)
+
+-- If the character isn't in the workspace, wait for it to be added
+if not character5512 then
+    character5512 = player32332.CharacterAdded:Wait()
+end
+
+-- Wait for the HumanoidRootPart to be available
+local rootPart25512 = character5512:WaitForChild("HumanoidRootPart")
+
         -- Variable to store the saved position, outline part, and highlight
         local savedPosition = nil
         local outlinePart = nil
@@ -3281,7 +3310,7 @@ end    end,
             -- Create a 1x1 stud part at the position of the HumanoidRootPart
             outlinePart = Instance.new("Part")
             outlinePart.Size = Vector3.new(1, 1, 1)  -- 1x1x1 stud part
-            outlinePart.Position = rootPart112.Position  -- Set position to the root part's position
+            outlinePart.Position = rootPart25512.Position  -- Set position to the root part's position
             outlinePart.Anchored = true  -- Anchor the part so it stays in place
             outlinePart.CanCollide = false  -- Disable collisions for the outline part
             outlinePart.Material = Enum.Material.Neon  -- Neon material for visibility
@@ -3325,16 +3354,16 @@ end    end,
             Callback = function(isPressed)
                 if isPressed == true then
                     -- Save the current position
-                    savedPosition = rootPart112.Position
+                    savedPosition = rootPart25512.Position
         
                     -- Create the simple outline at the player's current position
-                    createOutline(character223)
+                    createOutline(character5512)
         
                 elseif isPressed == false then
                     -- Teleport back to the saved position while maintaining rotation
                     if savedPosition then
-                        rootPart112.CFrame = CFrame.new(savedPosition) * CFrame.Angles(
-                            rootPart112.CFrame:ToEulerAnglesXYZ()
+                        rootPart25512.CFrame = CFrame.new(savedPosition) * CFrame.Angles(
+                            rootPart25512.CFrame:ToEulerAnglesXYZ()
                         )
                     end
         
