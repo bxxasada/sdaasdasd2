@@ -2350,7 +2350,7 @@ end
 LeftGroupBox:AddToggle('FaceCameraToggle_SpinModule3', {
     Text = 'Roll AA',
     Default = false, -- Default value (false means face away initially)
-    Tooltip = 'Toggle the character to face the camera or not',
+    Tooltip = 'Roll',
 
     Callback = function(Value)
         -- Declare variables for rotation and hook
