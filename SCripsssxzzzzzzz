@@ -38,7 +38,28 @@ local Tabs = {
 
 -- Groupbox and Tabbox inherit the same functions
 -- except Tabboxes you have to call the functions on a tab (Tabbox:AddTab(name))
-local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Main stuff')
+local Combat = Tabs.Main:AddLeftGroupbox('Combat')
+local Blatant = Tabs.Main:AddLeftGroupbox('Blatant')
+local AA = Tabs.Main:AddLeftGroupbox('AA (anti aim)')
+local Trading = Tabs.Main:AddLeftGroupbox('Trading')
+local Troll = Tabs.Main:AddLeftGroupbox('Troll stuff')
+local Sound = Tabs.Main:AddLeftGroupbox('Sound')
+
+local Chat = Tabs.Main:AddLeftGroupbox('Chat stuff')
+local Match = Tabs.Main:AddLeftGroupbox('Game stuff')
+local Local = Tabs.Main:AddLeftGroupbox('Local')
+local Other = Tabs.Main:AddLeftGroupbox('Other')
+local Visuals = Tabs.Main:AddRightGroupbox('Visuals')
+local Skins = Tabs.Main:AddRightGroupbox('Skins')
+
+
+
+
+
+
+
+
+
 local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updates (11-01-2025) (17:50 GMT+1)')
 local LeftGroupBox3 = Tabs.Farm:AddLeftGroupbox('Auto open cases')
 
@@ -110,7 +131,6 @@ while _G.AutoBhop == true do
 
 
 
-local RightGroupbox = Tabs.Main:AddRightGroupbox('Visuals');
 
 
 _G.KillAllFast = true
@@ -278,10 +298,9 @@ end
     end
 
 
-RightGroupbox:AddLabel('Visual')
 -- Arguments: Index, Options
 -- Add the toggle for ForceField weapon
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'ForceField stuff',
     Default = false, -- Default value (true / false)
     Tooltip = 'Changes ur weapons material', -- Information shown when you hover over the toggle
@@ -312,10 +331,7 @@ local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels
 end
         end
     end
-})
-
--- Add the color picker for changing the color of the ForceField
-RightGroupbox:AddLabel('Gun color'):AddColorPicker('ColorPicker', {
+}):AddColorPicker('ColorPicker', {
     Default = Color3.new(1, 0, 0), -- Default color is magenta (force field color)
     Title = 'ForceField Color', -- Custom title for the color picker
     Transparency = 0, -- Optional transparency
@@ -356,7 +372,7 @@ end
          -- Wait briefly before repeating
     
 
-RightGroupbox:AddToggle('MyToggle', {
+         Visuals:AddToggle('MyToggle', {
     Text = 'Invis Skin (not arm)',
     Default = false, -- Default value (true / false)
     Tooltip = 'Changes ur arms material', -- Information shown when you hover over the toggle
@@ -403,7 +419,7 @@ function CharacterForceField()
     end
 end
 
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'ForceField character',
     Default = false, -- Default value (true / false)
     Tooltip = 'Changes your entire character to ForceField material', -- Information shown when you hover over the toggle
@@ -423,9 +439,7 @@ RightGroupbox:AddToggle('MyToggle', {
             end
         end
     end
-})
-
-RightGroupbox:AddLabel('Character color'):AddColorPicker('ColorPicker', {
+}):AddColorPicker('ColorPicker', {
     Default = Color3.new(1, 0, 0), -- Default color is red
     Title = 'Forcefield Color', -- Custom title for the color picker
     Transparency = 0, -- Optional transparency
@@ -434,6 +448,7 @@ RightGroupbox:AddLabel('Character color'):AddColorPicker('ColorPicker', {
         _G.selectedColor3 = Value -- Store the color chosen by the user
     end
 })
+
 
 
 function UpdateLightingColor()
@@ -474,7 +489,7 @@ function UpdateLightingColor()
     end
 end
 
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'Ambience Changer',
     Default = false, -- Default value (true / false)
     Tooltip = 'Changes the lighting TintColor to a selected color', -- Information shown when you hover over the toggle
@@ -483,9 +498,7 @@ RightGroupbox:AddToggle('MyToggle', {
         _G.LightingColorLoop = Value
         UpdateLightingColor()
     end
-})
-
-RightGroupbox:AddLabel('Ambience Color'):AddColorPicker('ColorPicker', {
+}):AddColorPicker('ColorPicker', {
     Default = Color3.new(33/255, 33/255, 33/255), -- Default color for TintColor
     Title = 'Ambience Color', -- Custom title for the color picker
     Transparency = 0, -- Optional transparency
@@ -495,7 +508,7 @@ RightGroupbox:AddLabel('Ambience Color'):AddColorPicker('ColorPicker', {
     end
 })
 
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'Rainbow Crosshair',
     Default = false, -- Default value (true / false)
     Tooltip = 'Ranbow crosshair color', -- Information shown when you hover over the toggle
@@ -507,7 +520,7 @@ RightGroupbox:AddToggle('MyToggle', {
 })
 
 
-RightGroupbox:AddSlider('MySlider', {
+Visuals:AddSlider('MySlider', {
     Text = 'Stretch',
     Default = 1,
     Min = 0.1,
@@ -533,7 +546,7 @@ RightGroupbox:AddSlider('MySlider', {
 
 
 
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'ESP',
     Default = false, -- Default value (true / false)
     Tooltip = 'ESP', -- Information shown when you hover over the toggle
@@ -640,7 +653,7 @@ local function disableThirdPerson()
 end
 
 -- Add a toggle to control third-person mode
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'Third person',
     Default = false, -- Default value (true / false)
     Tooltip = 'Thirdperson', -- Information shown when you hover over the toggle
@@ -652,7 +665,39 @@ RightGroupbox:AddToggle('MyToggle', {
             disableThirdPerson() -- Disable third-person mode
         end
     end
+}):AddKeyPicker('KeyPicker', {
+    -- SyncToggleState only works with toggles.
+    -- It allows you to make a keybind which has its state synced with its parent toggle
+
+    -- Example: Keybind which you use to toggle flyhack, etc.
+    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
+
+    Default = 'X', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+    SyncToggleState = true,
+
+
+    -- You can define custom Modes but I have never had a use for it.
+    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+
+    Text = 'Third person', -- Text to display in the keybind menu
+    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+
+    Callback = function(Value)
+        if Value then
+            enableThirdPerson() -- Enable third-person mode
+        else
+            disableThirdPerson() -- Disable third-person mode
+        end
+    end,
+
+    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+    ChangedCallback = function(New)
+        print('[cb] Keybind changed!', New)
+    end
 })
+
+Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
+
 
 
 _G.InvisArms = true
@@ -677,7 +722,7 @@ deleteAllModelsUnderCameraArms()
     end
 end
 
-RightGroupbox:AddToggle('MyToggle', {
+Visuals:AddToggle('MyToggle', {
     Text = 'Invis arms',
     Default = false, -- Default value (true / false)
     Tooltip = 'Makes ur arms invisible', -- Information shown when you hover over the toggle
@@ -720,7 +765,7 @@ oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
 end)
 
 -- Add the Toggle for FOV
-RightGroupbox:AddToggle('FOVToggle', {
+Visuals:AddToggle('FOVToggle', {
     Text = 'Enable FOV Change',
     Default = false, -- Default value (true / false)
     Tooltip = 'Enable or disable Field of View adjustment', -- Tooltip for FOV toggle
@@ -735,7 +780,7 @@ RightGroupbox:AddToggle('FOVToggle', {
 })
 
 -- Add the FOV Slider
-RightGroupbox:AddSlider('FOVSlider', {
+Visuals:AddSlider('FOVSlider', {
     Text = 'Field of View Slider',
     Default = 70,  -- Default FOV value
     Min = 30,      -- Minimum FOV value
@@ -756,7 +801,7 @@ RightGroupbox:AddSlider('FOVSlider', {
 })
 
 
-RightGroupbox:AddButton({
+Visuals:AddButton({
     Text = 'Remove animations',
     Func = function()
         local localplayer = game.Players.LocalPlayer        
@@ -772,7 +817,6 @@ RightGroupbox:AddButton({
 
 
 
-LeftGroupBox:AddLabel('Troll')
 
 
 _G.Dropxxx22 = true
@@ -862,7 +906,7 @@ function Dropxxx22()
     end
 end
 
-LeftGroupBox:AddToggle('MyToggle', {
+Troll:AddToggle('MyToggle', {
     Text = 'Spawn inf Hammers',
     Default = false, -- Default value (true / false)
     Tooltip = 'lol', -- Information shown when you hover over the toggle
@@ -963,7 +1007,7 @@ function Dropxxx221111()
     end
 end
 
-LeftGroupBox:AddToggle('MyToggle', {
+Troll:AddToggle('MyToggle', {
     Text = 'Crash game',
     Default = false, -- Default value (true / false)
     Tooltip = 'lol', -- Information shown when you hover over the toggle
@@ -998,7 +1042,7 @@ end
     end
 end
 
-LeftGroupBox:AddToggle('MyToggle', {
+Troll:AddToggle('MyToggle', {
     Text = 'Anti Crash',
     Default = false, -- Default value (true / false)
     Tooltip = 'lol', -- Information shown when you hover over the toggle
@@ -1086,7 +1130,7 @@ end
     end
 end
 
-LeftGroupBox:AddToggle('MyToggle', {
+Troll:AddToggle('MyToggle', {
     Text = 'Attach players to ur gun',
     Default = false, -- Default value (true / false)
     Tooltip = 'lol', -- Information shown when you hover over the toggle
@@ -1109,7 +1153,7 @@ end
 
 
 
-RightGroupbox:AddButton({
+Visuals:AddButton({
     Text = 'Sync.wtf pfp',
     Func = function()
         local ohString1 = "save"
@@ -1124,10 +1168,9 @@ game:GetService("ReplicatedStorage").ProfileUpdateEvent:FireServer(ohString1, oh
 
 
 
-RightGroupbox:AddLabel('Skins')
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'Ban Hammer melee',
     Func = function()
         -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
@@ -1171,7 +1214,7 @@ game:GetService("ReplicatedStorage").Events.ApplyGun:FireServer(ohTable1)
 
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'Doom sword melee',
     Func = function()
         -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
@@ -1213,7 +1256,7 @@ game:GetService("ReplicatedStorage").Events.ApplyGun:FireServer(ohTable1)
 })
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'BODY PILLOW (LOL?) melee ',
     Func = function()
         local players = game:GetService("Players")
@@ -1285,7 +1328,7 @@ RightGroupbox:AddButton({
 
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'Cigarette (smoke effect) melee',
     Func = function()
         local players = game:GetService("Players")
@@ -1359,7 +1402,7 @@ RightGroupbox:AddButton({
 
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'Random ass arm ',
     Func = function()
         local players = game:GetService("Players")
@@ -1493,7 +1536,7 @@ end
 
 
 
-RightGroupbox:AddToggle('MyToggle', {
+Skins:AddToggle('MyToggle', {
     Text = 'TP random stuff? ',
     Default = false, -- Default value (true / false)
     Tooltip = 'Only others can see', -- Information shown when you hover over the toggle
@@ -1506,7 +1549,7 @@ RightGroupbox:AddToggle('MyToggle', {
 
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'Get accessories (LAGGY)',
     Func = function()
 -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
@@ -1568,7 +1611,7 @@ end,
 
 
 
-RightGroupbox:AddButton({
+Skins:AddButton({
     Text = 'Become femboy',
     Func = function()
         function Accessory(Name)
@@ -1646,7 +1689,6 @@ RightGroupbox:AddButton({
 
 
 
-LeftGroupBox:AddLabel('Sound')
 
 
 
@@ -1658,7 +1700,7 @@ LeftGroupBox:AddLabel('Sound')
 
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Sound:AddToggle('MyToggle', {
     Text = 'Hit sound',
     Default = false, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
@@ -1693,7 +1735,7 @@ end
 
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Sound:AddToggle('MyToggle', {
     Text = 'Gun shoot sound',
     Default = false, -- Default value (true / false)
     Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
@@ -1720,7 +1762,7 @@ end
 
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Sound:AddToggle('MyToggle', {
     Text = 'Fall dmg sound',
     Default = false, -- Default value (true / false)
     Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
@@ -1760,7 +1802,7 @@ end
 
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Sound:AddToggle('MyToggle', {
     Text = 'Make others shoot',
     Default = false, -- Default value (true / false)
     Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
@@ -1774,7 +1816,6 @@ LeftGroupBox:AddToggle('MyToggle', {
 
 
 
-LeftGroupBox:AddLabel('Combat')
 
 
 
@@ -2122,8 +2163,8 @@ end
 
 
 -- Toggle for enabling AutoShoot
-LeftGroupBox:AddToggle('MyToggle', {
-    Text = 'Auto shoot (Read tooltip)',
+Combat:AddToggle('MyToggle', {
+    Text = 'Auto shoot',
     Default = false, -- Default value (true / false)
     Tooltip = '', -- Information shown when you hover over the toggle
 
@@ -2131,28 +2172,52 @@ LeftGroupBox:AddToggle('MyToggle', {
         _G.AutoShoot = Value
             AutoShoot()  -- Only start AutoShoot if the toggle is enabled
     end
+}):AddKeyPicker('KeyPicker', {
+    -- SyncToggleState only works with toggles.
+    -- It allows you to make a keybind which has its state synced with its parent toggle
+
+    -- Example: Keybind which you use to toggle flyhack, etc.
+    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
+
+    Default = 'T', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+    SyncToggleState = true,
+
+
+    -- You can define custom Modes but I have never had a use for it.
+    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+
+    Text = 'AutoShoot', -- Text to display in the keybind menu
+    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+
+    Callback = function(Value)
+        _G.AutoShoot  = Value
+        AutoShoot()
+    end,
+
+    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+    ChangedCallback = function(New)
+        print('[cb] Keybind changed!', New)
+    end
 })
-
-LeftGroupBox:AddLabel('idk')
-
+Options.KeyPicker:SetValue({ 'T', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
 
 
-RightGroupbox:AddButton({
+
+Other:AddButton({
     Text = 'INF xp',
     Func = function()
         game:GetService("ReplicatedStorage").AddXP:FireServer(math.huge)
             end,
     DoubleClick = false,
-    Tooltip = '(go in 3rdperson to see)'
+    Tooltip = 'Gives u all battlepass lvls'
 })
 
-LeftGroupBox:AddLabel('Trading')
 
 local isToggleActiveForInventoryUpdate = false
 local currentInputValueFromTextbox = ""
 
 -- Add the textbox input
-LeftGroupBox:AddInput('MyTextbox', {
+Trading:AddInput('MyTextbox', {
     Default = '',
     Numeric = false, -- Allows any text
     Finished = true, -- Updates in real-time
@@ -2168,7 +2233,7 @@ LeftGroupBox:AddInput('MyTextbox', {
 
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Trading:AddToggle('MyToggle', {
     Text = 'Get any value (Trading serv)',
     Default = false,
     Tooltip = 'Ez',
@@ -2195,7 +2260,7 @@ LeftGroupBox:AddToggle('MyToggle', {
 
 
 
-LeftGroupBox:AddInput('MyTextbox', {
+Trading:AddInput('MyTextbox', {
     Default = '',
     Numeric = false, -- Allows any text
     Finished = true, -- Updates in real-time
@@ -2233,10 +2298,9 @@ SkinAdd(Value)
 
 
 
-LeftGroupBox:AddLabel('Blatant')
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Blatant:AddToggle('MyToggle', {
     Text = 'Kill all',
     Default = false, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
@@ -2249,14 +2313,13 @@ LeftGroupBox:AddToggle('MyToggle', {
 })
 
 
-LeftGroupBox:AddLabel('Anti aim')
 
 
 
 
 
 -- Add the Spin Toggle to control whether the character spins
-LeftGroupBox:AddToggle('SpinToggle2', {
+AA:AddToggle('SpinToggle2', {
     Text = 'Custom AA',
     Default = false, -- Default value (false means not spinning initially)
     Tooltip = 'Enable or disable fast character spinning', -- Information shown when you hover over the toggle
@@ -2280,7 +2343,7 @@ LeftGroupBox:AddToggle('SpinToggle2', {
 })
 
 -- Add the AA Slider for changing the value
-LeftGroupBox:AddSlider('AASlider', {
+AA:AddSlider('AASlider', {
     Text = 'Custom AA Slider',
     Default = 0,
     Min = -30,
@@ -2347,7 +2410,7 @@ end
 
 
 -- Add a toggle to control the character's rotation (face camera or not)
-LeftGroupBox:AddToggle('FaceCameraToggle_SpinModule3', {
+AA:AddToggle('FaceCameraToggle_SpinModule3', {
     Text = 'Roll AA',
     Default = false, -- Default value (false means face away initially)
     Tooltip = 'Roll',
@@ -2443,7 +2506,6 @@ LeftGroupBox:AddToggle('FaceCameraToggle_SpinModule3', {
 
 
 
-LeftGroupBox:AddLabel('Misc')
 
 
 
@@ -2452,7 +2514,7 @@ LeftGroupBox:AddLabel('Misc')
 
 
 
-LeftGroupBox:AddButton({
+Blatant:AddButton({
     Text = 'Tp all (doesnt work in warmup)',
     Func = function()
 -- Get the local player
@@ -2539,7 +2601,7 @@ end
 
 
 
-LeftGroupBox:AddButton({
+Blatant:AddButton({
     Text = 'Kick all (doesnt work in warmup)',
     Func = function()
 -- Get the local player
@@ -2624,7 +2686,7 @@ end
 
 
 -- Arguments: Idx, Info
-LeftGroupBox:AddInput('MyTextbox', {
+Chat:AddInput('MyTextbox', {
     Default = '',
     Numeric = false, -- true / false, only allows numbers
     Finished = true, -- true / false, only calls callback when you press enter
@@ -2667,7 +2729,7 @@ wait(1)
     end
 end
 -- Add the Toggle to turn SpeedSpeed on/off
-LeftGroupBox:AddToggle('MyToggle', {
+Chat:AddToggle('MyToggle', {
     Text = 'Uhh what',
     Default = false, -- Default value (true / false)
     Tooltip = 'Enable continuous movement without jumping', -- Information shown when you hover over the toggle
@@ -2680,7 +2742,7 @@ LeftGroupBox:AddToggle('MyToggle', {
 
 
 
-LeftGroupBox:AddButton({
+Match:AddButton({
     Text = 'Tp bomb to nowhere (need to stand on site)',
     Func = function()
 
@@ -2693,7 +2755,7 @@ game:GetService("ReplicatedStorage").Events.PlantC4:FireServer(ohCFrame1, ohStri
     Tooltip = 'lol'
 })
 
-LeftGroupBox:AddButton({
+Match:AddButton({
     Text = 'Defuse bomb',
     Func = function()
         local C4 = game:GetService("Workspace"):FindFirstChild("C4")
@@ -2704,7 +2766,6 @@ LeftGroupBox:AddButton({
     Tooltip = 'lol'
 })
 
-LeftGroupBox:AddLabel('Local')
 
 -- Initialize AutoBhop and Movement Speed
 _G.SpeedSpeed = false  -- Default to off
@@ -2738,7 +2799,7 @@ local function ApplyMovement()
 end
 
 -- Add the AA Slider for changing the speed value
-LeftGroupBox:AddSlider('MovementSpeed', {
+Local:AddSlider('MovementSpeed', {
     Text = 'Movement Speed',
     Default = 10,  -- Default speed value
     Min = 10,      -- Minimum speed value
@@ -2756,7 +2817,7 @@ LeftGroupBox:AddSlider('MovementSpeed', {
 })
 
 -- Add the Toggle to turn SpeedSpeed on/off
-LeftGroupBox:AddToggle('MyToggle', {
+Local:AddToggle('MyToggle', {
     Text = 'Speed',
     Default = false, -- Default value (true / false)
     Tooltip = 'Enable continuous movement without jumping', -- Information shown when you hover over the toggle
@@ -2774,7 +2835,7 @@ LeftGroupBox:AddToggle('MyToggle', {
 
 
 
-LeftGroupBox:AddToggle('MyToggle', {
+Local:AddToggle('MyToggle', {
     Text = 'Bhop',
     Default = false, -- Default value (true / false)
     Tooltip = '', -- Information shown when you hover over the toggle
@@ -2783,11 +2844,51 @@ LeftGroupBox:AddToggle('MyToggle', {
         _G.AutoBhop = Value
         AutoBhop()  
     end
+}):AddKeyPicker('KeyPicker', {
+    -- SyncToggleState only works with toggles.
+    -- It allows you to make a keybind which has its state synced with its parent toggle
+
+    -- Example: Keybind which you use to toggle flyhack, etc.
+    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
+
+    Default = 'H', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+    SyncToggleState = true,
+
+
+    -- You can define custom Modes but I have never had a use for it.
+    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
+
+    Text = 'Bhop', -- Text to display in the keybind menu
+    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
+
+    Callback = function(Value)
+        -- Enable or disable AutoBhop based on the toggle
+_G.AutoBhop = Value
+AutoBhop()
+
+
+    end,
+
+    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+    ChangedCallback = function(New)
+        print('[cb] Keybind changed!', New)
+    end
 })
 
 
--- Listen for character respawn event
-LeftGroupBox:AddLabel('Sky')
+
+-- OnClick is only fired when you press the keybind and the mode is Toggle
+-- Otherwise, you will have to use Keybind:GetState()
+
+
+
+
+Options.KeyPicker:SetValue({ 'H', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
+
+
+
+
+Other:AddLabel('Sky')
 
 _G.AutoCaseClassicKara = true
 function AutoCaseClassicKara()
@@ -2889,7 +2990,7 @@ LeftGroupBox3:AddToggle('MyToggle', {
     You can call :AddButton on a button to add a SubButton!
 ]]
 
-local MyButton = LeftGroupBox:AddButton({
+local MyButton = Other:AddButton({
     Text = 'Skybox (Night)',
     Func = function()
 -- Asset ID replacements
@@ -2935,7 +3036,7 @@ end
     Tooltip = 'Change ur skybox'
 })
 
-local MyButton2 = MyButton:AddButton({
+MyButton:AddButton({
     Text = 'Skybox (wtf)',
     Func = function()
 -- Asset ID replacements
@@ -2984,70 +3085,10 @@ end    end,
 
 
 
-LeftGroupBox:AddLabel('Auto shoot'):AddKeyPicker('KeyPicker', {
-    -- SyncToggleState only works with toggles.
-    -- It allows you to make a keybind which has its state synced with its parent toggle
-
-    -- Example: Keybind which you use to toggle flyhack, etc.
-    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
-
-    Default = 'T', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
-    SyncToggleState = false,
-
-
-    -- You can define custom Modes but I have never had a use for it.
-    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
-
-    Text = 'AutoShoot', -- Text to display in the keybind menu
-    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
-
-    Callback = function(Value)
-        _G.AutoShoot  = Value
-        AutoShoot()
-    end,
-
-    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
-    ChangedCallback = function(New)
-        print('[cb] Keybind changed!', New)
-    end
-})
-Options.KeyPicker:SetValue({ 'T', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
 
 
 
 
-
-
-LeftGroupBox:AddLabel('Third person'):AddKeyPicker('KeyPicker', {
-    -- SyncToggleState only works with toggles.
-    -- It allows you to make a keybind which has its state synced with its parent toggle
-
-    -- Example: Keybind which you use to toggle flyhack, etc.
-    -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
-
-    Default = 'X', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
-    SyncToggleState = false,
-
-
-    -- You can define custom Modes but I have never had a use for it.
-    Mode = 'Toggle', -- Modes: Always, Toggle, Hold
-
-    Text = 'Third person', -- Text to display in the keybind menu
-    NoUI = false, -- Set to true if you want to hide from the Keybind menu,
-
-    Callback = function(Value)
-        if Value then
-            enableThirdPerson() -- Enable third-person mode
-        else
-            disableThirdPerson() -- Disable third-person mode
-        end
-    end,
-
-    -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
-    ChangedCallback = function(New)
-        print('[cb] Keybind changed!', New)
-    end
-})
 
 
 
@@ -3057,48 +3098,6 @@ LeftGroupBox:AddLabel('Third person'):AddKeyPicker('KeyPicker', {
 
 
 
-Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
-
-        LeftGroupBox:AddLabel('Bhop'):AddKeyPicker('KeyPicker', {
-            -- SyncToggleState only works with toggles.
-            -- It allows you to make a keybind which has its state synced with its parent toggle
-        
-            -- Example: Keybind which you use to toggle flyhack, etc.
-            -- Changing the toggle disables the keybind state and toggling the keybind switches the toggle state
-        
-            Default = 'H', -- String as the name of the keybind (MB1, MB2 for mouse buttons)
-            SyncToggleState = false,
-        
-        
-            -- You can define custom Modes but I have never had a use for it.
-            Mode = 'Toggle', -- Modes: Always, Toggle, Hold
-        
-            Text = 'Bhop', -- Text to display in the keybind menu
-            NoUI = false, -- Set to true if you want to hide from the Keybind menu,
-        
-            Callback = function(Value)
-                -- Enable or disable AutoBhop based on the toggle
-        _G.AutoBhop = Value
-        AutoBhop()
-
-
-            end,
-        
-            -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
-            ChangedCallback = function(New)
-                print('[cb] Keybind changed!', New)
-            end
-        })
-        
-        
-        
-        -- OnClick is only fired when you press the keybind and the mode is Toggle
-        -- Otherwise, you will have to use Keybind:GetState()
-        
-        
-        
-        
-        Options.KeyPicker:SetValue({ 'H', 'Toggle' }) -- Sets keybind to MB2, mode to Hold
 
 
 
@@ -3149,7 +3148,7 @@ Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
 
 
         -- Add the Bhop label and key picker
-        LeftGroupBox:AddLabel('Auto peak'):AddKeyPicker('KeyPicker', {
+        Other:AddLabel('Auto peak'):AddKeyPicker('KeyPicker', {
             Default = 'V', -- Default keybind
             SyncToggleState = false,
             Mode = 'Toggle', -- Modes: Always, Toggle, Hold
@@ -3161,7 +3160,6 @@ Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
                 if isPressed == true then
                     -- Save the current position
                     savedPosition = rootPart112.Position
-                    print("Position saved:", savedPosition)
         
                     -- Create the simple outline at the player's current position
                     createOutline(character223)
@@ -3172,7 +3170,6 @@ Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
                         rootPart112.CFrame = CFrame.new(savedPosition) * CFrame.Angles(
                             rootPart112.CFrame:ToEulerAnglesXYZ()
                         )
-                        print("Teleported back to position while maintaining rotation.")
                     end
         
                     -- Remove the outline when the key is released
