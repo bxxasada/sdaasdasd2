@@ -3156,7 +3156,7 @@ Options.KeyPicker:SetValue({ 'X', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
 
         -- Add the Bhop label and key picker
         LeftGroupBox:AddLabel('Auto peak'):AddKeyPicker('KeyPicker', {
-            Default = 'G', -- Default keybind
+            Default = 'V', -- Default keybind
             SyncToggleState = false,
             Mode = 'Toggle', -- Modes: Always, Toggle, Hold
             Text = 'Auto peak', -- Text to display in the keybind menu
