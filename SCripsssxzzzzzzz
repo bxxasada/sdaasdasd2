@@ -31,6 +31,7 @@ local Window = Library:CreateWindow({
 local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'),
+    Visuals2 = Window:AddTab('Visuals'),
     Farm = Window:AddTab('Cases'),
     UpdateLogs = Window:AddTab('Update logs'),
     ['UI Settings'] = Window:AddTab('Settings'),
@@ -46,9 +47,10 @@ local Sound = Tabs.Main:AddLeftGroupbox('Sound')
 
 local Chat = Tabs.Main:AddLeftGroupbox('Chat stuff')
 local Match = Tabs.Main:AddLeftGroupbox('Game stuff')
-local Local = Tabs.Main:AddLeftGroupbox('Local')
-local Other = Tabs.Main:AddLeftGroupbox('Other')
-local Visuals = Tabs.Main:AddRightGroupbox('Visuals')
+local Local = Tabs.Main:AddRightGroupbox('Local')
+local Other = Tabs.Main:AddRightGroupbox('Other')
+local Visuals2 = Tabs.Visuals2:AddLeftGroupbox('Esp')
+local Visuals = Tabs.Visuals2:AddRightGroupbox('Other Visuals')
 local Skins = Tabs.Main:AddRightGroupbox('Skins')
 
 
@@ -546,50 +548,204 @@ Visuals:AddSlider('MySlider', {
 
 
 
-Visuals:AddToggle('MyToggle', {
-    Text = 'ESP',
+local Sense = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua'))()
+
+Visuals2:AddToggle('MyToggle', {
+    Text = 'ESP toggle',
     Default = false, -- Default value (true / false)
-    Tooltip = 'ESP', -- Information shown when you hover over the toggle
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
-        -- Load the Sense library
-        local Sense = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Sirius/request/library/sense/source.lua'))()
 
-        _G.ESP2 = Value
+if Value == true then
+-- 1. Load the library
 
-        if _G.ESP2 == true then
-            -- When the toggle is ON, load the ESP
-            Sense.Load()
-        else
-            -- When the toggle is OFF, unload the ESP
-            Sense.Unload()
-        end
+-- 2. Change the configuration.
+Sense.teamSettings.enemy.enabled = true
 
-        -- Customize ESP settings for enemy team
-        Sense.teamSettings.enemy.enabled = true
-        Sense.teamSettings.enemy.box = true
-        Sense.teamSettings.enemy.boxColor[1] = Color3.new(.25, .25, .25)
-        Sense.teamSettings.enemy.distanceColor = { Color3.new(.6,0,0), 2 }
-        Sense.teamSettings.enemy.chams = true
-        Sense.teamSettings.enemy.distance = true
-        Sense.teamSettings.enemy.chamsVisibleOnly = false
-        Sense.teamSettings.enemy.name = true
-        Sense.teamSettings.enemy.nameColor = { Color3.new(.6,0,0), 2 }
-        Sense.teamSettings.enemy.healthBar = true
-        Sense.teamSettings.enemy.healthyColor = Color3.new(1,0,0)
-        Sense.teamSettings.enemy.chamsFillColor = { Color3.new(1, 0, 0), 0.83 }
-        Sense.teamSettings.enemy.chamsOutlineColor = { Color3.new(0,0,0), .4 }
-        Sense.teamSettings.enemy.healthText = true
-        Sense.teamSettings.enemy.healthTextColor = { Color3.new(.6,0,0), 2 }     
-        Sense.teamSettings.enemy.healthTextOutline = true
-        Sense.teamSettings.enemy.healthTextOutlineColor = Color3.new(0, 0, 0)
-
-        Sense.teamSettings.enemy.distanceOutline = true
-        Sense.teamSettings.enemy.distanceOutlineColor = Color3.new(0, 0, 0)
-        Sense.teamSettings.enemy.nameOutline = true
-        Sense.teamSettings.enemy.nameOutlineColor = Color3.new(0, 0, 0)
+Sense.Load()
+elseif Value == false then
+Sense.Unload()
+    
+end
     end
 })
+
+Visuals2:AddToggle('MyToggle', {
+    Text = 'Box',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+
+if Value == true then
+-- 1. Load the library
+
+Sense.teamSettings.enemy.box = true
+
+elseif Value == false then
+Sense.teamSettings.enemy.box = false
+    
+end
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Bright green
+    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.boxColor = {Value, 1}
+
+    end
+})
+
+
+Visuals2:AddToggle('MyToggle', {
+    Text = 'HealthBar',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+
+if Value == true then
+Sense.teamSettings.enemy.healthBar = true
+elseif Value == false then
+Sense.teamSettings.enemy.healthBar = false
+end
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Bright green
+    Title = 'Low health', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.dyingColor = Value
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(0, 1, 0), -- Bright green
+    Title = 'High health', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.healthyColor = Value
+    end
+})
+
+
+Visuals2:AddToggle('MyToggle', {
+    Text = 'Name',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+
+if Value == true then
+-- 1. Load the library
+
+Sense.teamSettings.enemy.name = true
+
+elseif Value == false then
+Sense.teamSettings.enemy.name = false
+    
+end
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Bright green
+    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.nameColor = {Value, 1}
+
+    end
+})
+
+
+Visuals2:AddToggle('MyToggle', {
+    Text = 'Distance',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+
+if Value == true then
+-- 1. Load the library
+
+Sense.teamSettings.enemy.distance = true
+
+elseif Value == false then
+Sense.teamSettings.enemy.distance = false
+    
+end
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Bright green
+    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.distanceColor = {Value, 1}
+
+    end
+})
+
+
+
+Visuals2:AddToggle('ControlToggle', {
+    Text = 'Chams',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+
+if Value == true then
+-- 1. Load the library
+
+Sense.teamSettings.enemy.chams = true
+
+elseif Value == false then
+Sense.teamSettings.enemy.chams = false
+    
+end
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 0, 0), -- Bright green
+    Title = 'Fill Color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Transparency = 0, -- Enables transparency changing for this color picker
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.chamsFillColor = {Value, 0.5}
+    end
+}):AddColorPicker('ColorPicker', {
+    Default = Color3.new(0, 0, 0),
+    Title = 'Outline Color',
+    Transparency = 0,
+
+    Callback = function(Value)
+        Sense.teamSettings.enemy.chamsOutlineColor = {Value, 0.5}
+    end
+})
+
+
+Visuals2:AddToggle('ControlToggle', {
+    Text = 'Visible Chams only',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+
+if Value == true then
+-- 1. Load the library
+
+Sense.teamSettings.enemy.chamsVisibleOnly = true
+
+elseif Value == false then
+Sense.teamSettings.enemy.chamsVisibleOnly = false
+    
+end
+    end
+})
+
 
 
 
@@ -3076,7 +3232,7 @@ LeftGroupBox3:AddToggle('MyToggle', {
     You can call :AddButton on a button to add a SubButton!
 ]]
 
-local MyButton = Other:AddButton({
+local MyButton = Visuals:AddButton({
     Text = 'Skybox (Night)',
     Func = function()
 -- Asset ID replacements
