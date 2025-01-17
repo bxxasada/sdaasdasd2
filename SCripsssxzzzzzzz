@@ -2156,7 +2156,7 @@ function AutoShoot()
         
                 -- Fire the remote for the target model when hit
                 if hitResult.Parent == closestPlayer then
-                    Library:Notify("Hit " .. closestPlayer.Name .. " at " .. hitResult.Name,5)
+                    Library:Notify("Hit " .. closestPlayer.Name .. " at " .. hitResult.Name,2)
 
 
                     -- Define the parameters
