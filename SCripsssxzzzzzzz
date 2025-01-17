@@ -2629,7 +2629,7 @@ AA:AddToggle('FaceCameraToggle_SpinModule3', {
 
 
 Blatant:AddButton({
-    Text = 'Tp all (doesnt work in warmup)',
+    Text = 'Tp all',
     Func = function()
 -- Get the local player
 local localPlayer = game:GetService("Players").LocalPlayer
@@ -2707,16 +2707,9 @@ end
 
             end,
     DoubleClick = false,
-    Tooltip = 'lol'
-})
-
-
-
-
-
-
-Blatant:AddButton({
-    Text = 'Kick all (doesnt work in warmup)',
+    Tooltip = '(doesnt work in warmup)'
+}):AddButton({
+    Text = 'Kick all',
     Func = function()
 -- Get the local player
 local localPlayer = game:GetService("Players").LocalPlayer
@@ -2794,7 +2787,7 @@ end
 
             end,
     DoubleClick = false,
-    Tooltip = 'lol'
+    Tooltip = '(doesnt work in warmup)'
 })
 
 
