@@ -52,6 +52,8 @@ local Other = Tabs.Main:AddRightGroupbox('Other')
 local Visuals2 = Tabs.Visuals2:AddLeftGroupbox('Esp')
 local Visuals = Tabs.Visuals2:AddRightGroupbox('Other Visuals')
 local Skins = Tabs.Main:AddRightGroupbox('Skins')
+local Legit = Tabs.Main:AddRightGroupbox('Legit-Bot')
+
 
 
 
@@ -264,6 +266,42 @@ end
 -- Groupbox:AddToggle
 -- Arguments: Index, Options
 
+local SliderValue = 0 -- Store the slider's value
+
+-- Function to execute HeadSize logic
+local function ExecuteHeadSize()
+    for i, v in pairs(game:GetDescendants()) do
+        if v:IsA("Part") and (v.Name == "HeadHB") and v.Parent ~= game.Players.LocalPlayer.Character then
+            v.Size = Vector3.new(SliderValue, SliderValue, SliderValue)
+            v.Transparency = 0.5
+        end
+    end
+end
+
+-- Add the button
+Legit:AddButton({
+    Text = 'Update Head Size',
+    Func = function()
+        ExecuteHeadSize()
+    end,
+    DoubleClick = false,
+    Tooltip = 'Adjust head size using the slider value',
+})
+
+-- Add the slider
+Legit:AddSlider('MySlider', {
+    Text = 'Head Size Adjuster',
+    Default = 2, -- Default slider value
+    Min = 1, -- Minimum size
+    Max = 10, -- Maximum size
+    Rounding = 1,
+    Compact = false,
+
+    Callback = function(Value)
+        SliderValue = Value -- Update the SliderValue
+        print('[cb] Slider updated! New value:', Value)
+    end
+})
 
 
 
@@ -2964,7 +3002,6 @@ Options.KeyPicker:SetValue({ 'H', 'Toggle' }) -- Sets keybind to MB2, mode to Ho
 
 
 
-Other:AddLabel('Sky')
 
 _G.AutoCaseClassicKara = true
 function AutoCaseClassicKara()
