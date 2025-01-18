@@ -1882,6 +1882,83 @@ Skins:AddButton({
 })
 
 
+Skins:AddButton({
+    Text = 'Dev stuff idk? ',
+    Func = function()
+        function Accessory(Name)
+            local players = game:GetService("Players")
+            local replicatedStorage = game:GetService("ReplicatedStorage")
+            
+            for _, player in pairs(players:GetPlayers()) do
+                -- Ensure the player has a character and the Gun exists
+                if player.Character and player.Character:FindFirstChild("Gun") then
+                    -- Create a copy of the original table for each player
+                    local ohTable1 = {
+                        ["MinDmg"] = 0,
+                        ["Animations"] = replicatedStorage.Modules.WeaponData.Assets.P2000.Configuration,
+                        ["Bullets"] = 1,
+                        ["Range"] = 8192,
+                        ["FireRate"] = 0.14,
+                        ["CanDrop"] = true,
+                        ["DMG"] = 35,
+                        ["Penetration"] = 100,
+                        ["Secondary"] = true,
+                        ["Gun"] = Name, -- Use the Gun for the current player
+                        ["Spread"] = {
+                            ["Move"] = 10,
+                            ["Crouch"] = 3.68,
+                            ["Stand"] = 4.9,
+                            ["MaxInaccuracy"] = 0,
+                            ["Land"] = 19.1,
+                            ["Value"] = 2.5,
+                            ["Jump"] = 94.48,
+                            ["Ladder"] = 138.32,
+                            ["RecoveryTime"] = {
+                                ["Value"] = 0.349,
+                                ["Crouched"] = 0.291
+                            }
+                        },
+                        ["BulletPerTrail"] = 0,
+                        ["ArmorPenetration"] = 50.5,
+                        ["AccuracyDivisor"] = -1,
+                        ["Tagging"] = 0.44,
+                        ["KillAward"] = 150,
+                        ["Ammo"] = 2222,
+                        ["PointsAward"] = 12,
+                        ["RangeModifier"] = 91,
+                        ["StoredAmmo"] = 24,
+                        ["RemoveTime"] = 3.65,
+                        ["ApplyTime"] = 3,
+                        ["Name"] = "P2000",
+                        ["AccuracyOffset"] = 0,
+                        ["ReloadTime"] = 2.17,
+                        ["EquipTime"] = 1,
+                        ["Auto"] = false,
+                        ["Recoil"] = {
+                            ["Value"] = 23,
+                            ["X"] = 0,
+                            ["Y"] = 2222
+                        }
+                    }
+            
+                    local ohInstance2 = players.LocalPlayer
+            
+                    -- Fire the remote event for this player's gun
+                    replicatedStorage.Events.ApplyGun:FireServer(ohTable1, ohInstance2)
+                end
+                
+                end
+            end
+            Accessory(game:GetService("ReplicatedStorage").CharacterModels.Agents.DEVSKIN_Homer["Accessory (homerAccessory)"])
+            Accessory(game:GetService("ReplicatedStorage").CharacterModels.Agents.DEVSKIN_CastlersMonkey["Banana Bod"])
+            Accessory(game:GetService("ReplicatedStorage").CharacterModels.Agents.DEVSKIN_CastlersMonkey.MonkeyHat)
+             
+    end,
+    DoubleClick = false,
+    Tooltip = '(go in 3rdperson to see)'
+})
+
+
 
 
 
@@ -2790,6 +2867,120 @@ end
     Tooltip = '(doesnt work in warmup)'
 })
 
+local hasFired = false  -- Flag to track if FireServer has been called
+local isRunning = false  -- Flag to track if the loop is running
+local eventConnection  -- Store the event connection to disconnect later
+
+-- Function that handles remote firing and event processing
+local function onPlayerChatted(ohString1, ohBoolean2, ohString3, ohBoolean4, ohBoolean5, ohBoolean6)
+    -- Check if the player who fired the remote is the LocalPlayer
+    if game.Players.LocalPlayer.Name ~= ohString1 then
+        return  -- If the event was not fired by the LocalPlayer, exit the function
+    end
+
+    if hasFired then
+        return  -- If already fired, exit the function
+    end
+
+    print("Original arguments:", ohString1, ohBoolean2, ohString3, ohBoolean4, ohBoolean5, ohBoolean6)
+
+    -- Overwrite the remote arguments
+    local newOhString1 = ohBoolean2  -- Overwrite ohString1 with the value of ohString3
+    local newOhBoolean2 = false  -- Modify as needed
+    local newOhString3 = "Innocent"  -- Modify to "Innocent" as before
+    local newOhBoolean4 = false
+    local newOhBoolean5 = false
+    local newOhBoolean6 = false
+
+    -- Fire the server with the modified arguments
+    game:GetService("ReplicatedStorage").Events.PlayerChatted:FireServer(newOhString1, newOhBoolean2, newOhString3, newOhBoolean4, newOhBoolean5, newOhBoolean6)
+
+    -- Set the flag to true to prevent firing another input at the same time
+    hasFired = true
+
+    -- Reset the flag after a short delay to allow the next input to be processed
+    wait(1)  -- Adjust this wait time as needed for your application
+    hasFired = false
+end
+
+-- Create the toggle button
+Chat:AddToggle('MyToggle', {
+    Text = 'Chat bypass (Semi)',  -- Toggle text
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Semi chat bypass', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        if Value then
+            -- Toggle is ON: Start listening to the event
+            if not eventConnection then
+                eventConnection = game:GetService("ReplicatedStorage").Events.PlayerChatted.OnClientEvent:Connect(onPlayerChatted)
+            end
+        else
+            -- Toggle is OFF: Stop listening to the event
+            if eventConnection then
+                eventConnection:Disconnect()  -- Disconnect the event handler
+                eventConnection = nil  -- Reset the event connection
+            end
+            hasFired = false  -- Reset hasFired when toggled off
+        end
+    end
+})
+
+
+local hasFired2 = false  -- Flag to track if FireServer has been called
+local isRunning = false  -- Flag to track if the loop is running
+local eventConnection2  -- Store the event connection to disconnect later
+
+-- Function that handles remote firing and event processing
+local function onPlayerChatted(ohString1, ohBoolean2, ohString3, ohBoolean4, ohBoolean5, ohBoolean6)
+    if hasFired2 then
+        return  -- If already fired, exit the function
+    end
+
+    print("Original arguments:", ohString1, ohBoolean2, ohString3, ohBoolean4, ohBoolean5, ohBoolean6)
+
+    -- Overwrite the remote arguments
+    local newOhString1 = ohBoolean2  -- Overwrite ohString1 with the value of ohString3
+    local newOhBoolean2 = false  -- Modify as needed
+    local newOhString3 = "Innocent"  -- Modify to "Innocent" as before
+    local newOhBoolean4 = false
+    local newOhBoolean5 = false
+    local newOhBoolean6 = false
+
+    -- Fire the server with the modified arguments
+    game:GetService("ReplicatedStorage").Events.PlayerChatted:FireServer(newOhString1, newOhBoolean2, newOhString3, newOhBoolean4, newOhBoolean5, newOhBoolean6)
+
+    -- Set the flag to true to prevent firing another input at the same time
+    hasFired2 = true
+
+    -- Reset the flag after a short delay to allow the next input to be processed
+    wait(1)  -- Adjust this wait time as needed for your application
+    hasFired2 = false
+end
+
+-- Create the toggle button
+Chat:AddToggle('MyToggle', {
+    Text = 'Chat bypass ALL (Semi)',  -- Toggle text
+    Default = false, -- Default value (true / false)
+    Tooltip = 'This bypasses chat for all', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        if Value then
+            -- Toggle is ON: Start listening to the event
+            if not eventConnection2 then
+                eventConnection2 = game:GetService("ReplicatedStorage").Events.PlayerChatted.OnClientEvent:Connect(onPlayerChatted)
+            end
+        else
+            -- Toggle is OFF: Stop listening to the event
+            if eventConnection2 then
+                eventConnection2:Disconnect()  -- Disconnect the event handler
+                eventConnection2 = nil  -- Reset the event connection
+            end
+            hasFired2 = false  -- Reset hasFired when toggled off
+        end
+    end
+})
+
 
 
 -- Arguments: Idx, Info
@@ -2807,7 +2998,6 @@ Chat:AddInput('MyTextbox', {
     Callback = function(Value)
         -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
 
-local ohString1 = Value
 local ohBoolean2 = false
 local ohString3 = "Innocent"
 local ohBoolean4 = false
