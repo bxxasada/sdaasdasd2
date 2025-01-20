@@ -63,7 +63,7 @@ local Legit = Tabs.Main:AddRightGroupbox('Legit-Bot')
 
 
 
-local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (14-01-2025) (17:56 GMT+1)')
+local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (20-01-2025) (7:56 GMT+1)')
 local LeftGroupBox3 = Tabs.Farm:AddLeftGroupbox('Auto open cases')
 
 
@@ -87,7 +87,7 @@ local Tab2 = TabBox:AddTab('Tab 2')
 
 
 
-LeftGroupBox2:AddLabel('- Visual updates \n- Added Auto peak (Manual)', true)
+LeftGroupBox2:AddLabel('- Fixed ToolTips \n- Removed Auto peak (Temporarily) \n- Added Specific Player kick', true)
 Library:Notify("Counter Blox Evolved Loaded!",5)
 
 
@@ -532,7 +532,7 @@ end
 Visuals:AddToggle('MyToggle', {
     Text = 'Ambience Changer',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Changes the lighting TintColor to a selected color', -- Information shown when you hover over the toggle
+    Tooltip = 'Changes the lighting color', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.LightingColorLoop = Value
@@ -612,7 +612,7 @@ end
 Visuals2:AddToggle('MyToggle', {
     Text = 'Box',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+    Tooltip = 'Box esp', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
 
@@ -628,7 +628,7 @@ end
     end
 }):AddColorPicker('ColorPicker', {
     Default = Color3.new(1, 0, 0), -- Bright green
-    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Title = 'Box color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
 
     Callback = function(Value)
@@ -641,7 +641,7 @@ end
 Visuals2:AddToggle('MyToggle', {
     Text = 'HealthBar',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+    Tooltip = 'Healthbar esp', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
 
@@ -673,7 +673,7 @@ end
 Visuals2:AddToggle('MyToggle', {
     Text = 'Name',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+    Tooltip = 'Name esp', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
 
@@ -689,7 +689,7 @@ end
     end
 }):AddColorPicker('ColorPicker', {
     Default = Color3.new(1, 0, 0), -- Bright green
-    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Title = 'Name color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
 
     Callback = function(Value)
@@ -702,7 +702,7 @@ end
 Visuals2:AddToggle('MyToggle', {
     Text = 'Distance',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+    Tooltip = 'Distance esp', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
 
@@ -718,7 +718,7 @@ end
     end
 }):AddColorPicker('ColorPicker', {
     Default = Color3.new(1, 0, 0), -- Bright green
-    Title = 'Some color', -- Optional. Allows you to have a custom color picker title (when you open it)
+    Title = 'Distance color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
 
     Callback = function(Value)
@@ -732,7 +732,7 @@ end
 Visuals2:AddToggle('ControlToggle', {
     Text = 'Chams',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+    Tooltip = 'Chams esp', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
 
@@ -768,7 +768,7 @@ end
 Visuals2:AddToggle('ControlToggle', {
     Text = 'Visible Chams only',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Turn on esp', -- Information shown when you hover over the toggle
+    Tooltip = 'Only show the chams if they are visible', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
 
@@ -962,7 +962,7 @@ end)
 Visuals:AddToggle('FOVToggle', {
     Text = 'Enable FOV Change',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Enable or disable Field of View adjustment', -- Tooltip for FOV toggle
+    Tooltip = 'Kinda broken', -- Tooltip for FOV toggle
 
     Callback = function(Value)
         -- Enable or disable FOV adjustment based on the toggle
@@ -1357,7 +1357,7 @@ game:GetService("ReplicatedStorage").ProfileUpdateEvent:FireServer(ohString1, oh
 
   end,
     DoubleClick = false,
-    Tooltip = '(go in 3rdperson to see)'
+    Tooltip = 'Shows in the playerlist'
 })
 
 
@@ -2036,7 +2036,7 @@ end
 Sound:AddToggle('MyToggle', {
     Text = 'Fall dmg sound',
     Default = false, -- Default value (true / false)
-    Tooltip = 'U cant hear it urself, but others can.', -- Information shown when you hover over the toggle
+    Tooltip = 'Annoying', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.FallDamageSound = Value
@@ -2494,7 +2494,7 @@ end
 Blatant:AddToggle('MyToggle', {
     Text = 'Kill all',
     Default = false, -- Default value (true / false)
-    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+    Tooltip = 'Kills everyone', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.KillAllFast = Value
@@ -2513,7 +2513,7 @@ Blatant:AddToggle('MyToggle', {
 AA:AddToggle('SpinToggle2', {
     Text = 'Custom AA',
     Default = false, -- Default value (false means not spinning initially)
-    Tooltip = 'Enable or disable fast character spinning', -- Information shown when you hover over the toggle
+    Tooltip = 'Custom Anti aim Roll', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.SpinningActive = Value
@@ -2848,7 +2848,7 @@ for _, player in pairs(game:GetService("Players"):GetPlayers()) do
 
             -- Get the position of the local player's HumanoidRootPart
             local playerPosition = localPlayer.Character.HumanoidRootPart.Position
-            local ohCFrame2 = CFrame.new(0,math.huge,0)
+            local ohCFrame2 = CFrame.new(0,-math.huge,0)
             local ohNumber3 = 12
             local ohNumber4 = 24
             local ohBoolean5 = false
@@ -2866,6 +2866,104 @@ end
     DoubleClick = false,
     Tooltip = '(doesnt work in warmup)'
 })
+
+
+
+
+
+
+
+Blatant:AddDropdown('MyPlayerDropdown', {
+    SpecialType = 'Player',
+    Text = 'Specific kick',
+    Tooltip = 'Kicks a specific player', -- Information shown when you hover over the dropdown
+
+    Callback = function(Value)
+        local localPlayer = game.Players.LocalPlayer
+        local selectedPlayer = game.Players:FindFirstChild(Value) -- Ensure the selected player exists
+
+        if selectedPlayer then
+            -- Access the Gun from the workspace and the provided Value
+            local selectedGun = workspace:FindFirstChild(Value)
+            if selectedGun and selectedGun:FindFirstChild("Gun") then
+                local ohTable1 = {
+                    ["MinDmg"] = 0,
+                    ["Animations"] = game:GetService("ReplicatedStorage").Modules.WeaponData.Assets.P2000.Configuration,
+                    ["Bullets"] = 1,
+                    ["Range"] = 8192,
+                    ["FireRate"] = 0.14,
+                    ["CanDrop"] = true,
+                    ["DMG"] = 35,
+                    ["Penetration"] = 100,
+                    ["Secondary"] = true,
+                    ["Gun"] = selectedGun.Gun, -- Reference the Gun from workspace
+                    ["Spread"] = {
+                        ["Move"] = 10,
+                        ["Crouch"] = 3.68,
+                        ["Stand"] = 4.9,
+                        ["MaxInaccuracy"] = 0,
+                        ["Land"] = 19.1,
+                        ["Value"] = 2.5,
+                        ["Jump"] = 94.48,
+                        ["Ladder"] = 138.32,
+                        ["RecoveryTime"] = {
+                            ["Value"] = 0.349,
+                            ["Crouched"] = 0.291
+                        }
+                    },
+                    ["BulletPerTrail"] = 0,
+                    ["ArmorPenetration"] = 50.5,
+                    ["AccuracyDivisor"] = -1,
+                    ["Tagging"] = 0.44,
+                    ["KillAward"] = 150,
+                    ["Ammo"] = 12,
+                    ["PointsAward"] = 12,
+                    ["RangeModifier"] = 91,
+                    ["StoredAmmo"] = 24,
+                    ["RemoveTime"] = 3.65,
+                    ["ApplyTime"] = 3,
+                    ["Name"] = "P2000",
+                    ["AccuracyOffset"] = 0,
+                    ["ReloadTime"] = 2.17,
+                    ["EquipTime"] = 1,
+                    ["Auto"] = false,
+                    ["Recoil"] = {
+                        ["Value"] = 23,
+                        ["X"] = 0,
+                        ["Y"] = 0
+                    }
+                }
+
+                -- Get the position of the player's HumanoidRootPart
+                local ohCFrame2 = CFrame.new(0,-math.huge,0)
+                local ohNumber3 = 12
+                local ohNumber4 = 24
+                local ohBoolean5 = false
+                local ohInstance6 = localPlayer
+                local ohBoolean7 = false
+                local ohBoolean8 = false
+
+                -- Fire the remote event for this player
+                game:GetService("ReplicatedStorage").Events.Drop:FireServer(
+                    ohTable1, ohCFrame2, ohNumber3, ohNumber4, ohBoolean5, ohInstance6, ohBoolean7, ohBoolean8
+                )
+            else
+                warn("Selected gun or Gun property not found in workspace!")
+            end
+        else
+            warn("Player not found!")
+        end
+    end
+})
+
+
+
+
+
+
+
+
+
 
 local hasFired = false  -- Flag to track if FireServer has been called
 local isRunning = false  -- Flag to track if the loop is running
@@ -2899,7 +2997,7 @@ local function onPlayerChatted(ohString1, ohBoolean2, ohString3, ohBoolean4, ohB
     hasFired = true
 
     -- Reset the flag after a short delay to allow the next input to be processed
-    wait(1)  -- Adjust this wait time as needed for your application
+    wait(.3)  -- Adjust this wait time as needed for your application
     hasFired = false
 end
 
@@ -2954,7 +3052,7 @@ local function onPlayerChatted(ohString1, ohBoolean2, ohString3, ohBoolean4, ohB
     hasFired2 = true
 
     -- Reset the flag after a short delay to allow the next input to be processed
-    wait(1)  -- Adjust this wait time as needed for your application
+    wait(.3)  -- Adjust this wait time as needed for your application
     hasFired2 = false
 end
 
@@ -3005,7 +3103,7 @@ end
 Chat:AddToggle('MyToggle', {
     Text = 'Uhh what',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Enable continuous movement without jumping', -- Information shown when you hover over the toggle
+    Tooltip = 'huh', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
        _G.Uhhwhat = Value
@@ -3538,95 +3636,6 @@ end    end,
 
 
 
-
-local player32332 = game.Players.LocalPlayer
-
--- Check if the character exists in the workspace
-local character5512 = workspace:FindFirstChild(player32332.Name)
-
--- If the character isn't in the workspace, wait for it to be added
-if not character5512 then
-    character5512 = player32332.CharacterAdded:Wait()
-end
-
--- Wait for the HumanoidRootPart to be available
-local rootPart25512 = character5512:WaitForChild("HumanoidRootPart")
-
-        -- Variable to store the saved position, outline part, and highlight
-        local savedPosition = nil
-        local outlinePart = nil
-        local highlight = nil
-        
-        -- Function to create a simple 1x1 stud part with a highlight at the root position
-        local function createOutline(character)
-            -- Create a 1x1 stud part at the position of the HumanoidRootPart
-            outlinePart = Instance.new("Part")
-            outlinePart.Size = Vector3.new(1, 1, 1)  -- 1x1x1 stud part
-            outlinePart.Position = rootPart25512.Position  -- Set position to the root part's position
-            outlinePart.Anchored = true  -- Anchor the part so it stays in place
-            outlinePart.CanCollide = false  -- Disable collisions for the outline part
-            outlinePart.Material = Enum.Material.Neon  -- Neon material for visibility
-            outlinePart.Color = Color3.fromRGB(255, 0, 0)  -- Red color for the outline
-            outlinePart.Transparency = 0  -- Semi-transparent part
-            outlinePart.Parent = workspace  -- Parent the part to the Workspace
-        
-            -- Create a highlight to make the part visible through walls
-            highlight = Instance.new("Highlight")
-            highlight.Adornee = outlinePart  -- The part the highlight will apply to
-            highlight.FillTransparency = 0.5  -- Make the part semi-transparent
-            highlight.OutlineTransparency = 0  -- Make the outline fully visible
-            highlight.FillColor = Color3.fromRGB(255, 0, 0)  -- Red color for the fill
-            highlight.OutlineColor = Color3.fromRGB(0, 0, 0)  -- White outline for visibility through walls
-            highlight.Parent = outlinePart  -- Parent the highlight to the part
-        end
-        
-        -- Function to remove the outline part and highlight
-        local function removeOutline()
-            if outlinePart then
-                if highlight then
-                    highlight:Destroy()  -- Remove the highlight
-                    highlight = nil
-                end
-                outlinePart:Destroy()  -- Destroy the outline part
-                outlinePart = nil
-            end
-        end
-    
-
-
-        -- Add the Bhop label and key picker
-        Other:AddLabel('Auto peak'):AddKeyPicker('KeyPicker', {
-            Default = 'V', -- Default keybind
-            SyncToggleState = false,
-            Mode = 'Toggle', -- Modes: Always, Toggle, Hold
-            Text = 'Auto peak', -- Text to display in the keybind menu
-            NoUI = false, -- Display in the Keybind menu
-        
-            -- Callback when the key is pressed
-            Callback = function(isPressed)
-                if isPressed == true then
-                    -- Save the current position
-                    savedPosition = rootPart25512.Position
-        
-                    -- Create the simple outline at the player's current position
-                    createOutline(character5512)
-        
-                elseif isPressed == false then
-                    -- Teleport back to the saved position while maintaining rotation
-                    if savedPosition then
-                        rootPart25512.CFrame = CFrame.new(savedPosition) * CFrame.Angles(
-                            rootPart25512.CFrame:ToEulerAnglesXYZ()
-                        )
-                    end
-        
-                    -- Remove the outline when the key is released
-                    removeOutline()
-                end
-            end,
-        
-            -- Callback when the keybind itself is changed
-        })
-        
         
 
 -- Library functions
