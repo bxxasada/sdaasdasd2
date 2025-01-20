@@ -63,7 +63,7 @@ local Legit = Tabs.Main:AddRightGroupbox('Legit-Bot')
 
 
 
-local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (20-01-2025) (7:56 GMT+1)')
+local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (20-01-2025) (14:33 GMT+1)')
 local LeftGroupBox3 = Tabs.Farm:AddLeftGroupbox('Auto open cases')
 
 
@@ -87,8 +87,8 @@ local Tab2 = TabBox:AddTab('Tab 2')
 
 
 
-LeftGroupBox2:AddLabel('- Fixed ToolTips \n- Removed Auto peak (Temporarily) \n- Added Specific Player kick', true)
-Library:Notify("Counter Blox Evolved Loaded!",5)
+LeftGroupBox2:AddLabel('- Fixed ToolTips \n- Removed Auto peak (Temporarily) \n- Added Specific Player kick \n- Fixed AutoShoot targetting behavior', true)
+Library:Notify("Counter Blox Evolved Loaded! (Updated 20-01-2025)",5)
 
 
 
@@ -1974,7 +1974,7 @@ Skins:AddButton({
 Sound:AddToggle('MyToggle', {
     Text = 'Hit sound',
     Default = false, -- Default value (true / false)
-    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+    Tooltip = 'Makes a hit sound (Loud)', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.AnnoyingSound = Value
@@ -2100,187 +2100,94 @@ _G.AutoShoot = true
 
 function AutoShoot()
     while _G.AutoShoot == true do
-
-
         local localPlayer = game.Players.LocalPlayer
-        local closestPlayer = nil
-        local closestDistance = math.huge  -- Set an initial high distance
 
-        -- Check if localPlayer exists using pcall to avoid errors
-        local success, err = pcall(function()
-            if not localPlayer or not localPlayer.Character or not localPlayer.Character:FindFirstChild("Humanoid") then
-                return
-            end
-        end)
-        
-        -- Skip if there was an error
-        if not success then
-            print("Error: " .. err)
-            wait(.1)  -- Wait before continuing the loop
+        -- Validate the local player to prevent errors
+        if not localPlayer or not localPlayer.Character or not localPlayer.Character:FindFirstChild("Humanoid") then
+            wait(0.1)
             continue
         end
-        
-        -- Loop through all the models in workspace to find the closest player
+
+        -- Loop through all models in the workspace
         for _, playerModel in pairs(workspace:GetChildren()) do
             if playerModel:IsA("Model") and playerModel:FindFirstChild("Humanoid") and playerModel.Name ~= localPlayer.Name then
-                if playerModel.PrimaryPart and localPlayer.Character and localPlayer.Character.PrimaryPart then
-                    -- Check if players are on the same team
+                if playerModel.PrimaryPart and localPlayer.Character.PrimaryPart then
+
+                    -- Skip if the target is on the same team
                     local player = game.Players:FindFirstChild(playerModel.Name)
                     if player and player.Team == localPlayer.Team then
-                        -- Skip if the target is on the same team as the local player
                         continue
                     end
-                    
-                    local distance = (playerModel.PrimaryPart.Position - localPlayer.Character.PrimaryPart.Position).Magnitude
-        
-                    if distance < closestDistance then
-                        closestDistance = distance
-                        closestPlayer = playerModel
+
+                    -- Ensure the gun part exists for the local player
+                    local gunPart = localPlayer.Character:FindFirstChild("HumanoidRootPart")
+                    if not gunPart then
+                        continue
                     end
-                else
-                    -- Skip this player model if required parts are missing
-                    continue
-                end
-            end
-        end
-        
-        -- If no closest player is found, skip this iteration
-        if not closestPlayer then
-            wait(.1)  -- Wait before continuing the loop
-            continue  -- Skip to the next iteration of the loop
-        end
-        
-        -- Ensure the .Gun exists and use it for raycasting with pcall
-        local gunPart = nil
-        success, err = pcall(function()
-            gunPart = localPlayer.Character:FindFirstChild("HumanoidRootPart")
-            if not gunPart == nil then
-                return
-            end
-        end)
-        
-        if not success then
-            return  -- Skip this iteration and move to the next one
-        end
-        
-        -- Ensure gunPart exists before proceeding further
-        if not gunPart then
-            return  -- Skip this iteration of the loop if gunPart is missing
-        end
 
-        -- If gunPart exists, proceed with raycasting and other actions...
-        
-        local rayOrigin = gunPart.Position  -- This will now only execute if gunPart exists
+                    local rayOrigin = gunPart.Position
 
+                    -- Create an ignore list for raycasting
+                    local ignoreList = {localPlayer.Character}
 
-        
-        -- Create an ignore list for raycasting (including localPlayer's character)
-        local ignoreList = {localPlayer.Character}
+                    if workspace:FindFirstChild("Camera") and workspace.Camera:FindFirstChild("Arms") then
+                        table.insert(ignoreList, workspace.Camera.Arms)
+                    else
+                        continue
+                    end
 
-        if workspace:FindFirstChild("Camera") and workspace.Camera:FindFirstChild("Arms") then
-            table.insert(ignoreList, workspace.Camera.Arms)
-        else
-            return
-        end
-        
-        -- Add any accessories to the ignore list (like Hat1, Hat2, Hat3, Hat4)
-        if closestPlayer then
-            for _, accessory in pairs(closestPlayer:GetChildren()) do
-                if accessory:IsA("Accessory") and accessory:FindFirstChild("Handle") then
-                    table.insert(ignoreList, accessory.Handle)
-                end
-            end
-        end
-
-        
-        
-        -- Create a function to handle raycasting to any part of the target model
-        local hitPart = nil
-        local maxDistance = closestDistance
-        local fullPath = ""  -- Store the full path of the raycast hits
-        
-        -- Loop through all parts in the target model to check for obstructions
-        local targetParts = {}
-        if closestPlayer then
-            -- Check if 'HeadHB' exists, if not skip
-            if not closestPlayer:FindFirstChild("HeadHB") then
-                print("HeadHB not found, skipping this target.")
-                continue  -- Skip if HeadHB is not found
-            end
-            
-            for _, part in pairs(closestPlayer:GetDescendants()) do
-                if part:IsA("BasePart") then
-                    table.insert(targetParts, part)
-                end
-            end
-        end
-        if closestPlayer:FindFirstChild("ForceField") then
-            continue
-        end
-        
-        -- Raycast and trace towards each part
-        for _, targetPart in pairs(targetParts) do
-            local rayDirection = (targetPart.Position - rayOrigin).unit * maxDistance
-            local ray = Ray.new(rayOrigin, rayDirection)
-            
-            -- Raycasting to the target part
-            local hitResult, hitPosition = workspace:FindPartOnRayWithIgnoreList(ray, ignoreList)
-        
-            -- Check if the ray hits the part of the target model
-            if hitResult then
-                -- Update the fullPath string with the part hit
-                fullPath = hitResult:GetFullName()  -- Get the full path of the part hit
-        
-                -- Fire the remote for the target model when hit
-                if hitResult.Parent == closestPlayer then
-                    Library:Notify("Hit " .. closestPlayer.Name .. " at " .. hitResult.Name,2)
-
-
-                    -- Define the parameters
-                    local ohInstance1 = closestPlayer.HeadHB
-                    local ohVector32 = Vector3.new(0, 0, 0)
-                    local ohString3 = "Vandal RGX"
-                    local ohNumber4 = math.huge
-                    local ohInstance5 = workspace:FindFirstChild(localPlayer.Name) and workspace[localPlayer.Name]:FindFirstChild("Gun") or nil
-                    local ohNil6 = nil
-                    local ohNil7 = nil
-                    local ohNumber8 = 10
-                    local ohBoolean9 = false
-                    local ohBoolean10 = true
-                    local ohVector311 = Vector3.new(0, 0, 0)
-                    local ohNumber12 = math.huge
-                    local ohVector313 = Vector3.new(0, 0, 0)
-                    local ohBoolean14 = true
-                    local ohNumber15 = 36
-                    local ohNumber16 = 86
-
-                    -- Find the event dynamically
-                    local replicatedStorage = game:GetService("ReplicatedStorage")
-                    local eventsFolder = replicatedStorage:FindFirstChild("Events")
-                    local targetEvent = nil
-
-                    if eventsFolder then
-                        local eventNamePattern = "^%w+%-%w+%-%w+$" -- Alphanumeric with dashes
-                        for _, child in pairs(eventsFolder:GetChildren()) do
-                            if child:IsA("RemoteEvent") and child.Name:match(eventNamePattern) then
-                                targetEvent = child
-                                break -- Stop after finding the first matching event
-                            end
+                    -- Add accessories of the player model to the ignore list
+                    for _, accessory in pairs(playerModel:GetChildren()) do
+                        if accessory:IsA("Accessory") and accessory:FindFirstChild("Handle") then
+                            table.insert(ignoreList, accessory.Handle)
                         end
                     end
 
-                    -- Ensure the event is found before firing
-                    if targetEvent then
-                        targetEvent:FireServer(
-                            ohInstance1, ohVector32, ohString3, ohNumber4, ohInstance5,
-                            ohNil6, ohNil7, ohNumber8, ohBoolean9, ohBoolean10, ohVector311,
-                            ohNumber12, ohVector313, ohBoolean14, ohNumber15, ohNumber16
-                        )
-                    else
-                        print("Target RemoteEvent not found!")
+                    if playerModel:FindFirstChild("ForceField") then
+                        continue
                     end
--- Services
-local dkpvha = game:GetService("Players")
+
+                    -- Iterate through the parts of the player model
+                    for _, targetPart in pairs(playerModel:GetDescendants()) do
+                        if targetPart:IsA("BasePart") then
+                            local rayDirection = (targetPart.Position - rayOrigin).unit * 1000
+                            local ray = Ray.new(rayOrigin, rayDirection)
+
+                            -- Perform raycasting
+                            local hitResult, hitPosition = workspace:FindPartOnRayWithIgnoreList(ray, ignoreList)
+
+                            if hitResult and hitResult.Parent == playerModel then
+                                -- Fire the remote event for the target
+                                local replicatedStorage = game:GetService("ReplicatedStorage")
+                                local eventsFolder = replicatedStorage:FindFirstChild("Events")
+                                local targetEvent = nil
+
+                                if eventsFolder then
+                                    for _, child in pairs(eventsFolder:GetChildren()) do
+                                        if child:IsA("RemoteEvent") and child.Name:match("^%w+%-%w+%-%w+$") then
+                                            targetEvent = child
+                                            break
+                                        end
+                                    end
+                                end
+
+                                if targetEvent then
+                                    targetEvent:FireServer(
+                                        playerModel.HeadHB, 
+                                        Vector3.new(0, 0, 0), 
+                                        "Vandal RGX", 
+                                        math.huge, 
+                                        workspace:FindFirstChild(localPlayer.Name) and workspace[localPlayer.Name]:FindFirstChild("Gun") or nil,
+                                        nil, nil, 10, false, true, 
+                                        Vector3.new(0, 0, 0), 
+                                        math.huge, Vector3.new(0, 0, 0), 
+                                        true, 36, 86
+                                    )
+                                else
+                                    print("Target RemoteEvent not found!")
+                                end
+
+                                local dkpvha = game:GetService("Players")
 local nqkmsp = game:GetService("TweenService")
 local hfrvla = game:GetService("SoundService")
 
@@ -2338,75 +2245,62 @@ end
 
 -- Test the showHitmarker function (call it manually or in a damage system)
 lvhjzw()
-                
-                    
 
-                    -- Now that the remote has been fired, start the tracer effect
-                    local startPart = Instance.new("Part")
-                    startPart.Size = Vector3.new(0.1, 0.1, 0.1)
-                    startPart.CFrame = CFrame.new(gunPart.Position)
-                    startPart.Anchored = true
-                    startPart.CanCollide = false
-                    startPart.Transparency = 1
-                    startPart.Parent = workspace
-        
-                    local endPart = Instance.new("Part")
-                    endPart.Size = Vector3.new(0.1, 0.1, 0.1)
-                    endPart.CFrame = CFrame.new(hitPosition)
-                    endPart.Anchored = true
-                    endPart.CanCollide = false
-                    endPart.Transparency = 1
-                    endPart.Parent = workspace
-        
-                    -- Create attachments for the Beam
-                    local attachment0 = Instance.new("Attachment", startPart)
-                    local attachment1 = Instance.new("Attachment", endPart)
-        
-                    -- Create Beam for the tracer effect
-                    local beam = Instance.new("Beam")
-                    beam.Attachment0 = attachment0
-                    beam.Attachment1 = attachment1
-                    beam.Texture = "rbxassetid://4728233934" -- Apply the decal texture (you can change the texture id)
-                    beam.TextureMode = Enum.TextureMode.Stretch
-                    beam.TextureLength = 5
-                    beam.FaceCamera = true
-                    beam.LightEmission = 1
-                    beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 0)) -- Set beam color to red
-                    beam.Width0 = 0.2
-                    beam.Width1 = 0.2
-                    beam.Parent = workspace
-        
-                    -- Move the endPart (tracer) to the hit position
-                    endPart.CFrame = CFrame.new(hitPosition)
-        
-                    -- Clean up the beam and start/end parts after the tracer effect
-                    local function fadeBeam(beam)
-                        local fadeDuration = .84 -- Duration of the fade in seconds
-                        local steps = 20 -- Number of steps for the fade
-                        local interval = fadeDuration / steps -- Time between each step
+                                -- Create tracer effect
+                                local startPart = Instance.new("Part")
+                                startPart.Size = Vector3.new(0.1, 0.1, 0.1)
+                                startPart.CFrame = CFrame.new(gunPart.Position)
+                                startPart.Anchored = true
+                                startPart.CanCollide = false
+                                startPart.Transparency = 1
+                                startPart.Parent = workspace
 
-                        for i = 0, steps do
-                            local transparencyValue = i / steps -- Gradual increase from 0 to 1
-                            -- Update transparency of both keypoints
-                            beam.Transparency = NumberSequence.new({
-                                NumberSequenceKeypoint.new(0, transparencyValue),  -- Start of the beam
-                                NumberSequenceKeypoint.new(1, transparencyValue)   -- End of the beam
-                            })
-                            task.wait(interval)
+                                local endPart = Instance.new("Part")
+                                endPart.Size = Vector3.new(0.1, 0.1, 0.1)
+                                endPart.CFrame = CFrame.new(hitPosition)
+                                endPart.Anchored = true
+                                endPart.CanCollide = false
+                                endPart.Transparency = 1
+                                endPart.Parent = workspace
+
+                                local attachment0 = Instance.new("Attachment", startPart)
+                                local attachment1 = Instance.new("Attachment", endPart)
+
+                                local beam = Instance.new("Beam")
+                                beam.Attachment0 = attachment0
+                                beam.Attachment1 = attachment1
+                                beam.Texture = "rbxassetid://4728233934"
+                                beam.TextureMode = Enum.TextureMode.Stretch
+                                beam.TextureLength = 5
+                                beam.FaceCamera = true
+                                beam.LightEmission = 1
+                                beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 0))
+                                beam.Width0 = 0.2
+                                beam.Width1 = 0.2
+                                beam.Parent = workspace
+
+                                task.spawn(function()
+                                    local fadeDuration = 0.84
+                                    local steps = 20
+                                    local interval = fadeDuration / steps
+                                    for i = 0, steps do
+                                        local transparencyValue = i / steps
+                                        beam.Transparency = NumberSequence.new({
+                                            NumberSequenceKeypoint.new(0, transparencyValue),
+                                            NumberSequenceKeypoint.new(1, transparencyValue)
+                                        })
+                                        task.wait(interval)
+                                    end
+                                    beam:Destroy()
+                                end)
+
+                                break
+                            end
                         end
-
-                        -- Clean up the beam and attachments after fading
-                        beam:Destroy() -- Destroy the beam
                     end
-
-                    task.spawn(function()
-                        fadeBeam(beam)
-                    end)
-                    break  -- Exit the loop once the ray hits the target model and remote is fired
                 end
             end
         end
-        
         wait(0.01)
     end
 end
