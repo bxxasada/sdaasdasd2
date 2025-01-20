@@ -2997,7 +2997,7 @@ local function onPlayerChatted(ohString1, ohBoolean2, ohString3, ohBoolean4, ohB
     hasFired = true
 
     -- Reset the flag after a short delay to allow the next input to be processed
-    wait(.3)  -- Adjust this wait time as needed for your application
+    wait(1)  -- Adjust this wait time as needed for your application
     hasFired = false
 end
 
@@ -3052,7 +3052,7 @@ local function onPlayerChatted(ohString1, ohBoolean2, ohString3, ohBoolean4, ohB
     hasFired2 = true
 
     -- Reset the flag after a short delay to allow the next input to be processed
-    wait(.3)  -- Adjust this wait time as needed for your application
+    wait(1)  -- Adjust this wait time as needed for your application
     hasFired2 = false
 end
 
