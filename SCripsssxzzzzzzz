@@ -63,7 +63,7 @@ local Legit = Tabs.Main:AddRightGroupbox('Legit-Bot')
 
 
 
-local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (20-01-2025) (14:33 GMT+1)')
+local LeftGroupBox2 = Tabs.UpdateLogs:AddLeftGroupbox('Updated (20-01-2025) (19:19 GMT+1)')
 local LeftGroupBox3 = Tabs.Farm:AddLeftGroupbox('Auto open cases')
 
 
@@ -87,8 +87,8 @@ local Tab2 = TabBox:AddTab('Tab 2')
 
 
 
-LeftGroupBox2:AddLabel('- Fixed ToolTips \n- Removed Auto peak (Temporarily) \n- Added Specific Player kick \n- Fixed AutoShoot targetting behavior', true)
-Library:Notify("Counter Blox Evolved Loaded! (Updated 20-01-2025)",5)
+LeftGroupBox2:AddLabel('- Fixed ToolTips \n- Removed Auto peak (Temporarily) \n- Added Specific Player kick', true)
+Library:Notify("Counter Blox Evolved Loaded! (Last updated 20-01-2025)",5)
 
 
 
@@ -299,7 +299,6 @@ Legit:AddSlider('MySlider', {
 
     Callback = function(Value)
         SliderValue = Value -- Update the SliderValue
-        print('[cb] Slider updated! New value:', Value)
     end
 })
 
@@ -309,6 +308,7 @@ Legit:AddSlider('MySlider', {
 
 
 function WeaponForceField()
+    while _G.WeaponForceField == true do
     -- Set the default color if none is selected
     local SelectedColor1 = _G.selectedColor1 or Color3.fromRGB(255, 0, 0) -- Default magenta
 
@@ -323,25 +323,46 @@ local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels
         -- Check if the child is a BasePart (Part, MeshPart, etc.)
         if child:IsA("BasePart") then
             -- Exclude parts named "Right Arm" and "Left Arm"
-            if child.Name ~= "Right Arm" and child.Name ~= "Left Arm" then
+        if not (child.Name:match("Arms") or child.Name:match("ARMS") or child.Name == "Right Arm" or child.Name == "Left Arm") then
                 -- Set the material to ForceField
                 child.Material = Enum.Material.ForceField
                 -- Set the color to newColor
                 child.Color = SelectedColor1
+
+                local player = game.Players.LocalPlayer
+                local playerModel = workspace:WaitForChild(player.Name)
+                local gunmodel = playerModel:WaitForChild("Gun")
+                
+                -- Function to apply ForceField material to all BaseParts
+                local function applyForceFieldToParts(model)
+                    for _, part in pairs(model:GetDescendants()) do
+                        if part:IsA("BasePart") then
+                            part.Material = Enum.Material.ForceField
+                            part.Color = SelectedColor1
+                        end
+                    end
+                end
+                
+                applyForceFieldToParts(gunmodel)
+
+                
+                
+
+            end
         end
     end
+    wait(0.01)  
+
 end
 
--- Run the function to set the material and color
-
-        wait(0.01)  -- Wait briefly before repeating
     end
 
 
--- Arguments: Index, Options
--- Add the toggle for ForceField weapon
+   
+
+
 Visuals:AddToggle('MyToggle', {
-    Text = 'ForceField stuff',
+    Text = 'ForceField Weapon',
     Default = false, -- Default value (true / false)
     Tooltip = 'Changes ur weapons material', -- Information shown when you hover over the toggle
 
@@ -366,13 +387,19 @@ local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels
                 child.Material = Enum.Material.Plastic
                 -- Set the color to newColor
                 child.Color = newColor
+
+
+
+
+
+
         end
     end
 end
         end
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(1, 0, 0), -- Default color is magenta (force field color)
+    Default = Color3.new(0.529, 0.494, 0.902), -- Default color is magenta (force field color)
     Title = 'ForceField Color', -- Custom title for the color picker
     Transparency = 0, -- Optional transparency
 
@@ -386,55 +413,6 @@ end
 
 
 -- WeaponForceField function that runs when the toggle is enabled
-function ArmForceField()
-    -- Set the default color if none is selected
-    local SelectedColor2 = _G.selectedColor2 or Color3.fromRGB(255, 0, 0) -- Default magenta
-
-   -- Define the path to Camera.Arms
-local cameraArms = workspace:WaitForChild("Camera"):WaitForChild("Arms")
-
-
--- Function to set transparency of parts named "Left Arm" or "Right Arm"
-    -- Iterate over each descendant of Camera.Arms
-    for _, child in pairs(cameraArms:GetDescendants()) do
-        -- Check if the child is a part and if its name is "Left Arm" or "Right Arm"
-        if child:IsA("Part") and (child.Name == "Left Arm" or child.Name == "Right Arm") then
-            -- Set the transparency to 1 (fully invisible)
-            child.Transparency = 1
-        end
-    end
-
-            wait(0.01)
-end
--- Run the function to change material
-
-
-         -- Wait briefly before repeating
-    
-
-         Visuals:AddToggle('MyToggle', {
-    Text = 'Invis Skin (not arm)',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Changes ur arms material', -- Information shown when you hover over the toggle
-
-    Callback = function(Value)
-        _G.ArmForceField = Value
-        ArmForceField()
-        if _G.ArmForceField == false then
-            -- Define the path to Camera.Arms
-local cameraArms = workspace:WaitForChild("Camera"):WaitForChild("Arms")
-
-            for _, child in pairs(cameraArms:GetDescendants()) do
-                -- Check if the child is a part and if its name is "Left Arm" or "Right Arm"
-                if child:IsA("Part") and (child.Name == "Left Arm" or child.Name == "Right Arm") then
-                    -- Set the transparency to 1 (fully invisible)
-                    child.Transparency = 0
-                end
-            end
-        end
-    end
-})
-
 
 
 function CharacterForceField()
@@ -480,7 +458,7 @@ Visuals:AddToggle('MyToggle', {
         end
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(1, 0, 0), -- Default color is red
+    Default = Color3.new(0.529, 0.494, 0.902), -- Default color is red
     Title = 'Forcefield Color', -- Custom title for the color picker
     Transparency = 0, -- Optional transparency
 
@@ -539,7 +517,7 @@ Visuals:AddToggle('MyToggle', {
         UpdateLightingColor()
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(33/255, 33/255, 33/255), -- Default color for TintColor
+    Default = Color3.new(135/255, 126/255, 230/255), -- Default color for TintColor
     Title = 'Ambience Color', -- Custom title for the color picker
     Transparency = 0, -- Optional transparency
 
@@ -548,16 +526,6 @@ Visuals:AddToggle('MyToggle', {
     end
 })
 
-Visuals:AddToggle('MyToggle', {
-    Text = 'Rainbow Crosshair',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Ranbow crosshair color', -- Information shown when you hover over the toggle
-
-    Callback = function(Value)
-        _G.RainbowCrosshair  = Value
-        RainbowCrosshair()
-    end
-})
 
 
 Visuals:AddSlider('MySlider', {
@@ -627,7 +595,7 @@ Sense.teamSettings.enemy.box = false
 end
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(1, 0, 0), -- Bright green
+    Default = Color3.new(0.529, 0.494, 0.902), -- Bright green
     Title = 'Box color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
 
@@ -688,7 +656,7 @@ Sense.teamSettings.enemy.name = false
 end
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(1, 0, 0), -- Bright green
+    Default = Color3.new(0.529, 0.494, 0.902), -- Bright green
     Title = 'Name color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
 
@@ -717,7 +685,7 @@ Sense.teamSettings.enemy.distance = false
 end
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(1, 0, 0), -- Bright green
+    Default = Color3.new(0.529, 0.494, 0.902), -- Bright green
     Title = 'Distance color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Optional. Enables transparency changing for this color picker (leave as nil to disable)
 
@@ -747,7 +715,7 @@ Sense.teamSettings.enemy.chams = false
 end
     end
 }):AddColorPicker('ColorPicker', {
-    Default = Color3.new(1, 0, 0), -- Bright green
+    Default = Color3.new(0.529, 0.494, 0.902), -- Bright green
     Title = 'Fill Color', -- Optional. Allows you to have a custom color picker title (when you open it)
     Transparency = 0, -- Enables transparency changing for this color picker
 
@@ -906,6 +874,8 @@ local function deleteAllModelsUnderCameraArms()
             child:Destroy()
         end
     end
+
+
 end
 end
 
@@ -926,6 +896,37 @@ Visuals:AddToggle('MyToggle', {
         InvisArms()
     end
 })
+
+
+
+_G.Invisgun = true
+
+function Invisgun()
+    while _G.Invisgun == true do
+        local camera = workspace:WaitForChild("Camera")
+        local arms = camera:WaitForChild("Arms")
+        local gunmodel = arms:FindFirstChild("Handle")
+
+        -- Check if gunmodel exists and then destroy it
+        if gunmodel then
+            gunmodel:Destroy()
+        end
+
+        wait(0.01)  -- Loop every 0.01 seconds
+    end
+end
+
+Visuals:AddToggle('MyToggle', {
+    Text = 'Invis gun',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Makes ur gun invisible', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.Invisgun = Value
+        Invisgun()
+    end
+})
+
 
 
 -- FOV settings
@@ -1974,7 +1975,7 @@ Skins:AddButton({
 Sound:AddToggle('MyToggle', {
     Text = 'Hit sound',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Makes a hit sound (Loud)', -- Information shown when you hover over the toggle
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.AnnoyingSound = Value
@@ -2100,6 +2101,8 @@ _G.AutoShoot = true
 
 function AutoShoot()
     while _G.AutoShoot == true do
+    local TweenService = game:GetService("TweenService")
+    local Debris = game:GetService("Debris")
         local localPlayer = game.Players.LocalPlayer
 
         -- Validate the local player to prevent errors
@@ -2178,122 +2181,126 @@ function AutoShoot()
                                         "Vandal RGX", 
                                         math.huge, 
                                         workspace:FindFirstChild(localPlayer.Name) and workspace[localPlayer.Name]:FindFirstChild("Gun") or nil,
-                                        nil, nil, 10, false, true, 
+                                        nil, nil, 30, false, false, 
                                         Vector3.new(0, 0, 0), 
                                         math.huge, Vector3.new(0, 0, 0), 
                                         true, 36, 86
                                     )
                                 else
                                     print("Target RemoteEvent not found!")
+
+                                end
+                                 local dkpvha = game:GetService("Players")
+    local nqkmsp = game:GetService("TweenService")
+    local hfrvla = game:GetService("SoundService")
+
+    -- Get the LocalPlayer
+    local azmjwb = dkpvha.LocalPlayer
+    local pscklg = azmjwb:WaitForChild("PlayerGui")
+
+    -- Create the Hitmarker GUI
+    local ghrxuf = Instance.new("ScreenGui")
+    ghrxuf.Name = "HitmarkerGui"
+    ghrxuf.ResetOnSpawn = false
+    ghrxuf.Parent = pscklg
+
+    -- Create the ImageLabel for the hitmarker
+    local jxwrub = Instance.new("ImageLabel")
+    jxwrub.Name = "Hitmarker"
+    jxwrub.Size = UDim2.new(0, 35, 0, 35) -- Size of the hitmarker
+    jxwrub.Position = UDim2.new(0.5, 0, 0.5, -27) -- Position exactly at the center of the screen
+    jxwrub.AnchorPoint = Vector2.new(0.5, 0.5) -- Anchor to the center
+    jxwrub.BackgroundTransparency = 1 -- Transparent background
+    jxwrub.Image = "rbxassetid://8797893157" -- Your hitmarker image ID
+    jxwrub.ImageTransparency = 1 -- Start invisible
+    jxwrub.Visible = false
+    jxwrub.Parent = ghrxuf
+
+    -- Create the Sound for the hitmarker
+    local qktvpl = Instance.new("Sound")
+    qktvpl.SoundId = "rbxassetid://4817809188"  -- Sound ID
+    qktvpl.Volume = 5 -- Set the volume (adjust if needed)
+    qktvpl.Parent = azmjwb.Character or azmjwb -- Attach the sound to the player or character
+
+    -- Function to show the hitmarker and play the sound
+    local function lvhjzw()
+        -- Ensure it's not blocked by other scripts
+        task.spawn(function()
+            -- Show hitmarker
+            jxwrub.Visible = true
+            jxwrub.ImageTransparency = 0 -- Make it visible
+            
+            -- Play the sound
+            qktvpl:Play()
+
+            -- Tween for fade-out effect
+            local rfqjxk = TweenInfo.new(1.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+            local aspldv = nqkmsp:Create(jxwrub, rfqjxk, {ImageTransparency = 1})
+            aspldv:Play()
+            
+            -- Hide after fade-out
+            aspldv.Completed:Connect(function()
+                jxwrub.Visible = false
+                jxwrub.ImageTransparency = 0 -- Reset for future use
+            end)
+        end)
+    end
+
+    -- Test the showHitmarker function (call it manually or in a damage system)
+    lvhjzw()
+
+Library:Notify("Hit " .. playerModel.Name .. " at " .. targetPart.Name, 2)
+
+
+                                -- Direct definition of the tracer function
+                                local function Tracer(Fire, Hit, Color)
+                                    local A0 = Instance.new("Attachment", workspace.Terrain) do
+                                        A0.WorldPosition = Fire
+                                    end
+                                    
+                                    local A1 = Instance.new("Attachment", workspace.Terrain) do
+                                        A1.WorldPosition = Hit
+                                    end
+
+                                    local Beam = Instance.new("Beam", workspace) do  -- Use workspace as the parent
+                                        Beam.Texture = "rbxassetid://446111271"
+                                        Beam.TextureMode = Enum.TextureMode.Wrap
+                                        Beam.Brightness = 1
+                                        Beam.TextureSpeed = 2
+                                        Beam.LightEmission = 1
+                                        Beam.LightInfluence = -1
+                                        Beam.TextureLength = 35
+                                        Beam.FaceCamera = true
+                                        Beam.Enabled = true
+                                        Beam.ZOffset = -1.2
+                                        Beam.Width0 = 1.5
+                                        Beam.Width1 = 1.5
+                                        Beam.Transparency = NumberSequence.new(0, 0)
+                                        Beam.Color = ColorSequence.new(Color, Color)
+                                        Beam.Attachment0 = A0
+                                        Beam.Attachment1 = A1
+                                    end
+
+                                    task.delay(.6, function()
+                                        task.spawn(function()
+                                            for i = 0, 1, 0.015 do
+                                                task.wait()
+                                                Beam.Transparency = NumberSequence.new(i)
+                                            end
+                                        end)
+
+                                        TweenService:Create(Beam, TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0.1), { Width0 = 0 }):Play()
+                                        TweenService:Create(Beam, TweenInfo.new(0.8, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0.1), { Width1 = 0 }):Play()
+
+                                        Debris:AddItem(A0, 1)
+                                        Debris:AddItem(A1, 1)
+                                        Debris:AddItem(Beam, 1)
+                                    end)
                                 end
 
-                                local dkpvha = game:GetService("Players")
-local nqkmsp = game:GetService("TweenService")
-local hfrvla = game:GetService("SoundService")
-
--- Get the LocalPlayer
-local azmjwb = dkpvha.LocalPlayer
-local pscklg = azmjwb:WaitForChild("PlayerGui")
-
--- Create the Hitmarker GUI
-local ghrxuf = Instance.new("ScreenGui")
-ghrxuf.Name = "HitmarkerGui"
-ghrxuf.ResetOnSpawn = false
-ghrxuf.Parent = pscklg
-
--- Create the ImageLabel for the hitmarker
-local jxwrub = Instance.new("ImageLabel")
-jxwrub.Name = "Hitmarker"
-jxwrub.Size = UDim2.new(0, 35, 0, 35) -- Size of the hitmarker
-jxwrub.Position = UDim2.new(0.5, 0, 0.5, -27) -- Position exactly at the center of the screen
-jxwrub.AnchorPoint = Vector2.new(0.5, 0.5) -- Anchor to the center
-jxwrub.BackgroundTransparency = 1 -- Transparent background
-jxwrub.Image = "rbxassetid://8797893157" -- Your hitmarker image ID
-jxwrub.ImageTransparency = 1 -- Start invisible
-jxwrub.Visible = false
-jxwrub.Parent = ghrxuf
-
--- Create the Sound for the hitmarker
-local qktvpl = Instance.new("Sound")
-qktvpl.SoundId = "rbxassetid://1129547534"  -- Sound ID
-qktvpl.Volume = 2 -- Set the volume (adjust if needed)
-qktvpl.Parent = azmjwb.Character or azmjwb -- Attach the sound to the player or character
-
--- Function to show the hitmarker and play the sound
-local function lvhjzw()
-    -- Ensure it's not blocked by other scripts
-    task.spawn(function()
-        -- Show hitmarker
-        jxwrub.Visible = true
-        jxwrub.ImageTransparency = 0 -- Make it visible
-        
-        -- Play the sound
-        qktvpl:Play()
-
-        -- Tween for fade-out effect
-        local rfqjxk = TweenInfo.new(1.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-        local aspldv = nqkmsp:Create(jxwrub, rfqjxk, {ImageTransparency = 1})
-        aspldv:Play()
-        
-        -- Hide after fade-out
-        aspldv.Completed:Connect(function()
-            jxwrub.Visible = false
-            jxwrub.ImageTransparency = 0 -- Reset for future use
-        end)
-    end)
-end
-
--- Test the showHitmarker function (call it manually or in a damage system)
-lvhjzw()
-
-                                -- Create tracer effect
-                                local startPart = Instance.new("Part")
-                                startPart.Size = Vector3.new(0.1, 0.1, 0.1)
-                                startPart.CFrame = CFrame.new(gunPart.Position)
-                                startPart.Anchored = true
-                                startPart.CanCollide = false
-                                startPart.Transparency = 1
-                                startPart.Parent = workspace
-
-                                local endPart = Instance.new("Part")
-                                endPart.Size = Vector3.new(0.1, 0.1, 0.1)
-                                endPart.CFrame = CFrame.new(hitPosition)
-                                endPart.Anchored = true
-                                endPart.CanCollide = false
-                                endPart.Transparency = 1
-                                endPart.Parent = workspace
-
-                                local attachment0 = Instance.new("Attachment", startPart)
-                                local attachment1 = Instance.new("Attachment", endPart)
-
-                                local beam = Instance.new("Beam")
-                                beam.Attachment0 = attachment0
-                                beam.Attachment1 = attachment1
-                                beam.Texture = "rbxassetid://4728233934"
-                                beam.TextureMode = Enum.TextureMode.Stretch
-                                beam.TextureLength = 5
-                                beam.FaceCamera = true
-                                beam.LightEmission = 1
-                                beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 0))
-                                beam.Width0 = 0.2
-                                beam.Width1 = 0.2
-                                beam.Parent = workspace
-
-                                task.spawn(function()
-                                    local fadeDuration = 0.84
-                                    local steps = 20
-                                    local interval = fadeDuration / steps
-                                    for i = 0, steps do
-                                        local transparencyValue = i / steps
-                                        beam.Transparency = NumberSequence.new({
-                                            NumberSequenceKeypoint.new(0, transparencyValue),
-                                            NumberSequenceKeypoint.new(1, transparencyValue)
-                                        })
-                                        task.wait(interval)
-                                    end
-                                    beam:Destroy()
-                                end)
-
+                                -- Call the Tracer with the necessary parameters (fire position, hit position, and color)
+                                Tracer(gunPart.Position, hitPosition, Color3.fromRGB(135, 126, 230)) -- Red color for the tracer
+                                
                                 break
                             end
                         end
@@ -2469,7 +2476,6 @@ function ResetControlHook()
     if OriginalMethod then
         -- Reset the hook when the toggle is off
         OriginalMethod = nil
-        print("[INFO] Remote hook has been reset.")
     end
 end
 
@@ -2478,7 +2484,6 @@ function UpdateControlRemote(Value)
     -- Logic to fire the remote with the updated slider value
     local Arguments = {Value, false} -- Just an example, use appropriate arguments for your game
     game:GetService("ReplicatedStorage").Events.Control:FireServer(table.unpack(Arguments))
-    print("[INFO] Remote fired with value: " .. Value)
 end
 
 -- Function to simulate the spinning behavior
@@ -2513,7 +2518,7 @@ AA:AddToggle('FaceCameraToggle_SpinModule3', {
 
             -- Variables to control the rotation
             local rotationAngle = math.rad(0.1) -- Rotation angle in radians (small for subtle movement)
-            local direction = 1               -- Direction: 1 for right, -1 for left
+            local direction = .5               -- Direction: 1 for right, -1 for left
 
             -- Spoof camera rotation by applying small angular changes
             rotationThread = task.spawn(function()
@@ -2541,7 +2546,6 @@ AA:AddToggle('FaceCameraToggle_SpinModule3', {
                         -- Update the first argument to the currentValue
                         Arguments[1] = currentValue
 
-                        -- Increment the value, reset to 1 if it exceeds 30
                         currentValue = currentValue + 1
                         if currentValue > 30 then
                             currentValue = 1
@@ -2554,7 +2558,6 @@ AA:AddToggle('FaceCameraToggle_SpinModule3', {
                 end)
 
                 -- Debugging message
-                print("[INFO] Camera left-right rotation spoof and remote hook successfully applied!")
             end
 
         else
@@ -2563,7 +2566,6 @@ AA:AddToggle('FaceCameraToggle_SpinModule3', {
             if rotationThread then
                 pcall(function()
                     rotationThread = nil  -- Stop the loop by setting the thread to nil
-                    print("[INFO] Camera rotation stopped.")
                 end)
             end
 
@@ -2576,12 +2578,10 @@ AA:AddToggle('FaceCameraToggle_SpinModule3', {
                     -- Properly reset the hook to the original state
                     hookmetamethod(game, "__namecall", originalHook)
                     originalHook = nil -- Clear the hook reference
-                    print("[INFO] Remote hook removed.")
                 end)
             end
 
             -- Optionally print message for debugging purposes
-            print("[INFO] Toggle turned off, camera stopped and value reset to 0.")
         end
     end
 })
