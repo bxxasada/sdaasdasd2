@@ -3191,7 +3191,7 @@ Local:AddSlider('MovementSpeed', {
 Local:AddToggle('MyToggle', {
     Text = 'Speed',
     Default = false, -- Default value (true / false)
-    Tooltip = 'Enable continuous movement without jumping', -- Information shown when you hover over the toggle
+    Tooltip = 'Speed', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         -- Enable or disable movement based on the toggle
@@ -3209,7 +3209,7 @@ Local:AddToggle('MyToggle', {
 Local:AddToggle('MyToggle', {
     Text = 'Bhop',
     Default = false, -- Default value (true / false)
-    Tooltip = '', -- Information shown when you hover over the toggle
+    Tooltip = 'Auto jump', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.AutoBhop = Value
