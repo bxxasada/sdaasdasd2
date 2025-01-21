@@ -2409,6 +2409,124 @@ Blatant:AddToggle('MyToggle', {
 
 
 
+local player = game.Players.LocalPlayer
+local spinning = false
+local spinSpeed = 10 -- Default spin speed (degrees per frame)
+
+-- Function to spin the character
+local function spinCharacter()
+    while spinning do
+        -- Wait for the character and HumanoidRootPart to load
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        local humanoid = character:WaitForChild("Humanoid")
+
+        -- Disable AutoRotate while spinning
+        humanoid.AutoRotate = false
+
+        -- Rotate the HumanoidRootPart around the Y-axis (up axis)
+        local delta = spinSpeed * (1 / 60) -- Adjust for frame rate
+        rootPart.CFrame = rootPart.CFrame * CFrame.Angles(0, math.rad(delta), 0)
+        task.wait()
+    end
+end
+
+-- Toggle callback
+AA:AddToggle('SpinToggle', {
+    Text = 'Spin',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Enable or disable character spinning', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        spinning = Value -- Update the spinning state
+
+        if spinning then
+            -- Start spinning
+            spinCharacter()
+        else
+            -- Re-enable AutoRotate when spinning is stopped
+            local character = player.Character
+            if character then
+                local humanoid = character:FindFirstChild("Humanoid")
+                if humanoid then
+                    humanoid.AutoRotate = true
+                end
+            end
+        end
+    end
+})
+
+-- Slider callback
+AA:AddSlider('AASlider', {
+    Text = 'Spin Speed',
+    Default = 10, -- Default spin speed
+    Min = 5,      -- Minimum spin speed
+    Max = 1000,    -- Maximum spin speed
+    Rounding = 1, -- Round to 1 decimal place
+    Compact = false,
+
+    Callback = function(Value)
+        spinSpeed = Value -- Update the spin speed
+    end
+})
+
+
+
+
+local player = game.Players.LocalPlayer
+local facingCamera = false
+
+-- Function to make the character face the camera
+local function faceCamera()
+    while facingCamera do
+        -- Wait for the character and HumanoidRootPart to load
+        local character = player.Character
+        if not character then
+            character = player.CharacterAdded:Wait()
+        end
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        local humanoid = character:WaitForChild("Humanoid")
+
+        -- Disable AutoRotate while facing the camera
+        humanoid.AutoRotate = false
+
+        -- Get the camera's position and make the character face it
+        local camera = workspace.CurrentCamera
+        local cameraPosition = camera.CFrame.Position
+        local lookVector = (cameraPosition - rootPart.Position).Unit
+        rootPart.CFrame = CFrame.new(rootPart.Position, rootPart.Position + Vector3.new(lookVector.X, 0, lookVector.Z))
+
+        task.wait()
+    end
+end
+
+-- Face Camera Toggle callback
+AA:AddToggle('FaceCameraToggle', {
+    Text = 'Backwards',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Make the character face the camera', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        facingCamera = Value -- Update the facing camera state
+
+        if facingCamera then
+            -- Start facing the camera
+            faceCamera()
+        else
+            -- Re-enable AutoRotate when facing camera is stopped
+            local character = player.Character
+            if character then
+                local humanoid = character:FindFirstChild("Humanoid")
+                if humanoid then
+                    humanoid.AutoRotate = true
+                end
+            end
+        end
+    end
+})
 
 -- Add the Spin Toggle to control whether the character spins
 AA:AddToggle('SpinToggle2', {
