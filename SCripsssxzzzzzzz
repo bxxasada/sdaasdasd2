@@ -3196,38 +3196,7 @@ Match:AddDropdown('SkinDropdown', {
 
         game:GetService("ReplicatedStorage").Events.Drop:FireServer(ohTable1, ohCFrame2, ohNumber3, ohNumber4, ohBoolean5, ohInstance6, ohBoolean7, ohBoolean8)
         Library:Notify("Spawned: " .. selectedSkin, 5)
-        wait(1)
 
-        -- Find the BasePart in workspace.Debris with the matching name
-        local debrisFolder = workspace:FindFirstChild("Debris")
-        if not debrisFolder then
-            Library:Notify("Debris folder not found!", 5)
-            return
-        end
-
-        local matchingPart = debrisFolder:FindFirstChild(selectedSkin)
-        if not matchingPart or not matchingPart:IsA("BasePart") then
-            Library:Notify("No matching part found for: " .. selectedSkin, 5)
-            return
-        end
-        matchingPart.Velocity = Vector3.zero
-        matchingPart.RotVelocity = Vector3.zero
-        wait(0.1)
-
-        -- Teleport the matching part to the local player's position
-        matchingPart.CFrame = CFrame.new(rootPart)
-        matchingPart.CFrame = CFrame.new(rootPart)
-
-        matchingPart.CFrame = CFrame.new(rootPart)
-        matchingPart.CFrame = CFrame.new(rootPart)
-        matchingPart.CFrame = CFrame.new(rootPart)
-        matchingPart.CFrame = CFrame.new(rootPart)
-        matchingPart.CFrame = CFrame.new(rootPart)
-
-
-        -- Remove velocity and speed from the spawned item
-
-        Library:Notify("Teleported " .. selectedSkin .. " to player and removed velocity!", 5)
     end
 })
 
