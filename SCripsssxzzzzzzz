@@ -313,7 +313,7 @@ function WeaponForceField()
     local SelectedColor1 = _G.selectedColor1 or Color3.fromRGB(255, 0, 0) -- Default magenta
 
     -- Define the path to ReplicatedStorage.Viewmodels
-local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels")
+    local viewmodels = game:GetService("Workspace"):WaitForChild("Camera"):WaitForChild("Arms")
 
 -- Function to set material and color of all BaseParts, excluding "Right Arm" and "Left Arm"
     -- Specify the color you want to set (Bright red in this case)
@@ -371,7 +371,7 @@ Visuals:AddToggle('MyToggle', {
         WeaponForceField()
         if _G.WeaponForceField == false then
             -- Define the path to ReplicatedStorage.Viewmodels
-local viewmodels = game:GetService("ReplicatedStorage"):WaitForChild("Viewmodels")
+local viewmodels = game:GetService("Workspace"):WaitForChild("Camera"):WaitForChild("Arms")
 
 -- Function to set material and color of all BaseParts, excluding "Right Arm" and "Left Arm"
     -- Specify the color you want to set (Bright red in this case)
